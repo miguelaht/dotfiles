@@ -7,7 +7,7 @@ end
 
 vim.api.nvim_command('packadd packer.nvim')
 
-local no_errors = pcall(function()
+local no_errors, error_msg = pcall(function()
 
   local time
   local profile_info
@@ -100,15 +100,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/neogit"
   },
-  ["neoscroll.nvim"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
-  },
-  ["nlua.nvim"] = {
-    loaded = false,
-    needs_bufread = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/nlua.nvim"
-  },
   ["nvim-compe"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-compe"
@@ -138,6 +129,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["rust.vim"] = {
+    loaded = false,
+    needs_bufread = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/rust.vim"
+  },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
@@ -147,8 +143,10 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
   ["vim-lsc"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/vim-lsc"
+    after_files = { "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/vim-lsc/after/plugin/lsc.vim" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/vim-lsc"
   }
 }
 
@@ -158,5 +156,5 @@ if should_profile then save_profiles() end
 end)
 
 if not no_errors then
-  vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: ".v:exception | echom "Please check your config for correctness" | echohl None')
+  vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end

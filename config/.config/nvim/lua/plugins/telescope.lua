@@ -11,5 +11,5 @@ vim.api.nvim_set_keymap('n', '<Leader>pw',
                         [[<Cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown({ search = vim.fn.expand("<cword>") }))<CR>]],
                         {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>pb', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<Leader>ht', [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>tt', [[<Cmd>Telescope<CR>]], {noremap = true, silent = true})
 

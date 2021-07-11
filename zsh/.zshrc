@@ -1,14 +1,6 @@
-# LLVM
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include"
-
 #
 export EDITOR="nvim"
 export VISUAL="nvim"
-
-# Java
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home"
 
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
@@ -17,6 +9,10 @@ bindkey '\C-x\C-e' edit-command-line
 
 # ZSH auto-complete
 autoload -Uz compinit; compinit
+
+if (( ! ${fpath[(I)/usr/local/share/zsh-completions]} )); then
+  FPATH=/usr/local/share/zsh-completions:$FPATH
+fi
 
 # theme
 autoload -U promptinit; promptinit
@@ -33,12 +29,19 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 
-if (( ! ${fpath[(I)/usr/local/share/zsh-completions]} )); then
-  FPATH=/usr/local/share/zsh-completions:$FPATH
-fi
-
 # Homebrew
 export HOMEBREW_AUTO_UPDATE_SECS=604800
+
+# LLVM
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+
+# Java
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home"
+
+# Rust
+. "$HOME/.cargo/env"
 
 # alias
 alias ls='ls -G'

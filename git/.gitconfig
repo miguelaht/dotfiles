@@ -12,8 +12,6 @@
     ui = auto
 [credential]
     helper = osxkeychain
-[url "git@github.com:"]
-    insteadOf = https://github.com/
 [alias]
     c = commit
     ca = commit -a

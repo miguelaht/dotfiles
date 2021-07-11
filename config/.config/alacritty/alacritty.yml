@@ -1,0 +1,240 @@
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Number of lines/columns (not pixels) in the terminal. The number of columns
+  # must be at least `2`, while using a value of `0` for columns and lines will
+  # fall back to the window manager's recommended size.
+  #dimensions:
+  #  columns: 0
+  #  lines: 0
+
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  position:
+    x: 0
+    y: 0
+
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 2
+    y: 2
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
+
+  # Window decorations
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background and no title bar buttons
+  decorations: full
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  #startup_mode: Windowed
+
+  # Window title
+  #title: Alacritty
+
+  # Allow terminal applications to change Alacritty's window title.
+  #dynamic_title: true
+
+  # Window class (Linux/BSD only):
+  #class:
+    # Application instance name
+    #instance: Alacritty
+    # General application class
+    #general: Alacritty
+
+  # GTK theme variant (Linux/BSD only)
+  #
+  # Override the variant of the GTK theme. Commonly supported values are `dark`
+  # and `light`. Set this to `None` to use the default theme variant.
+  #gtk_theme_variant: None
+
+
+selection:
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+mouse:
+  hints:
+    launcher:
+      program: open
+    modifiers: Command
+
+font:
+  normal:
+    family: Hack Nerd Font
+    style: Regular
+  bold:
+    family: Hack Nerd Font
+    style: Bold
+  italic:
+    family: Hack Nerd Font
+    style: Italic
+  bold_italic:
+    family: Hack Nerd Font
+    style: Bold Italic
+  size: 13.0
+  use_thin_strokes: true
+draw_bold_text_with_bright_colors: true
+# Base16 Default Dark 256 - alacritty color config
+# Chris Kempson (http://chriskempson.com)
+
+
+# The definition of color schemes.
+schemes:
+  gruvbox_material_hard_dark: &gruvbox_material_hard_dark
+    primary:
+      background: '0x1d2021'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x32302f'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x32302f'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_medium_dark: &gruvbox_material_medium_dark
+    primary:
+      background: '0x282828'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x3c3836'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x3c3836'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_soft_dark: &gruvbox_material_soft_dark
+    primary:
+      background: '0x32302f'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x45403d'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x45403d'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_hard_light: &gruvbox_material_hard_light
+    primary:
+      background: '0xf9f5d7'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xf2e5bc'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xf2e5bc'
+  gruvbox_material_medium_light: &gruvbox_material_medium_light
+    primary:
+      background: '0xfbf1c7'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xeee0b7'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xeee0b7'
+  gruvbox_material_soft_light: &gruvbox_material_soft_light
+    primary:
+      background: '0xf2e5bc'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xe6d5ae'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xe6d5ae'
+
+# Apply the color scheme.
+colors: *gruvbox_material_medium_dark

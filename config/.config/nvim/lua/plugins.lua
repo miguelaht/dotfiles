@@ -5,8 +5,7 @@ return require('packer').startup(function(use)
 
     use {'neovim/nvim-lspconfig'}
     use {'hrsh7th/nvim-compe'}
-    use {'tjdevries/nlua.nvim', opt = true}
-    use {'tjdevries/lsp_extensions.nvim', opt = true}
+    use {'nvim-lua/lsp_extensions.nvim', opt = true}
 
     -- fzf
     use {
@@ -43,5 +42,5 @@ return require('packer').startup(function(use)
     -- smooth scroll
     -- use {'karb94/neoscroll.nvim', require('neoscroll').setup {}}
 
-    use "natebosch/vim-lsc"
+    use {"natebosch/vim-lsc", opt = true}
 end)
