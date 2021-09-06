@@ -69,17 +69,21 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["Catppuccino.nvim"] = {
+  LuaSnip = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/Catppuccino.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/LuaSnip"
   },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-buffer"
   },
-  ["darcula-solid.nvim"] = {
+  ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/darcula-solid.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
   },
   fzf = {
     loaded = false,
@@ -103,9 +107,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
-  ["lush.nvim"] = {
+  ["nvim-autopairs"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/lush.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -143,10 +147,6 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope.nvim"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   }
 }
 

@@ -32,16 +32,18 @@ return require('packer').startup(function(use)
     'vijaymarupudi/nvim-fzf'}
   }
 
-
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
   }
 
+  use {'windwp/nvim-autopairs'}
+
   -- colorschemes
   use 'eddyekofo94/gruvbox-flat.nvim'
 
   -- statusline
   use {'hoob3rt/lualine.nvim'}
+
 end)

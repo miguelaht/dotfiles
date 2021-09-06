@@ -34,8 +34,6 @@ export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 # Java
-export JAVA_HOME="/usr/libexec/java_home -v 1.8.301.09"
-export GLASSFISH_HOME="/usr/local/opt/glassfish/libexec"
 
 # Rust
 . "$HOME/.cargo/env"
@@ -55,8 +53,18 @@ alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %
 alias batt='ioreg -l -w0 | grep Capacity'
 alias vim=nvim
 
+# ZMV
+autoload zmv
+alias zmv='noglob zmv'
+alias zcp='noglob zmv -C'
+alias zln='noglob zmv -L'
+alias zsy='noglob zmv -Ls'
+alias python='python3'
+
 # fuzzy search keybinds
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # ZSH autosuggest
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export PATH="$HOME/.poetry/bin:$PATH"
