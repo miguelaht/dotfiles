@@ -46,4 +46,21 @@ return require('packer').startup(function(use)
   -- statusline
   use {'hoob3rt/lualine.nvim'}
 
+  use {
+    'goolord/alpha-nvim',
+    config = function ()
+      require'alpha'.setup(require'alpha.themes.startify'.opts)
+    end
+  }
+
+  use({
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    module = "persistence",
+    config = function()
+      require("persistence").setup()
+    end,
+  })
+
+
 end)
