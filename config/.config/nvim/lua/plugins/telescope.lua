@@ -1,5 +1,6 @@
 require('telescope').setup{
   defaults = {
+    color_devicons = true,
     selection_strategy = "reset",
     winblend = 0,
     prompt_prefix = "❯ ",
@@ -34,7 +35,6 @@ require('telescope').setup{
     },
     file_browser = {
       theme = "ivy",
-      disable_devicons = true
     },
     buffers = {
       sort_lastused = true,

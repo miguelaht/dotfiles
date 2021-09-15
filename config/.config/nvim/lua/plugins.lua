@@ -43,6 +43,8 @@ return require('packer').startup(function(use)
   -- colorschemes
   use 'eddyekofo94/gruvbox-flat.nvim'
 
+  use 'kyazdani42/nvim-web-devicons'
+
   -- statusline
   use {'hoob3rt/lualine.nvim'}
 
@@ -61,6 +63,15 @@ return require('packer').startup(function(use)
       require("persistence").setup()
     end,
   })
+
+  use 'mfussenegger/nvim-dap'
+
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require('goto-preview').setup {}
+    end
+  }
 
 
 end)
