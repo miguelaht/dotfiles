@@ -48,6 +48,7 @@ return require('packer').startup(function(use)
   -- statusline
   use {'hoob3rt/lualine.nvim'}
 
+  -- Alpha screen
   use {
     'goolord/alpha-nvim',
     config = function ()
@@ -72,6 +73,4 @@ return require('packer').startup(function(use)
       require('goto-preview').setup {}
     end
   }
-
-
 end)
