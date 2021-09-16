@@ -40,13 +40,14 @@ return require('packer').startup(function(use)
 
   use {'windwp/nvim-autopairs'}
 
+  -- statusline
+  use {'hoob3rt/lualine.nvim'}
+
   -- colorschemes
   use 'eddyekofo94/gruvbox-flat.nvim'
 
   use 'kyazdani42/nvim-web-devicons'
 
-  -- statusline
-  use {'hoob3rt/lualine.nvim'}
 
   -- Alpha screen
   use {
