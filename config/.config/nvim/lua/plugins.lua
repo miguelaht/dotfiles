@@ -21,6 +21,8 @@ return require('packer').startup(function(use)
     }
   }
 
+  use 'rmagatti/auto-session'
+
   -- fzf
   use {
     'junegunn/fzf',
@@ -35,7 +37,7 @@ return require('packer').startup(function(use)
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
+    requires = {{'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
   }
 
   use {'windwp/nvim-autopairs'}
@@ -49,22 +51,15 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
 
-  -- Alpha screen
+  -- refactor
   use {
-    'goolord/alpha-nvim',
-    config = function ()
-      require'alpha'.setup(require'alpha.themes.startify'.opts)
-    end
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      {"nvim-lua/plenary.nvim"},
+      {"nvim-treesitter/nvim-treesitter"}
+    }
   }
 
-  use({
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    module = "persistence",
-    config = function()
-      require("persistence").setup()
-    end,
-  })
 
   use 'mfussenegger/nvim-dap'
 

@@ -5,5 +5,7 @@ config/.config/gh
 config/.config/iterm2
 config/.config/htop
 config/.config/shopify
+config/.config/psppirerc
 ~/
 **/sessions
+
