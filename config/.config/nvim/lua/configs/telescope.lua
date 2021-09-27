@@ -71,7 +71,7 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzy_native')
---require('telescope').load_extension('sessions')
+require('telescope').load_extension('neoclip')
 
 -- Git
 vim.api.nvim_set_keymap('n', '<C-p>', [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], {noremap = true, silent = true})

@@ -14,10 +14,10 @@ return require('packer').startup(function(use)
   use {
     'hrsh7th/nvim-cmp',
     requires = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'saadparwaiz1/cmp_luasnip',
-      'L3MON4D3/LuaSnip'
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-buffer'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'L3MON4D3/LuaSnip'},
     }
   }
 
@@ -28,10 +28,6 @@ return require('packer').startup(function(use)
     'junegunn/fzf',
     run = function() vim.fn['fzf#install']()
     end, opt = true
-  }
-  use { 'ibhagwan/fzf-lua',
-  requires = {
-    'vijaymarupudi/nvim-fzf'}
   }
 
   -- Telescope
@@ -48,7 +44,7 @@ return require('packer').startup(function(use)
   -- colorschemes
   use 'eddyekofo94/gruvbox-flat.nvim'
 
-  use 'kyazdani42/nvim-web-devicons'
+  use {'kyazdani42/nvim-web-devicons', opt = true}
 
 
   -- refactor
@@ -56,12 +52,12 @@ return require('packer').startup(function(use)
     "ThePrimeagen/refactoring.nvim",
     requires = {
       {"nvim-lua/plenary.nvim"},
-      {"nvim-treesitter/nvim-treesitter"}
     }
   }
 
 
-  use 'mfussenegger/nvim-dap'
+  use {'mfussenegger/nvim-dap'}
+  use {'mfussenegger/nvim-dap-python'}
 
   use {
     'rmagatti/goto-preview',
@@ -69,4 +65,35 @@ return require('packer').startup(function(use)
       require('goto-preview').setup {}
     end
   }
+
+  use {'dbeniamine/cheat.sh-vim', opt = true}
+
+  use {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+      require('neoclip').setup({
+        history = 1000,
+        filter = nil,
+        preview = true,
+        default_register = '"',
+        content_spec_column = false,
+        on_paste = {
+          set_reg = false,
+        },
+        keys = {
+          i = {
+            select = '<cr>',
+            paste = '<c-p>',
+            paste_behind = '<c-k>',
+          },
+          n = {
+            select = '<cr>',
+            paste = 'p',
+            paste_behind = 'P',
+          },
+        },
+      })
+    end,
+  }
+
 end)
