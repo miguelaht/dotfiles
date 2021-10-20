@@ -4,7 +4,7 @@ return require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
 
   -- highlight
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', require'nvim-treesitter.configs'.setup {highlight = {enable = true}}}
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- LSP
   use {'neovim/nvim-lspconfig'}
@@ -15,7 +15,6 @@ return require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-buffer'},
       {'saadparwaiz1/cmp_luasnip'},
       {'L3MON4D3/LuaSnip'},
     }
@@ -54,19 +53,6 @@ return require('packer').startup(function(use)
       {"nvim-lua/plenary.nvim"},
     }
   }
-
-
-  use {'mfussenegger/nvim-dap'}
-  use {'mfussenegger/nvim-dap-python'}
-
-  use {
-    'rmagatti/goto-preview',
-    config = function()
-      require('goto-preview').setup {}
-    end
-  }
-
-  use {'dbeniamine/cheat.sh-vim', opt = true}
 
   use {
     "AckslD/nvim-neoclip.lua",

@@ -77,15 +77,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/auto-session"
   },
-  ["cheat.sh-vim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/cheat.sh-vim"
-  },
-  ["cmp-buffer"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-buffer"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
@@ -98,11 +89,6 @@ _G.packer_plugins = {
     loaded = false,
     needs_bufread = false,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/fzf"
-  },
-  ["goto-preview"] = {
-    config = { "\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17goto-preview\frequire\0" },
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/goto-preview"
   },
   ["gruvbox-flat.nvim"] = {
     loaded = true,
@@ -125,20 +111,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-cmp"
   },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-dap"
-  },
-  ["nvim-dap-python"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-dap-python"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
   ["nvim-neoclip.lua"] = {
-    config = { "\27LJ\2\nç\2\0\0\5\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\tkeys\6n\1\0\3\npaste\6p\17paste_behind\6P\vselect\t<cr>\6i\1\0\0\1\0\3\npaste\n<c-p>\17paste_behind\n<c-k>\vselect\t<cr>\ron_paste\1\0\1\fset_reg\1\1\0\4\fpreview\2\24content_spec_column\1\21default_register\6\"\fhistory\3Ë\a\nsetup\fneoclip\frequire\0" },
+    config = { "\27LJ\2\nç\2\0\0\5\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\tkeys\6n\1\0\3\17paste_behind\6P\npaste\6p\vselect\t<cr>\6i\1\0\0\1\0\3\17paste_behind\n<c-k>\npaste\n<c-p>\vselect\t<cr>\ron_paste\1\0\1\fset_reg\1\1\0\4\21default_register\6\"\fpreview\2\fhistory\3Ë\a\24content_spec_column\1\nsetup\fneoclip\frequire\0" },
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-neoclip.lua"
   },
@@ -175,13 +153,9 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: goto-preview
-time([[Config for goto-preview]], true)
-try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17goto-preview\frequire\0", "config", "goto-preview")
-time([[Config for goto-preview]], false)
 -- Config for: nvim-neoclip.lua
 time([[Config for nvim-neoclip.lua]], true)
-try_loadstring("\27LJ\2\nç\2\0\0\5\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\tkeys\6n\1\0\3\npaste\6p\17paste_behind\6P\vselect\t<cr>\6i\1\0\0\1\0\3\npaste\n<c-p>\17paste_behind\n<c-k>\vselect\t<cr>\ron_paste\1\0\1\fset_reg\1\1\0\4\fpreview\2\24content_spec_column\1\21default_register\6\"\fhistory\3Ë\a\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
+try_loadstring("\27LJ\2\nç\2\0\0\5\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\tkeys\6n\1\0\3\17paste_behind\6P\npaste\6p\vselect\t<cr>\6i\1\0\0\1\0\3\17paste_behind\n<c-k>\npaste\n<c-p>\vselect\t<cr>\ron_paste\1\0\1\fset_reg\1\1\0\4\21default_register\6\"\fpreview\2\fhistory\3Ë\a\24content_spec_column\1\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
 time([[Config for nvim-neoclip.lua]], false)
 if should_profile then save_profiles() end
 

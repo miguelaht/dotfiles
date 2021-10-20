@@ -1,5 +1,5 @@
 require('lualine').setup {
-  options = {theme = 'gruvbox-flat', section_separators = {'', ''}, component_separators = {'', ''}},
+  options = {theme = 'gruvbox', section_separators = {'', ''}, component_separators = {'', ''}},
   sections = {
     lualine_a = {{'mode', upper = true}},
     lualine_b = {{'branch', icon = ''}},

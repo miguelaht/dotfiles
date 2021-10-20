@@ -49,12 +49,13 @@ local on_attach = function(client, bufnr)
   end
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 -- LANGUAGES
 local servers = {"tsserver", "pyright", "rls", "vuels", "cssls", "html"}
 
 for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
-
-require'lspconfig'.java_language_server.setup{ cmd = {home..[[/java-language-server/dist/lang_server_mac.sh]]}, on_attach=on_attach}
 
 local pid = vim.fn.getpid()
 local omnisharp_bin = home.."/omnisharp-osx/run"
