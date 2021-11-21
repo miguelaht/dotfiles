@@ -35,6 +35,7 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 # python
 PYTHONDONTWRITEBYTECODE="true"
+alias pipenv='python -m pipenv'
 
 # Rust
 . "$HOME/.cargo/env"
@@ -69,3 +70,6 @@ alias python='python3'
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export PATH="$HOME/.poetry/bin:$PATH"
+eval "$(pyenv init -)"
+
+export PATH="/Users/miguelaht/.deta/bin:$PATH"

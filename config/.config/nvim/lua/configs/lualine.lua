@@ -1,9 +1,9 @@
 require('lualine').setup {
-  options = {theme = 'gruvbox', section_separators = {'', ''}, component_separators = {'', ''}},
+  options = {theme = 'github', section_separators = {'', ''}, component_separators = {'', ''}},
   sections = {
     lualine_a = {{'mode', upper = true}},
     lualine_b = {{'branch', icon = ''}},
-    lualine_c = {{'filename', file_status = true}},
+    lualine_c = {{'filename', file_status = true, path = 1}},
     lualine_x = {{'diagnostics', sources = {'nvim_lsp'}, sections = {'error', 'warn', 'info', 'hint'}, symbols = {error = '  ', warn = '  ', info = '  ', hint = '  '}}, 'encoding', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}

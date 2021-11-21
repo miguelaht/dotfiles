@@ -8,6 +8,7 @@ config/.config/shopify
 config/.config/psppirerc
 config/.config/planetscale
 config/.config/yarn
+config/.config/configstore
 ~/
 **/sessions
 

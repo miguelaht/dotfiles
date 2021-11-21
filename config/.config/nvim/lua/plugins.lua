@@ -35,13 +35,12 @@ return require('packer').startup(function(use)
     requires = {{'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
   }
 
-  use {'windwp/nvim-autopairs'}
-
   -- statusline
   use {'hoob3rt/lualine.nvim'}
 
   -- colorschemes
   use 'eddyekofo94/gruvbox-flat.nvim'
+  use 'projekt0n/github-nvim-theme'
 
   use {'kyazdani42/nvim-web-devicons', opt = true}
 
@@ -53,33 +52,4 @@ return require('packer').startup(function(use)
       {"nvim-lua/plenary.nvim"},
     }
   }
-
-  use {
-    "AckslD/nvim-neoclip.lua",
-    config = function()
-      require('neoclip').setup({
-        history = 1000,
-        filter = nil,
-        preview = true,
-        default_register = '"',
-        content_spec_column = false,
-        on_paste = {
-          set_reg = false,
-        },
-        keys = {
-          i = {
-            select = '<cr>',
-            paste = '<c-p>',
-            paste_behind = '<c-k>',
-          },
-          n = {
-            select = '<cr>',
-            paste = 'p',
-            paste_behind = 'P',
-          },
-        },
-      })
-    end,
-  }
-
 end)

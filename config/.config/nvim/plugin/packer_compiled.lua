@@ -71,92 +71,101 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/LuaSnip"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["auto-session"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/auto-session"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/auto-session",
+    url = "https://github.com/rmagatti/auto-session"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   cmp_luasnip = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   fzf = {
     loaded = false,
     needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/fzf"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/fzf",
+    url = "https://github.com/junegunn/fzf"
+  },
+  ["github-nvim-theme"] = {
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
   },
   ["gruvbox-flat.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/gruvbox-flat.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/gruvbox-flat.nvim",
+    url = "https://github.com/eddyekofo94/gruvbox-flat.nvim"
   },
   ["lsp_extensions.nvim"] = {
     loaded = false,
     needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/lsp_extensions.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/lsp_extensions.nvim",
+    url = "https://github.com/nvim-lua/lsp_extensions.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/lualine.nvim"
-  },
-  ["nvim-autopairs"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/hoob3rt/lualine.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
-  },
-  ["nvim-neoclip.lua"] = {
-    config = { "\27LJ\2\nç\2\0\0\5\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\tkeys\6n\1\0\3\17paste_behind\6P\npaste\6p\vselect\t<cr>\6i\1\0\0\1\0\3\17paste_behind\n<c-k>\npaste\n<c-p>\vselect\t<cr>\ron_paste\1\0\1\fset_reg\1\1\0\4\21default_register\6\"\fpreview\2\fhistory\3Ë\a\24content_spec_column\1\nsetup\fneoclip\frequire\0" },
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-neoclip.lua"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = false,
     needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = false,
     needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["refactoring.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/refactoring.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/refactoring.nvim",
+    url = "https://github.com/ThePrimeagen/refactoring.nvim"
   },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-neoclip.lua
-time([[Config for nvim-neoclip.lua]], true)
-try_loadstring("\27LJ\2\nç\2\0\0\5\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\tkeys\6n\1\0\3\17paste_behind\6P\npaste\6p\vselect\t<cr>\6i\1\0\0\1\0\3\17paste_behind\n<c-k>\npaste\n<c-p>\vselect\t<cr>\ron_paste\1\0\1\fset_reg\1\1\0\4\21default_register\6\"\fpreview\2\fhistory\3Ë\a\24content_spec_column\1\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
-time([[Config for nvim-neoclip.lua]], false)
 if should_profile then save_profiles() end
 
 end)
