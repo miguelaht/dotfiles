@@ -52,4 +52,6 @@ return require('packer').startup(function(use)
       {"nvim-lua/plenary.nvim"},
     }
   }
+
+  use {'karb94/neoscroll.nvim'}
 end)

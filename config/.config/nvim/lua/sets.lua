@@ -46,6 +46,8 @@ augroup trimOnSave
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
+
+autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR>
 ]], true)
 
 -- compile packer when file is updated
