@@ -3,12 +3,8 @@ local nvim_lsp = require('lspconfig')
 local home = os.getenv("HOME")
 
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -55,11 +51,23 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- LANGUAGES
 local servers = {"tsserver", "eslint", "rls", "cssls", "html"}
 
-for _, lsp in ipairs(servers) do nvim_lsp[lsp].setup {on_attach = on_attach} end
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 
 local pid = vim.fn.getpid()
 local omnisharp_bin = home.."/omnisharp-osx/run"
 require'lspconfig'.omnisharp.setup{
   on_attach = on_attach,
   cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
+
+require'lspconfig'.jdtls.setup{
+  on_attach = on_attach,
+  cmd = { 'jdtls' };
 }

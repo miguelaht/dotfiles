@@ -47,11 +47,13 @@ return require('packer').startup(function(use)
 
   -- refactor
   use {
-    "ThePrimeagen/refactoring.nvim",
+    'ThePrimeagen/refactoring.nvim',
     requires = {
-      {"nvim-lua/plenary.nvim"},
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-treesitter/nvim-treesitter'}
     }
   }
+
 
   use {'karb94/neoscroll.nvim'}
 end)

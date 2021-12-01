@@ -33,10 +33,6 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
-# python
-PYTHONDONTWRITEBYTECODE="true"
-alias pipenv='python -m pipenv'
-
 # Rust
 . "$HOME/.cargo/env"
 
@@ -69,7 +65,7 @@ alias python='python3'
 # ZSH autosuggest
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export PATH="$HOME/.poetry/bin:$PATH"
-eval "$(pyenv init -)"
+# JDTLS
+export PATH=$PATH:$HOME/.local/bin
 
-export PATH="/Users/miguelaht/.deta/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"

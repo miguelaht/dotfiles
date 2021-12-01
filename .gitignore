@@ -9,6 +9,7 @@ config/.config/psppirerc
 config/.config/planetscale
 config/.config/yarn
 config/.config/configstore
+config/.config/filezilla
 ~/
 **/sessions
 
