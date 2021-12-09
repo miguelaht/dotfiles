@@ -56,4 +56,9 @@ return require('packer').startup(function(use)
 
 
   use {'karb94/neoscroll.nvim'}
+
+  use { 'michaelb/sniprun', run = 'bash ./install.sh'}
+
+  use 'tpope/vim-commentary'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 end)

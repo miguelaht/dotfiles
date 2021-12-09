@@ -49,7 +49,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- LANGUAGES
-local servers = {"tsserver", "eslint", "rls", "cssls", "html"}
+local servers = {"pyright", "tsserver", "eslint", "rls", "cssls", "html"}
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {

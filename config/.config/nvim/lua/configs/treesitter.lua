@@ -1,4 +1,7 @@
 require('nvim-treesitter.configs').setup {
+  context_commentstring = {
+    enable = true
+  },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
@@ -28,7 +31,7 @@ require('nvim-treesitter.configs').setup {
     },
     move = {
       enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
+      set_jumps = false, -- whether to set jumps in the jumplist
       goto_next_start = {
         [']m'] = '@function.outer',
         [']]'] = '@class.outer',

@@ -3,12 +3,14 @@ window:
     x: 0
     y: 0
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
+
   dynamic_padding: true
   decorations: full
   dynamic_title: true
 
+background_opacity: 0.999
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
   save_to_clipboard: true
@@ -67,7 +69,9 @@ schemes:
     colors:
       primary:
         background: '0x24292e'
-        foreground: '0x424242'
+        foreground: '0xd1d5da'
+
+      # Normal colors
       normal:
         black:   '0x24292e'
         red:     '0xf14c4c'
@@ -76,7 +80,9 @@ schemes:
         blue:    '0x3b8eea'
         magenta: '0xbc3fbc'
         cyan:    '0x29b7da'
-        white:   '0x424242'
+        white:   '0xd1d5da'
+
+      # Bright colors
       bright:
         black:   '0x666666'
         red:     '0xf14c4c'
@@ -85,45 +91,11 @@ schemes:
         blue:    '0x3b8eea'
         magenta: '0xd670d6'
         cyan:    '0x29b7da'
-        white:   '0x424242'
+        white:   '0xd1d5da'
 
       indexed_colors:
         - { index: 16, color: '0xd18616' }
         - { index: 17, color: '0xf14c4c' }
-
-  gh-dimmed: &gh-dimmed
-    colors:
-    # Default colors
-    primary:
-      background: '0x22272e'
-      foreground: '0x768390'
-
-    # Normal colors
-    normal:
-      black:   '0x22272e'
-      red:     '0xff938a'
-      green:   '0x6bc46d'
-      yellow:  '0xc69026'
-      blue:    '0x6cb6ff'
-      magenta: '0xb083f0'
-      cyan:    '0x56d4dd'
-      white:   '0x768390'
-
-    # Bright colors
-    bright:
-      black:   '0x636e7b'
-      red:     '0xff938a'
-      green:   '0x6bc46d'
-      yellow:  '0xdaaa3f'
-      blue:    '0x6cb6ff'
-      magenta: '0xdcbdfb'
-      cyan:    '0x56d4dd'
-      white:   '0x768390'
-
-    indexed_colors:
-      - { index: 16, color: '0xd18616' }
-      - { index: 17, color: '0xff938a' }
-
 
 key_bindings:
   - { key: F,  mods: Alt, chars: "\x1bf" }

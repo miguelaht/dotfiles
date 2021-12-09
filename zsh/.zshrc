@@ -28,10 +28,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 # Homebrew
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
-# LLVM
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/llvm/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include"
+# node
+export PATH="/usr/local/share/npm/bin:$PATH"
+
+export PATH="/usr/local/opt:$PATH"
 
 # Rust
 . "$HOME/.cargo/env"
@@ -57,7 +57,6 @@ alias zmv='noglob zmv'
 alias zcp='noglob zmv -C'
 alias zln='noglob zmv -L'
 alias zsy='noglob zmv -Ls'
-alias python='python3'
 
 # fuzzy search keybinds
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
