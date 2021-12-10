@@ -20,11 +20,10 @@ return require('packer').startup(function(use)
   }
   use {
     'L3MON4D3/LuaSnip',
-    after = 'nvim-cmp',
-    --config = function() require('config.snippets') end,
+    config = function() require('config.snippets') end,
   }
 
-  use 'rmagatti/auto-session'
+  use "rafamadriz/friendly-snippets"
 
   -- fzf
   use {

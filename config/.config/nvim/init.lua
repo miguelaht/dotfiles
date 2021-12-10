@@ -8,7 +8,7 @@ require('configs.lsp')
 require('configs.cmp')
 require('configs.colors')
 require('configs.lualine')
-require('configs.sessions')
+-- require('configs.sessions')
 require('configs.dap')
 
 require('neoscroll').setup()

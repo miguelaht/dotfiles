@@ -4,13 +4,13 @@ local has_words_before = function()
 end
 
 -- nvim-cmp setup
-local luasnip = require 'luasnip'
-local cmp = require 'cmp'
+local luasnip = require('luasnip')
+local cmp = require('cmp')
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = {
@@ -48,7 +48,7 @@ cmp.setup {
   },
   snippet = {
     expand = function(args)
-      local luasnip = prequire("luasnip")
+      local luasnip = require("luasnip")
       if not luasnip then
         return
       end

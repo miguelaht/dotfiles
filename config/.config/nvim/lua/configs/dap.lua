@@ -39,6 +39,39 @@ dap.adapters.node2 = {
   command = 'node',
   args = {vim.fn.stdpath('data') .. '/dapinstall/jsnode/vscode-node-debug2/out/src/nodeDebug.js'},
 }
+
+dap.adapters.chrome = {
+    type = "executable",
+    command = "node",
+    args = {vim.fn.stdpath('data') .. '/dapinstall/jsnode/vscode-node-debug2/out/src/nodeDebug.js'},
+}
+
+dap.configurations.javascriptreact = { -- change this to javascript if needed
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.typescriptreact = { -- change to typescript if needed
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}"
+    }
+}
+
 dap.configurations.javascript = {
   {
     name = 'Launch',
@@ -58,6 +91,8 @@ dap.configurations.javascript = {
     processId = require'dap.utils'.pick_process,
   },
 }
+
+dap_install.config("jsnode", {})
 dap.configurations.typescript = {
   {
     name = 'Launch',
