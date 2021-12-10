@@ -4,7 +4,7 @@ require('lualine').setup {
     lualine_a = {{'mode', upper = true}},
     lualine_b = {{'branch', icon = ''}},
     lualine_c = {{'filename', file_status = true, path = 1}},
-    lualine_x = {{'diagnostics', sources = {'nvim_lsp'}, sections = {'error', 'warn', 'info', 'hint'}, symbols = {error = '  ', warn = '  ', info = '  ', hint = '  '}}, 'encoding', 'filetype'},
+    lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}, sections = {'error', 'warn', 'info', 'hint'}, symbols = {error = '  ', warn = '  ', info = '  ', hint = '  '}}, 'encoding', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },

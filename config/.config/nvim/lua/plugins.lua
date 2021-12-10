@@ -16,8 +16,12 @@ return require('packer').startup(function(use)
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
       {'saadparwaiz1/cmp_luasnip'},
-      {'L3MON4D3/LuaSnip'},
     }
+  }
+  use {
+    'L3MON4D3/LuaSnip',
+    after = 'nvim-cmp',
+    --config = function() require('config.snippets') end,
   }
 
   use 'rmagatti/auto-session'
@@ -44,21 +48,14 @@ return require('packer').startup(function(use)
 
   use {'kyazdani42/nvim-web-devicons', opt = true}
 
-
-  -- refactor
-  use {
-    'ThePrimeagen/refactoring.nvim',
-    requires = {
-      {'nvim-lua/plenary.nvim'},
-      {'nvim-treesitter/nvim-treesitter'}
-    }
-  }
-
-
   use {'karb94/neoscroll.nvim'}
-
-  use { 'michaelb/sniprun', run = 'bash ./install.sh'}
 
   use 'tpope/vim-commentary'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+  -- DAP
+  use "mfussenegger/nvim-dap"
+  use "Pocco81/DAPInstall.nvim"
+  use "rcarriga/nvim-dap-ui"
+  use 'mfussenegger/nvim-dap-python'
 end)

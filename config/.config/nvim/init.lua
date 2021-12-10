@@ -9,7 +9,6 @@ require('configs.cmp')
 require('configs.colors')
 require('configs.lualine')
 require('configs.sessions')
-require('configs.refactor')
--- require('configs.dap')
+require('configs.dap')
 
 require('neoscroll').setup()
