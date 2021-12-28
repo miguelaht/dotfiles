@@ -34,7 +34,7 @@ abbrevs=(
 abbrevs+=(
   "cab" "cat ~/.zsh/abbreviations.zsh"
   "vab" "nvim ~/.zsh/abbreviations.zsh"
-  "dof" "cd ~/dotfiles; nvim; zsh; . ~/.zshrc; cd -"
+  "dof" "cd ~/dotfiles; nvim; cd -"
   "dz" '. ~/.zshrc'
   "sase" "set -a; source .env; set +a"
 )
@@ -101,7 +101,6 @@ abbrevs+=(
 
 # Vim
 abbrevs+=(
-  "vbs"  'nvim -p board-now.md board-later.md board-scratch-pad.md'
   "vim"  'nvim'
 )
 
@@ -169,23 +168,7 @@ abbrevs+=(
   "gpo"   "git push origin"
   "gpod"  "git push origin --delete"
 
-  "gl"    "git pull"
-  "glr"   "git pull --rebase"
-  "glor"  "git pull origin --rebase"
-  "glomr" "git pull origin master --rebase"
-
-  "gpr"    "git pull-request"
-  "gprbc"  "git pull-request --browse --copy"
-  "gprl"   "git pr list"
-  "gprco"  "git pr checkout"
-  "gprne"  "git pull-request --no-edit"
-  "gprd"   "git pull-request --draft"
-  "gprdne" "git pull-request --draft --no-edit"
-  "nebp"   "--no-edit --browse --push"
-  "necp"   "--no-edit --copy --push"
-  "gprm"   'git log master.. --format="%B" --reverse > .git/PULLREQ_EDITMSG && git push -u && git pull-request'
-  "gprmd"   'git log master.. --format="%B" --reverse > .git/PULLREQ_EDITMSG && git push -u && git pull-request'
-  "blb"    '-b $(git rev-parse --abbrev-ref @{-1})'
+  "gl"    "git log"
 
   "gbr"    "git browse"
   "gbrp"  "git browse -- pulls"

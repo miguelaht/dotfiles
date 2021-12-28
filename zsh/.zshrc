@@ -41,6 +41,8 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 
 export PATH="/usr/local/opt:$PATH"
 
+export PATH="$PATH:$HOME/.dotnet/tools"
+
 # Rust
 . "$HOME/.cargo/env"
 

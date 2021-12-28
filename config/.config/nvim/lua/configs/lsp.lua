@@ -47,9 +47,10 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
-local servers = {"pyright", "tsserver", "eslint", "rls", "cssls", "html"}
+local servers = {"csharp_ls", "pyright", "tsserver", "eslint", "rust_analyzer", "cssls", "html"}
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -59,13 +60,6 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
-
-local pid = vim.fn.getpid()
-local omnisharp_bin = home.."/omnisharp-osx/run"
-require'lspconfig'.omnisharp.setup{
-  on_attach = on_attach,
-  cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
-}
 
 require'lspconfig'.jdtls.setup{
   on_attach = on_attach,

@@ -1,5 +1,10 @@
 vim.cmd [[packadd packer.nvim]]
 
+-- compile packer when file is updated
+vim.api.nvim_exec([[
+autocmd BufWritePost plugins.lua PackerCompile
+]], true)
+
 return require('packer').startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
 
@@ -18,10 +23,7 @@ return require('packer').startup(function(use)
       {'saadparwaiz1/cmp_luasnip'},
     }
   }
-  use {
-    'L3MON4D3/LuaSnip',
-    config = function() require('config.snippets') end,
-  }
+  use 'L3MON4D3/LuaSnip'
 
   use "rafamadriz/friendly-snippets"
 
@@ -49,12 +51,15 @@ return require('packer').startup(function(use)
 
   use {'karb94/neoscroll.nvim'}
 
-  use 'tpope/vim-commentary'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'numToStr/Comment.nvim'
 
   -- DAP
   use "mfussenegger/nvim-dap"
   use "Pocco81/DAPInstall.nvim"
   use "rcarriga/nvim-dap-ui"
   use 'mfussenegger/nvim-dap-python'
+
+  -- format
+  use 'sbdchd/neoformat'
 end)

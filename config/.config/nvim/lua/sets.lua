@@ -47,8 +47,3 @@ augroup trimOnSave
     autocmd BufWritePre * :call TrimWhitespace()
 augroup END
 ]], true)
-
--- compile packer when file is updated
-api.nvim_exec([[
-autocmd BufWritePost plugins.lua PackerCompile
-]], true)

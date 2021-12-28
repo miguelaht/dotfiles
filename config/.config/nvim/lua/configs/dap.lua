@@ -22,6 +22,13 @@ end;
 
 require('dap-python').setup(python_env())
 
+-- rust
+dap.adapters.lldb = {
+  type = 'executable',
+  command = di_path .. 'cppr_vsc',
+  name = "lldb"
+}
+
 -- javascript node
 dap_install.config('jsnode', {})
 dap.adapters.node2 = {
