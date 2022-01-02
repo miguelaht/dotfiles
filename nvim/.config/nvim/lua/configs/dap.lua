@@ -25,9 +25,30 @@ require('dap-python').setup(python_env())
 -- rust
 dap.adapters.lldb = {
   type = 'executable',
-  command = di_path .. 'cppr_vsc',
-  name = "lldb"
+  attach = {pidProperty = "pid", pidSelect = "ask"},
+  command = '/usr/local/opt/llvm@13/bin/lldb-vscode',
+  name = "lldb",
+  env = {LLDB_LAUNCH_FLAG_LAUNCH_IN_TTY = "YES"}
 }
+
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/',
+        'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+    runInTerminal = false
+  }
+}
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
+
 
 -- javascript node
 dap_install.config('jsnode', {})
@@ -54,23 +75,38 @@ dap.configurations.javascript = {
     processId = require'dap.utils'.pick_process,
   },
 }
-dap.configurations.typescript = {
+
+-- react
+dap.adapters.chrome = {
+  type = "executable",
+  command = "node",
+  args = {di_path .. "chrome/vscode-chrome-debug/out/src/chromeDebug.js"} -- TODO adjust
+}
+
+dap.configurations.javascriptreact = { -- change this to javascript if needed
   {
-    name = 'Launch',
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
-  },
+    protocol = "inspector",
+    port = 9222,
+    webRoot = "${workspaceFolder}"
+  }
+}
+
+dap.configurations.typescriptreact = { -- change to typescript if needed
   {
-    name = 'Attach to process',
-    type = 'node2',
-    request = 'attach',
-    processId = require'dap.utils'.pick_process,
-  },
+    type = "chrome",
+    request = "attach",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
+    port = 9222,
+    webRoot = "${workspaceFolder}"
+  }
 }
 
 

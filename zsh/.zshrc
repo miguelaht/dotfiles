@@ -51,3 +51,18 @@ export PATH=$PATH:$HOME/.local/bin
 
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# llvm
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+export CC=clang
+export CXX=clang++
+export LD=ld.lld
+export AR=llvm-ar
+export RANLIB=llvm-ranlib
+
+alias cc=$CC
+alias c++=$CXX
+alias ld=$LD
+alias ar=$AR
+alias ranlib=$RANLIB

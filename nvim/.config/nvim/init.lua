@@ -11,5 +11,3 @@ require('configs.lualine')
 require('configs.dap')
 require('configs.snippets')
 require('configs.comment')
-
-require('neoscroll').setup()

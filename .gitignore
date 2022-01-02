@@ -1,15 +1,6 @@
 **/.DS_Store
 *.un~
 **/spell
-config/.config/gh
-config/.config/iterm2
-config/.config/htop
-config/.config/shopify
-config/.config/psppirerc
-config/.config/planetscale
-config/.config/yarn
-config/.config/configstore
-config/.config/filezilla
 ~/
 **/sessions
 

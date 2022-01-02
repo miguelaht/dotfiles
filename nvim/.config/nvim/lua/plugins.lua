@@ -23,8 +23,8 @@ return require('packer').startup(function(use)
       {'saadparwaiz1/cmp_luasnip'},
     }
   }
-  use 'L3MON4D3/LuaSnip'
 
+  use 'L3MON4D3/LuaSnip'
   use "rafamadriz/friendly-snippets"
 
   -- fzf
@@ -39,6 +39,7 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
   }
+  use { "nvim-telescope/telescope-file-browser.nvim" }
 
   -- statusline
   use {'hoob3rt/lualine.nvim'}
@@ -49,8 +50,6 @@ return require('packer').startup(function(use)
 
   use {'kyazdani42/nvim-web-devicons', opt = true}
 
-  use {'karb94/neoscroll.nvim'}
-
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'numToStr/Comment.nvim'
 
@@ -60,6 +59,23 @@ return require('packer').startup(function(use)
   use "rcarriga/nvim-dap-ui"
   use 'mfussenegger/nvim-dap-python'
 
-  -- format
-  use 'sbdchd/neoformat'
+  use {
+    "blackCauldron7/surround.nvim",
+    config = function()
+      require"surround".setup {
+        context_offset = 100,
+        load_autogroups = false,
+        mappings_style = "sandwich",
+        map_insert_mode = true,
+        quotes = {"'", '"'},
+        brackets = {"(", '{', '['},
+        space_on_closing_char = false,
+        pairs = {
+          nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"}},
+          linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
+        },
+        prefix = "s"
+      }
+    end
+  }
 end)
