@@ -32,7 +32,10 @@ o.shortmess:remove({I = true}, {c = true}, {F = true})
 
 -- python
 api.nvim_set_var('python3_host_prog', '/usr/local/bin/python3')
-api.nvim_set_var('python_host_prog', 'usr/bin/python')
+-- api.nvim_set_var('python_host_prog', 'usr/bin/python')
+api.nvim_set_var('loaded_python_provider', 0)
+api.nvim_set_var('loaded_ruby_provider', 0)
+api.nvim_set_var('loaded_perl_provider', 0)
 
 -- trim on save
 api.nvim_exec([[

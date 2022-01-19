@@ -110,7 +110,7 @@ dap.configurations.typescriptreact = { -- change to typescript if needed
 }
 
 
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 keymap('n', '<Leader>sb', [[<Cmd>lua require'dap'.toggle_breakpoint()<CR>]], {silent = true, noremap = true})
 keymap('n', '<Leader>so', [[<Cmd>lua require'dap'.step_over()<CR>]], {silent = true, noremap = true})

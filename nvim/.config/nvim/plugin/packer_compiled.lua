@@ -110,11 +110,6 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
     url = "https://github.com/projekt0n/github-nvim-theme"
   },
-  ["gruvbox-flat.nvim"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/gruvbox-flat.nvim",
-    url = "https://github.com/eddyekofo94/gruvbox-flat.nvim"
-  },
   ["lsp_extensions.nvim"] = {
     loaded = false,
     needs_bufread = false,
@@ -179,7 +174,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["surround.nvim"] = {
-    config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0" },
+    config = { "\27LJ\2\në\2\0\0\6\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\v\0004\4\4\0005\5\b\0>\5\1\0045\5\t\0>\5\2\0045\5\n\0>\5\3\4=\4\f\0034\4\4\0005\5\r\0>\5\1\0045\5\14\0>\5\2\0045\5\15\0>\5\3\4=\4\16\3=\3\17\2B\0\2\1K\0\1\0\npairs\vlinear\1\3\0\0\6\"\6\"\1\3\0\0\6`\6`\1\3\0\0\6'\6'\rnestable\1\0\0\1\3\0\0\6{\6}\1\3\0\0\6[\6]\1\3\0\0\6(\6)\rbrackets\1\4\0\0\6(\6{\6[\vquotes\1\3\0\0\6'\6\"\1\0\6\19mappings_style\rsandwich\20load_autogroups\1\19context_offset\3d\vprefix\6s\26space_on_closing_char\1\20map_insert_mode\2\nsetup\rsurround\frequire\0" },
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/surround.nvim",
     url = "https://github.com/blackCauldron7/surround.nvim"
@@ -198,13 +193,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
-try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\19mappings_style\rsurround\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+try_loadstring("\27LJ\2\në\2\0\0\6\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\v\0004\4\4\0005\5\b\0>\5\1\0045\5\t\0>\5\2\0045\5\n\0>\5\3\4=\4\f\0034\4\4\0005\5\r\0>\5\1\0045\5\14\0>\5\2\0045\5\15\0>\5\3\4=\4\16\3=\3\17\2B\0\2\1K\0\1\0\npairs\vlinear\1\3\0\0\6\"\6\"\1\3\0\0\6`\6`\1\3\0\0\6'\6'\rnestable\1\0\0\1\3\0\0\6{\6}\1\3\0\0\6[\6]\1\3\0\0\6(\6)\rbrackets\1\4\0\0\6(\6{\6[\vquotes\1\3\0\0\6'\6\"\1\0\6\19mappings_style\rsandwich\20load_autogroups\1\19context_offset\3d\vprefix\6s\26space_on_closing_char\1\20map_insert_mode\2\nsetup\rsurround\frequire\0", "config", "surround.nvim")
 time([[Config for surround.nvim]], false)
 if should_profile then save_profiles() end
 
