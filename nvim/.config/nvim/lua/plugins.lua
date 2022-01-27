@@ -24,6 +24,8 @@ return require('packer').startup(function(use)
     }
   }
 
+  use 'L3MON4D3/LuaSnip'
+
   -- fzf
   use {
     'junegunn/fzf',
@@ -42,7 +44,6 @@ return require('packer').startup(function(use)
   use {'hoob3rt/lualine.nvim'}
 
   -- colorschemes
-  -- use 'eddyekofo94/gruvbox-flat.nvim'
   use 'projekt0n/github-nvim-theme'
 
   use {'kyazdani42/nvim-web-devicons', opt = true}
@@ -56,24 +57,5 @@ return require('packer').startup(function(use)
   use 'rcarriga/nvim-dap-ui'
   use 'mfussenegger/nvim-dap-python'
 
-  use {
-    'blackCauldron7/surround.nvim',
-    config = function()
-      require"surround".setup {
-        context_offset = 100,
-        load_autogroups = false,
-        mappings_style = "sandwich",
-        map_insert_mode = true,
-        quotes = {"'", '"'},
-        brackets = {"(", '{', '['},
-        space_on_closing_char = false,
-        pairs = {
-          nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"}},
-          linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
-        },
-        prefix = "s"
-      }
-    end
-  }
   use { 'akinsho/toggleterm.nvim' }
 end)
