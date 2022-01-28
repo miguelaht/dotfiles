@@ -12,7 +12,10 @@ return require('packer').startup(function(use)
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- LSP
-  use {'neovim/nvim-lspconfig'}
+  use {
+    'neovim/nvim-lspconfig',
+    'williamboman/nvim-lsp-installer',
+  }
   use {'nvim-lua/lsp_extensions.nvim', opt = true}
 
   -- code completion

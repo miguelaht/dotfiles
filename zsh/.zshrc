@@ -36,24 +36,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 # Homebrew
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
-# node
-export PATH="/usr/local/share/npm/bin:$PATH"
-
 export PATH="/usr/local/opt:$PATH"
-
-export PATH="$PATH:$HOME/.dotnet/tools"
 
 # Rust
 . "$HOME/.cargo/env"
-
-# JDTLS
-export PATH=$PATH:$HOME/.local/bin
-
-# poetry
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# llvm
-export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 export CC=clang
 export CXX=clang++
@@ -66,3 +52,7 @@ alias c++=$CXX
 alias ld=$LD
 alias ar=$AR
 alias ranlib=$RANLIB
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

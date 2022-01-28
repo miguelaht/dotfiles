@@ -1,7 +1,4 @@
 -- LSP config
-local nvim_lsp = require('lspconfig')
-local home = os.getenv("HOME")
-
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -50,18 +47,34 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
-local servers = {"prismals", "tailwindcss", "csharp_ls", "pyright", "tsserver", "eslint", "rust_analyzer", "cssls", "html"}
+local servers = {
+  "sumneko_lua",
+  "prismals",
+  "tailwindcss",
+  "pyright",
+  "tsserver",
+  "eslint",
+  "rust_analyzer",
+  "cssls",
+  "html"
+}
+
+local lsp_installer_servers = require("nvim-lsp-installer.servers")
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
+  local server_available, server = lsp_installer_servers.get_server(lsp)
+  if server_available then
+    server:on_ready(function ()
+      local opts = {
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }
+      server:setup(opts)
+    end)
+    if not server:is_installed() then
+      server:install()
+    end
+  end
 end
-
-require'lspconfig'.jdtls.setup{
-  on_attach = on_attach,
-  cmd = { 'jdtls' };
-}
