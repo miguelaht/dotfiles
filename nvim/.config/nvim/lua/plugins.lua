@@ -55,10 +55,10 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
 
   -- DAP
-  use 'mfussenegger/nvim-dap'
-  use 'Pocco81/DAPInstall.nvim'
-  use 'rcarriga/nvim-dap-ui'
-  use 'mfussenegger/nvim-dap-python'
+  use {'mfussenegger/nvim-dap'}
+  use {'Pocco81/DAPInstall.nvim'}
+  use {'rcarriga/nvim-dap-ui'}
+  use {'mfussenegger/nvim-dap-python'}
 
-  use { 'akinsho/toggleterm.nvim' }
+  use {'akinsho/toggleterm.nvim'}
 end)

@@ -41,6 +41,15 @@ export PATH="/usr/local/opt:$PATH"
 # Rust
 . "$HOME/.cargo/env"
 
+# llvm
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+export CC=clang
+export CXX=clang++
+export LD=ld.lld
+export AR=llvm-ar
+export RANLIB=llvm-ranlib
+
 export CC=clang
 export CXX=clang++
 export LD=ld.lld
@@ -53,6 +62,4 @@ alias ld=$LD
 alias ar=$AR
 alias ranlib=$RANLIB
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. /usr/local/opt/asdf/libexec/asdf.sh
