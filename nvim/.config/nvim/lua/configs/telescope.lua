@@ -40,7 +40,6 @@ require('telescope').setup{
       mappings = {
         i = {
           ["<c-d>"] = require("telescope.actions").delete_buffer,
-          ["<c-d>"] = "delete_buffer",
         },
         n = {
           ["<c-d>"] = require("telescope.actions").delete_buffer,
@@ -49,9 +48,6 @@ require('telescope').setup{
     }
   },
   extensions = {
-    file_browser = {
-      theme = "ivy",
-    },
     fzy_native = {
       override_generic_sorter = true,
       override_file_sorter = true,
@@ -71,7 +67,6 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('file_browser')
 
 -- Git
 vim.api.nvim_set_keymap('n', '<C-p>', [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], {noremap = true, silent = true})
@@ -80,6 +75,5 @@ vim.api.nvim_set_keymap('n', '<C-p>', [[<Cmd>lua require('telescope.builtin').gi
 vim.api.nvim_set_keymap('n', '<Leader>pw', [[<Cmd>lua require('telescope.builtin').live_grep({ search = vim.fn.expand("<cword>") })<CR>]], {noremap = true, silent = true})
 -- vim.api.nvim_set_keymap('n', '<Leader>ps', [[<Cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>]], {noremap = true, silent = true})
 
--- Files and buffers
-vim.api.nvim_set_keymap('n', '<Leader>pf', [[<Cmd>lua require('telescope').extensions.file_browser.file_browser()<CR>]], {noremap = true, silent = true})
+-- buffers
 vim.api.nvim_set_keymap('n', '<Leader>b', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], {noremap = true, silent = true})

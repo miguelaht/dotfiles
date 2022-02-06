@@ -41,10 +41,8 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
   }
-  use { "nvim-telescope/telescope-file-browser.nvim" }
 
-  -- statusline
-  use {'hoob3rt/lualine.nvim'}
+  -- statusline  use {'hoob3rt/lualine.nvim'}
 
   -- colorschemes
   use 'projekt0n/github-nvim-theme'
@@ -55,10 +53,11 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
 
   -- DAP
+  --[[
   use {'mfussenegger/nvim-dap'}
   use {'Pocco81/DAPInstall.nvim'}
   use {'rcarriga/nvim-dap-ui'}
-  use {'mfussenegger/nvim-dap-python'}
+  ]]
 
   use {'akinsho/toggleterm.nvim'}
 end)

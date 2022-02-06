@@ -75,9 +75,8 @@ _G.packer_plugins = {
     url = "https://github.com/numToStr/Comment.nvim"
   },
   ["DAPInstall.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/DAPInstall.nvim",
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
     url = "https://github.com/Pocco81/DAPInstall.nvim"
   },
   LuaSnip = {
@@ -123,15 +122,13 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-dap"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/nvim-dap",
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-dap-python"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/nvim-dap-python",
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-dap-python",
     url = "https://github.com/mfussenegger/nvim-dap-python"
   },
   ["nvim-dap-ui"] = {
@@ -192,9 +189,8 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/toggleterm.nvim",
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   }
 }

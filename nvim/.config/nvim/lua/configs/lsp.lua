@@ -56,7 +56,8 @@ local servers = {
   "eslint",
   "rust_analyzer",
   "cssls",
-  "html"
+  "html",
+  "gopls"
 }
 
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
