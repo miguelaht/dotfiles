@@ -2,7 +2,7 @@ vim.cmd [[packadd packer.nvim]]
 
 -- compile packer when file is updated
 vim.api.nvim_exec([[
-autocmd BufWritePost plugins.lua PackerCompile
+  autocmd BufWritePost plugins.lua PackerCompile
 ]], true)
 
 return require('packer').startup(function(use)
@@ -16,48 +16,29 @@ return require('packer').startup(function(use)
     'neovim/nvim-lspconfig',
     'williamboman/nvim-lsp-installer',
   }
-  use {'nvim-lua/lsp_extensions.nvim', opt = true}
 
   -- code completion
   use {
     'hrsh7th/nvim-cmp',
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
-      {'saadparwaiz1/cmp_luasnip'},
     }
-  }
-
-  use 'L3MON4D3/LuaSnip'
-
-  -- fzf
-  use {
-    'junegunn/fzf',
-    run = function() vim.fn['fzf#install']()
-    end, opt = true
   }
 
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
+    requires = {
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope-fzy-native.nvim'}
+    }
   }
-
-  -- statusline  use {'hoob3rt/lualine.nvim'}
 
   -- colorschemes
   use 'projekt0n/github-nvim-theme'
+  use 'kyazdani42/nvim-web-devicons'
 
-  use {'kyazdani42/nvim-web-devicons', opt = true}
-
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'numToStr/Comment.nvim'
-
-  -- DAP
-  --[[
-  use {'mfussenegger/nvim-dap'}
-  use {'Pocco81/DAPInstall.nvim'}
-  use {'rcarriga/nvim-dap-ui'}
-  ]]
 
   use {'akinsho/toggleterm.nvim'}
 end)

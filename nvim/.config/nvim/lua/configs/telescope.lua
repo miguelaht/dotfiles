@@ -73,7 +73,6 @@ vim.api.nvim_set_keymap('n', '<C-p>', [[<Cmd>lua require('telescope.builtin').gi
 
 -- Search
 vim.api.nvim_set_keymap('n', '<Leader>pw', [[<Cmd>lua require('telescope.builtin').live_grep({ search = vim.fn.expand("<cword>") })<CR>]], {noremap = true, silent = true})
--- vim.api.nvim_set_keymap('n', '<Leader>ps', [[<Cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>]], {noremap = true, silent = true})
 
 -- buffers
 vim.api.nvim_set_keymap('n', '<Leader>b', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], {noremap = true, silent = true})
