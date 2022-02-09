@@ -7,24 +7,6 @@ typeset -A abbrevs
 # General aliases
 abbrevs=(
     "mdc"  "mkdir -p __CURSOR__ && cd \$_"
-    "killsshtty" 'kill $(ps auxww | grep ssh | grep tty| awk "{print \$2}")'
-    "kp" 'sudo kill $(ps auxww | grep ssh | grep -e "^pair" | awk "{print \$2}") ; chmod 770 /tmp/tmux-501'
-    "jsun" "python -mjson.tool"
-    "pag" 'ps auxww | grep'
-    "fdg" "find . | grep"
-    "pgr" "| grep"
-    "awkp" "| awk '{print \$__CURSOR__}'"
-    "tstamp" "| while read line; do ; echo \$(date | cut -f4 -d ' ') \$line; done"
-    "rlw"  'readlink $(which __CURSOR__)'
-    "wtnoti" "while do; noti; sleep 120; done"
-    "wt"     "while; do __CURSOR__; clear; sleep 5; done"
-    "wtbb"   "while; do !!; clear; sleep 5; done"
-    "ut"     "clear && until __CURSOR__; do sleep 5; done"
-    "utbb"   "clear && until !!; do sleep 5; done"
-    "epoch" "date +%s"
-    "epochms" 'echo $(($(gdate +%s%N)/1000000))'
-    "oedm" "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'"
-    "rfs" "refresh_safari"
     "trash" "mv __CURSOR__ ~/.Trash"
 )
 
@@ -50,8 +32,6 @@ abbrevs+=(
 "cab" "cat ~/.zsh/abbreviations.zsh"
 "vab" "nvim ~/.zsh/abbreviations.zsh"
 "dof" "cd ~/dotfiles; nvim; cd -"
-"dz" '. ~/.zshrc'
-"sase" "set -a; source .env; set +a"
 )
 
 # Homebrew
@@ -59,59 +39,8 @@ abbrevs+=(
 "br"    "brew"
 "bri"   "brew install"
 "brui"  "brew uninstall"
-"brl"   "brew list"
-"brs"   "brew search"
-"bro"   "brew options"
 "brud"  "brew update"
 "brug"  "brew upgrade"
-"brod"  "brew outdated"
-"brdoc" "brew doctor"
-
-"brc"   "brew cask"
-"brci"  "brew cask install"
-"brcz"  "brew cask zap"
-"brcl"  "brew cask list"
-"brcs"  "brew cask search"
-)
-
-# Tmux
-abbrevs+=(
-"ta"    "tmux -u attach"
-"tan"   "tmux -u attach || tmux -u new -n editor"
-"tda"   "tmux detach -a"
-"tsw"   "tmux split-window"
-"tswrc" "tmux split-window rails c"
-"tswrs" "tmux split-window rails s"
-"tswv"  "tmux split-window nvim"
-"tnw"   "tmux new-window"
-"tnwa"  "tnw; tnws; tnwj; tnwc; tnwm; tnwr; tmux select-window -t 1"
-"tnws"  "tmux new-window -n server rails s"
-"tnwws" "tmux new-window -n server bin/webpack-dev-server \; split-window -v rails s"
-"tnwj"  "tmux new-window -n journal nvim ~/Documents/Notes/\$(date +%Y-%m)-Journal.md \"+/^## \$(date +%d)...\" -c noh"
-"tnwc"  "tmux new-window -n chat weechat"
-"tnwm"  "tmux new-window -n mail mutt"
-"tnwr"  "tmux new-window -n rss newsboat"
-"tnwl"  "tmux new-window -n logs \"while ((1)) { heroku logs -t -r production }\""
-"tnwp"  "tmux new-window -n ping ping 8.8.8.8"
-
-"tks"   "tmux kill-session"
-
-"screst"  "sudo chown -R ericboehs:staff /tmp/tmux-501"
-"cr7t"  "chmod -R 777 /tmp/tmux-501"
-)
-
-# Docker
-abbrevs+=(
-"dk"    "docker"
-"dkrit" "docker run -it"
-"dki"   "docker images"
-"dkig"  "docker images | grep __CURSOR__ | awk '{print \$3}'"
-"dm"    "docker-machine"
-"dmssh" "docker-machine ssh"
-"dc"    "docker-compose"
-"dkbd"  "docker build ."
-"dkbt"  "docker build -t __CURSOR__ ."
-"drid"  "docker rmi -f \$(docker images -q -f \"dangling=true\")"
 )
 
 # Vim
@@ -121,20 +50,12 @@ abbrevs+=(
 
 # Git aliases
 abbrevs+=(
-"gs"    "git status -sb"
-"gsl"   "git status"
-"gg"    "git lg"
-"ggm"   "git lg origin/master.."
-"ggh"   "git lg --color | head"
-"ggmh"  "git lg origin/master.. --color | head"
-"ggg"   "git ll"
-"glogmh" "git log --oneline --graph master HEAD"
+"gs"   "git status"
+"gss"  "git status -sb"
+
 
 "ga"   "git add"
-"gad"  "git add ."
-"gadcp" "git add . && git commit -m 'Auto-commit' && git push"
-"gaud"  "git add -u ."
-"gap"  "git add -p"
+"gaa"  "git add ."
 
 "gapc"  "git add -p && git commit -v"
 "gapcp" "git add -p && git commit -v && git push -u"
@@ -184,13 +105,8 @@ abbrevs+=(
 "gpod"  "git push origin --delete"
 
 "gl"    "git log"
-
-"gbr"    "git browse"
-"gbrp"  "git browse -- pulls"
-"gbrpl"  "git browse -- pull/"
-"gbrpr"  "git browse -- pull/\$(git pr list -h \$(git rev-parse --abbrev-ref HEAD) | awk '{print \$1}' | tr -d '#')"
-"gbrb"  "git browse -- branches"
-"gbrby"  "git browse -- branches/yours"
+"glr"   "git log --raw --no-merges"
+"glg"   "git log --graph --oneline"
 
 "grb"   "git rebase"
 "grbi"  "git rebase -i"
@@ -221,19 +137,6 @@ abbrevs+=(
 "gstp" "git stash pop"
 
 "gcb"   "git checkout -b"
-
-"vgu"  'nvim $(git ls-files --unmerged | cut -f2 | sort -u)'
-"gcdi" "git clean -di"
-)
-
-# GitHub aliases
-abbrevs+=(
-"ghs"    "gh pr checkout \$(unbuffer gh pr status | tail +4 | fzf --ansi --tac | awk '{print \$1}' | tr -d '#')"
-"ghco"   "gh pr checkout \$(unbuffer gh pr list | tail +4 | fzf --ansi | awk '{print \$1}' | tr -d '#')"
-"ghv"    "gh pr view"
-"ghm"    "gh pr merge"
-"ghd"    "gh pr diff"
-"ghr"    "gh pr review"
 )
 
 # Add alias and autocompleteion for hub

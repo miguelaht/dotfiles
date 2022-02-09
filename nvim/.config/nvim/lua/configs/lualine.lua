@@ -1,13 +1,32 @@
-require('lualine').setup {
-  options = {theme = 'github', section_separators = {'', ''}, component_separators = {'', ''}},
-  sections = {
-    lualine_a = {{'mode', upper = true}},
-    lualine_b = {{'branch'}},
-    lualine_c = {{'filename', file_status = true, path = 1}},
-    lualine_x = {{'diagnostics', sources = {'nvim_diagnostic'}, sections = {'error', 'warn', 'info', 'hint'}, symbols = {error = '  ', warn = '  ', info = '  ', hint = '  '}},},
-    lualine_y = {'location'},
-    lualine_z = {'progress'},
+require("lualine").setup {
+  options = {
+    theme = "github",
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    always_divide_middle = true,
   },
-  inactive_sections = {lualine_a = {}, lualine_b = {}, lualine_c = {'filename'}, lualine_x = {'location'}, lualine_y = {}, lualine_z = {}},
-  extensions = {'fzf'}
+  sections = {
+    lualine_a = {{"mode", upper = true}},
+    lualine_b = {{"branch"}},
+    lualine_c = {{"filename"}, {"lsp_progress"}},
+    lualine_x = {
+    {
+        "diagnostics",
+        symbols = {error = "E", warn = "W", info = "I", hint = "H"},
+        colored = true,
+        update_in_insert = false,
+        always_visible = false,
+      }
+    },
+    lualine_y = {"location"},
+    lualine_z = {"progress"},
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {{"filename", file_status = true, path = 1}},
+    lualine_x = {},
+    lualine_y = {"location"},
+    lualine_z = {},
+  },
 }

@@ -38,7 +38,11 @@ return require('packer').startup(function(use)
   use 'projekt0n/github-nvim-theme'
   use 'kyazdani42/nvim-web-devicons'
 
+  -- status line
+  use 'nvim-lualine/lualine.nvim'
+  use 'arkav/lualine-lsp-progress'
+
   use 'numToStr/Comment.nvim'
 
-  use {'akinsho/toggleterm.nvim'}
+  use 'akinsho/toggleterm.nvim'
 end)
