@@ -22,9 +22,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<Leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts) end
+  if client.resolved_capabilities.document_formatting then buf_set_keymap('n', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts) end
   if client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("v", "<Leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    buf_set_keymap('v', '<Leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
   end
 
   -- Set autocommands conditional on server_capabilities
@@ -48,16 +48,19 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
 local servers = {
-  "sumneko_lua",
-  "prismals",
-  "tailwindcss",
-  "pyright",
-  "tsserver",
-  "rust_analyzer",
-  "gopls"
+  'sumneko_lua',
+  'prismals',
+  'tailwindcss',
+  'pyright',
+  'tsserver',
+  'rust_analyzer',
+  'gopls',
+  'sqls',
+  'java_language_server',
+  'csharp_ls'
 }
 
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
+local lsp_installer_servers = require('nvim-lsp-installer.servers')
 
 for _, lsp in ipairs(servers) do
   local server_available, server = lsp_installer_servers.get_server(lsp)

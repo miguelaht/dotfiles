@@ -36,6 +36,8 @@ return require('packer').startup(function(use)
 
   -- colorschemes
   use 'projekt0n/github-nvim-theme'
+  use 'ellisonleao/gruvbox.nvim'
+
   use 'kyazdani42/nvim-web-devicons'
 
   -- status line
@@ -45,4 +47,5 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
 
   use 'akinsho/toggleterm.nvim'
+  use 'nanotee/sqls.nvim'
 end)

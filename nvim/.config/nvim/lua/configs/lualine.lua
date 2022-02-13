@@ -1,6 +1,6 @@
 require("lualine").setup {
   options = {
-    theme = "github",
+    theme = "gruvbox",
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     always_divide_middle = true,
@@ -10,13 +10,14 @@ require("lualine").setup {
     lualine_b = {{"branch"}},
     lualine_c = {{"filename"}, {"lsp_progress"}},
     lualine_x = {
-    {
+      {
         "diagnostics",
         symbols = {error = "E", warn = "W", info = "I", hint = "H"},
         colored = true,
         update_in_insert = false,
         always_visible = false,
-      }
+      },
+      'filetype'
     },
     lualine_y = {"location"},
     lualine_z = {"progress"},

@@ -11,3 +11,5 @@ require("configs.lualine")
 --require("configs.dap")
 require("configs.comment")
 require("configs.toggleterm")
+
+require('sqls').setup()

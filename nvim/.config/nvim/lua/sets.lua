@@ -29,6 +29,7 @@ o.undofile = true
 o.termguicolors = true
 o.undodir = {home..'/.vim/undodir'}
 o.shortmess:remove({I = true}, {c = true}, {F = true})
+o.background = 'dark'
 
 -- providers
 api.nvim_set_var('python3_host_prog', home..'/.asdf/shims/python')
