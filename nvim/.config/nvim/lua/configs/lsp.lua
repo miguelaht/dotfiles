@@ -55,9 +55,8 @@ local servers = {
   'tsserver',
   'rust_analyzer',
   'gopls',
-  'sqls',
   'java_language_server',
-  'csharp_ls'
+  'csharp_ls',
 }
 
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
@@ -72,6 +71,15 @@ for _, lsp in ipairs(servers) do
           debounce_text_changes = 150,
         }
       }
+      if lsp == "sumneko_lua" then
+        opts.settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' }
+            }
+          }
+        }
+      end
       server:setup(opts)
     end)
     if not server:is_installed() then

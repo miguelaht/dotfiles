@@ -55,7 +55,7 @@ abbrevs+=(
 
 
 "ga"   "git add"
-"gaa"  "git add ."
+"gaa"  "git add -A"
 
 "gapc"  "git add -p && git commit -v"
 "gapcp" "git add -p && git commit -v && git push -u"

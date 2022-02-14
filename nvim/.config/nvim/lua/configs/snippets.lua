@@ -19,7 +19,7 @@ ls.config.set_config({
   },
   ext_base_prio = 300,
   enable_autosnippets = true,
-  store_selection_keys = "<c-k>",
+  store_selection_keys = "<Tab>",
 })
 
 ls.snippets = {
