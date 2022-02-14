@@ -23,8 +23,6 @@ ls.config.set_config({
 })
 
 ls.snippets = {
-  all = {
-  },
   go = {
     s("ieif", fmt(
       [[
