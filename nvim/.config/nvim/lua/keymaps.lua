@@ -11,8 +11,5 @@ keymap("n", "<Leader><Leader>", "<c-^>", {silent = true, noremap = true})
 keymap("n", "<c-s>", "<Cmd>:update<CR>", {silent = true, noremap = true})
 keymap("n", "Q", "<Cmd>:q<CR>", {silent = true, noremap = true})
 keymap("n", "<Leader>ss", "<Cmd>:source $MYVIMRC | echo 'Reload init.lua' <CR>")
-
-if vim.bo.filetype == "lua" then
-  keymap("n", "<Leader>sc", "<Cmd>:source % | lua print('Reload '..vim.fn.expand('%:t'))<CR>")
-end
+keymap("n", "<Leader>sc", "<Cmd>:source % | lua print('Reload '..vim.fn.expand('%:t'))<CR>")
 

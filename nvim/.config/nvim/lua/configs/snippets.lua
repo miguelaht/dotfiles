@@ -86,8 +86,22 @@ ls.snippets = {
   },
   react = {
     s("use", fmt("const [{}, set{}] = useState({});", { i(1, ""),  i(2, ""), i(3, "") })),
+  },
+  javascript = {
+    s("import", fmt([[import {{ {} }} from "{}";]], { i(1, ""), i(2, "") })),
+    s("if", fmt(
+    [[
+      if ({}) {{
+        {}
+      }}
+    ]], { i(1, ""), i(2, "") }))
+  },
+  lua = {
+    s("snip", fmt([[s("{}", fmt({}), {{ {} }})]], { i(1, ""), i(2, ""), i(3, "") })),
   }
 }
 
-ls.filetype_extend("javascriptreact", {"react"})
-ls.filetype_extend("typescriptreact", {"react"})
+ls.filetype_extend("javascriptreact", {"react", "javascript"})
+ls.filetype_extend("typescriptreact", {"react", "javascript"})
+ls.filetype_extend("typescript", {"javascript"})
+ls.filetype_extend("javascript", {"javascript"})

@@ -52,7 +52,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local servers = {
   'sumneko_lua',
   'prismals',
-  'tailwindcss',
   'pyright',
   'tsserver',
   'rust_analyzer',
