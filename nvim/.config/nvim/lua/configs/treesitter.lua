@@ -1,4 +1,19 @@
 require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    "c_sharp",
+    "css",
+    "go",
+    "gomod",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "python",
+    "rust",
+    "prisma",
+    "tsx",
+    "typescript",
+  },
   context_commentstring = {
     enable = true
   },
