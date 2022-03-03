@@ -96,7 +96,7 @@ _G.packer_plugins = {
     url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
   ["modes.nvim"] = {
-    config = { "\27LJ\2\nV\0\0\3\0\6\0\n6\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\3\0'\2\4\0B\0\2\0029\0\5\0B\0\1\1K\0\1\0\nsetup\nmodes\frequire\15cursorline\bopt\bvim\0" },
+    config = { "\27LJ\2\nu\0\0\3\0\a\0\v6\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\3\0'\2\4\0B\0\2\0029\0\5\0005\2\6\0B\0\2\1K\0\1\0\1\0\2\15set_cursor\1\15focus_only\2\nsetup\nmodes\frequire\15cursorline\bopt\bvim\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,

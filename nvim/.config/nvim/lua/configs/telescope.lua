@@ -1,4 +1,4 @@
-require('telescope').setup{
+require('telescope').setup({
   defaults = {
     color_devicons = true,
     selection_strategy = "reset",
@@ -64,7 +64,7 @@ require('telescope').setup{
       },
     },
   },
-}
+})
 
 require('telescope').load_extension('fzy_native')
 

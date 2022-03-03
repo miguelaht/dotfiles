@@ -36,41 +36,12 @@ return require("packer").startup(function(use)
     }
   }
 
-  -- colorschemes
-  --[[ use { "projekt0n/github-nvim-theme", config = function ()
-    require("github-theme").setup({
-      theme_style = "dark",
-      comment_style = "NONE",
-      keyword_style = "NONE",
-      function_style = "NONE",
-      variable_style = "NONE",
-      dark_float = true,
-    })
-  end
-  } ]]
-
   use { "ellisonleao/gruvbox.nvim", config = function ()
     vim.cmd("colorscheme gruvbox")
   end
   }
 
-  --[[ use({
-    "rose-pine/neovim",
-    as = "rose-pine",
-    tag = "v1.*",
-    config = function()
-      require("rose-pine").setup({
-        dark_variant = "moon"
-      })
-      vim.cmd("colorscheme rose-pine")
-    end
-  }) ]]
-
   use "kyazdani42/nvim-web-devicons"
-
-  -- status line
-  --[[ use "nvim-lualine/lualine.nvim"
-  use "arkav/lualine-lsp-progress" ]]
 
   use "numToStr/Comment.nvim"
   use "JoosepAlviste/nvim-ts-context-commentstring"
@@ -83,7 +54,10 @@ return require("packer").startup(function(use)
     event = "BufRead", -- optional lazy loading
     config = function()
       vim.opt.cursorline = true
-      require("modes").setup()
+      require("modes").setup({
+        focus_only = true,
+        set_cursor = false,
+      })
     end
   })
 end)

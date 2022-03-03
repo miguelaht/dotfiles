@@ -8,7 +8,7 @@ local on_attach = function(client, bufnr)
   -- Mappings
   local opts = {noremap = true, silent = true}
 
-  buf_set_keymap("n", "<Leader>vd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  buf_set_keymap("n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
   buf_set_keymap("n", "<Leader>vsh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   buf_set_keymap("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
   buf_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
@@ -28,6 +28,23 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_range_formatting then
     buf_set_keymap("v", "<Leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
+
+  -- Set autocommands conditional on server_capabilities
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = "lsp_document_highlight",
+      callback = function ()
+        vim.lsp.buf.document_highlight()
+      end
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = "lsp_document_highlight",
+      callback = function ()
+        vim.lsp.buf.clear_references()
+      end
+    })
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -46,6 +63,7 @@ local servers = {
   "csharp_ls",
   "cssls",
   "cssmodules_ls",
+  "eslint",
 }
 
 local lsp_installer_servers = require("nvim-lsp-installer.servers")

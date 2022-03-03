@@ -10,13 +10,10 @@ require("configs.colors")
 require("configs.comment")
 require("configs.toggleterm")
 require("configs.snippets")
---require("configs.lualine")
---require("configs.statusline")
 --require("configs.dap")
 
-vim.api.nvim_create_augroup({ name = "TrimOnSave" })
-vim.api.nvim_create_autocmd({
-  event = "BufWritePre",
+vim.api.nvim_create_augroup("TrimOnSave", { clear = false })
+vim.api.nvim_create_autocmd("BufWritePre", {
   group = "TrimOnSave",
   callback = function ()
     local current_view = vim.fn.winsaveview()

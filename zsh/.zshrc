@@ -66,3 +66,4 @@ alias ar=$AR
 alias ranlib=$RANLIB
 
 . /usr/local/opt/asdf/libexec/asdf.sh
+export PATH="/usr/local/sbin:$PATH"
