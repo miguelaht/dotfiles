@@ -144,6 +144,12 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["sqls.nvim"] = {
+    config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tsqls\frequire\0" },
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/sqls.nvim",
+    url = "https://github.com/nanotee/sqls.nvim"
+  },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
@@ -166,6 +172,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for gruvbox.nvim]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\24colorscheme gruvbox\bcmd\bvim\0", "config", "gruvbox.nvim")
 time([[Config for gruvbox.nvim]], false)
+-- Config for: sqls.nvim
+time([[Config for sqls.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tsqls\frequire\0", "config", "sqls.nvim")
+time([[Config for sqls.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads

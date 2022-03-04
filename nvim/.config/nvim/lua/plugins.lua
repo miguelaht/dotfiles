@@ -47,7 +47,6 @@ return require("packer").startup(function(use)
   use "JoosepAlviste/nvim-ts-context-commentstring"
 
   use "akinsho/toggleterm.nvim"
-  -- use { "nanotee/sqls.nvim", config = function() require("sqls").setup() end }
 
   use({
     "mvllow/modes.nvim",
@@ -56,7 +55,7 @@ return require("packer").startup(function(use)
       vim.opt.cursorline = true
       require("modes").setup({
         focus_only = true,
-        set_cursor = false,
+        set_cursor = true,
       })
     end
   })

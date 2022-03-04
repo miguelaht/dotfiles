@@ -59,10 +59,6 @@ local servers = {
   "tsserver",
   "rust_analyzer",
   "gopls",
-  "java_language_server",
-  "csharp_ls",
-  "cssls",
-  "cssmodules_ls",
   "eslint",
 }
 

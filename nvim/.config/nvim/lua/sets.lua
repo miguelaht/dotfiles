@@ -27,6 +27,9 @@ o.completeopt = {"menuone","noinsert","noselect"}
 o.mouse = "a"
 o.updatetime = 50
 
+o.wildignore = {'**/node_modules/**'}
+o.path:append('**')
+
 -- providers
 api.nvim_set_var("python3_host_prog", home.."/.asdf/shims/python")
 api.nvim_set_var("loaded_python_provider", 0)
