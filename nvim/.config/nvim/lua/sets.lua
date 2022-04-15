@@ -10,6 +10,7 @@ o.expandtab = true
 o.syntax="on"
 o.colorcolumn = "80"
 o.termguicolors = true
+o.laststatus = 3
 
 o.number = true
 o.relativenumber = true
@@ -27,7 +28,7 @@ o.completeopt = {"menuone","noinsert","noselect"}
 o.mouse = "a"
 o.updatetime = 50
 
-o.wildignore = {'**/node_modules/**'}
+o.wildignore = {'**/node_modules/**', '**/.git/**'}
 o.path:append('**')
 
 -- providers

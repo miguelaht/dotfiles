@@ -69,10 +69,10 @@ require('telescope').setup({
 require('telescope').load_extension('fzy_native')
 
 -- Git
-vim.api.nvim_set_keymap('n', '<C-p>', [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-p>', [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], { noremap = true, silent = true })
 
 -- Search
-vim.api.nvim_set_keymap('n', '<Leader>pw', [[<Cmd>lua require('telescope.builtin').live_grep({ search = vim.fn.expand("<cword>") })<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>pw', [[<Cmd>lua require('telescope.builtin').live_grep({ search = vim.fn.expand("<cword>") })<CR>]], { noremap = true, silent = true })
 
 -- buffers
-vim.api.nvim_set_keymap('n', '<Leader>b', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>b', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })

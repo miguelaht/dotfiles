@@ -1,12 +1,13 @@
 -- LSP config
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
   -- Mappings
-  local opts = {noremap = true, silent = true}
+  local opts = { noremap = true, silent = true }
 
   buf_set_keymap("n", "<Leader>gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
   buf_set_keymap("n", "<Leader>vsh", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
@@ -28,23 +29,6 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_range_formatting then
     buf_set_keymap("v", "<Leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
-
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = "lsp_document_highlight",
-      callback = function ()
-        vim.lsp.buf.document_highlight()
-      end
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = "lsp_document_highlight",
-      callback = function ()
-        vim.lsp.buf.clear_references()
-      end
-    })
-  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -53,40 +37,38 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
 local servers = {
-  "sumneko_lua",
-  "prismals",
-  "pyright",
   "tsserver",
-  "rust_analyzer",
-  "gopls",
   "eslint",
+  "pyright",
+  "gopls",
+  "rust_analyzer",
+  "csharp_ls",
 }
 
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
-
-for _, lsp in ipairs(servers) do
-  local server_available, server = lsp_installer_servers.get_server(lsp)
-  if server_available then
-    server:on_ready(function ()
-      local opts = {
-        on_attach = on_attach,
-        flags = {
-          debounce_text_changes = 150,
-        }
-      }
-      if lsp == "sumneko_lua" then
-        opts.settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" }
-            }
-          }
-        }
-      end
-      server:setup(opts)
-    end)
-    if not server:is_installed() then
-      server:install()
-    end
-  end
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 end
+
+require('lspconfig').sumneko_lua.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}

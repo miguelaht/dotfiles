@@ -6,24 +6,21 @@ vim.api.nvim_exec([[
 ]], true)
 
 return require("packer").startup(function(use)
-  use {"wbthomason/packer.nvim", opt = true}
+  use { "wbthomason/packer.nvim", opt = true }
 
   -- highlight
-  use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
   -- LSP
-  use {
-    "neovim/nvim-lspconfig",
-    "williamboman/nvim-lsp-installer",
-  }
+  use { "neovim/nvim-lspconfig" }
 
   -- code completion
   use {
     "hrsh7th/nvim-cmp",
     requires = {
-      {"hrsh7th/cmp-nvim-lsp"},
-      {"L3MON4D3/LuaSnip"},
-      {"saadparwaiz1/cmp_luasnip"}
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "L3MON4D3/LuaSnip" },
+      { "saadparwaiz1/cmp_luasnip" }
     }
   }
 
@@ -31,15 +28,12 @@ return require("packer").startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     requires = {
-      {"nvim-lua/plenary.nvim"},
-      {"nvim-telescope/telescope-fzy-native.nvim"}
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzy-native.nvim" }
     }
   }
 
-  use { "ellisonleao/gruvbox.nvim", config = function ()
-    vim.cmd("colorscheme gruvbox")
-  end
-  }
+  use { "gruvbox-community/gruvbox" }
 
   use "kyazdani42/nvim-web-devicons"
 

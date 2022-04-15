@@ -8,6 +8,7 @@ typeset -A abbrevs
 abbrevs=(
     "mdc"  "mkdir -p __CURSOR__ && cd \$_"
     "trash" "mv __CURSOR__ ~/.Trash"
+    "quit" "osascript -e 'quit app \"__CURSOR__\"'"
 )
 
 if hash exa 2>/dev/null; then
@@ -26,6 +27,11 @@ else
     "la" 'ls -A'
 )
 fi
+
+# Tmux
+abbrevs+=(
+"tas" "tmux attach-session"
+)
 
 # Dotfiles
 abbrevs+=(

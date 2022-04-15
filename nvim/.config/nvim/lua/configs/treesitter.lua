@@ -13,6 +13,7 @@ require('nvim-treesitter.configs').setup {
     "prisma",
     "tsx",
     "typescript",
+    "comment",
   },
   context_commentstring = {
     enable = true
@@ -31,7 +32,7 @@ require('nvim-treesitter.configs').setup {
   },
   indent = {
     enable = true,
-    disable = {'python'},
+    disable = { 'python' },
   },
   textobjects = {
     select = {

@@ -1,6 +1,8 @@
 "Genereal Settings
  syntax on
- 
+
+ set wmnu
+ set laststatus=2
  set mouse=a
  set relativenumber
  set nohlsearch
@@ -25,7 +27,7 @@
  set spell
  set encoding=utf8
  set rtp+=/usr/local/opt/fzf
- 
+
  highlight ColorColumn ctermbg=0 guibg=lightgrey
- 
+
  filetype plugin indent on

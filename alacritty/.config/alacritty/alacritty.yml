@@ -1,5 +1,5 @@
 window:
-  opacity: 0.999
+  opacity: 0.90
   position:
     x: 1760
     y: 0
@@ -39,10 +39,15 @@ font:
   use_thin_strokes: true
 draw_bold_text_with_bright_colors: true
 
+bell:
+  animation: EaseOutExpo
+  duration: 2
+  color: '#ffffff'
+
 schemes:
   gruvbox: &gruvbox
     primary:
-      background: '0x1d2021'
+      background: '0x1e1e1e'
       foreground: '0xd4be98'
     normal:
       black:   '0x1D2021'
@@ -67,17 +72,19 @@ schemes:
       - { index: 17, color: '0xc14a4a' }
 
 key_bindings:
-  - { key: F,  mods: Alt, chars: "\x1bf" }
-  - { key: B,  mods: Alt, chars: "\x1bb" }
-  - { key: D,  mods: Alt, chars: "\x1bd" }
-  - { key: Q,  mods: Alt, chars: "\x1bq" }
-  - { key: Key1,  mods: Alt, chars: "\x1b1" }
-  - { key: Key2,  mods: Alt, chars: "\x1b2" }
-  - { key: Key3,  mods: Alt, chars: "\x1b3" }
-  - { key: Key4,  mods: Alt, chars: "\x1b4" }
-  - { key: Key5,  mods: Alt, chars: "\x1b5" }
-  - { key: PageUp,   mods: Shift, action: ScrollPageUp   }
-  - { key: PageDown, mods: Shift, action: ScrollPageDown }
+  - { key: F,        mods: Alt,     chars: "\x1bf" }
+  - { key: B,        mods: Alt,     chars: "\x1bb" }
+  - { key: D,        mods: Alt,     chars: "\x1bd" }
+  - { key: Q,        mods: Alt,     chars: "\x1bq" }
+  - { key: P,        mods: Alt,     chars: "\x1bp" }
+  - { key: Key1,     mods: Alt,     chars: "\x1b1" }
+  - { key: Key2,     mods: Alt,     chars: "\x1b2" }
+  - { key: Key3,     mods: Alt,     chars: "\x1b3" }
+  - { key: Key4,     mods: Alt,     chars: "\x1b4" }
+  - { key: Key5,     mods: Alt,     chars: "\x1b5" }
+  - { key: PageUp,   mods: Shift,   action: ScrollPageUp }
+  - { key: PageDown, mods: Shift,   action: ScrollPageDown }
+  - { key: N,        mods: Command, action: CreateNewWindow }
 
 colors: *gruvbox
 

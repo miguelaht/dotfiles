@@ -5,6 +5,9 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
+# poetry
+fpath+=~/.zfunc
+
 # ZSH auto-complete
 autoload -Uz compinit; compinit
 
@@ -21,6 +24,8 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # theme
 autoload -U promptinit; promptinit
 prompt pure
+prompt_newline='%666v'
+PROMPT=" $PROMPT"
 
 # colors
 export CLICOLOR=1
@@ -67,3 +72,7 @@ alias ranlib=$RANLIB
 
 . /usr/local/opt/asdf/libexec/asdf.sh
 export PATH="/usr/local/sbin:$PATH"
+
+export PATH="$PATH:$HOME/.local/bin"
+
+export PATH="$PATH:$HOME/.dotnet/tools"
