@@ -89,18 +89,10 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  gruvbox = {
+  ["gruvbox.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/gruvbox",
-    url = "https://github.com/gruvbox-community/gruvbox"
-  },
-  ["modes.nvim"] = {
-    config = { "\27LJ\2\nu\0\0\3\0\a\0\v6\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\3\0'\2\4\0B\0\2\0029\0\5\0005\2\6\0B\0\2\1K\0\1\0\1\0\2\15set_cursor\2\15focus_only\2\nsetup\nmodes\frequire\15cursorline\bopt\bvim\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/modes.nvim",
-    url = "https://github.com/mvllow/modes.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -117,20 +109,9 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-ts-context-commentstring"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
-    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
-  },
-  ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/kyazdani42/nvim-web-devicons"
-  },
   ["packer.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/opt/packer.nvim",
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
@@ -138,31 +119,19 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["telescope-fzy-native.nvim"] = {
+  ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
-    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["toggleterm.nvim"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
-    url = "https://github.com/akinsho/toggleterm.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Event lazy-loads
-time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'modes.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
-time([[Defining lazy-load event autocommands]], false)
-vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

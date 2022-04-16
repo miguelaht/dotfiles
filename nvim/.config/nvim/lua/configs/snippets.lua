@@ -94,7 +94,7 @@ ls.add_snippets("rust", {
 }, { key = "rust", })
 
 ls.add_snippets("react", {
-  s("use", fmt("const [{}, set{}] = useState({});", { i(1, ""), title_case(1), i(3, "") })),
+  s("use", fmt("const [{}, set{}] = React.useState({});", { i(1, ""), title_case(1), i(2, "") })),
   s("rfc", fmt([[
     export const {} = () => {{
       {}
