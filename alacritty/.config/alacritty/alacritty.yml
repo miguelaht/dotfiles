@@ -24,16 +24,16 @@ mouse:
 
 font:
   normal:
-    family: JetBrainsMono Nerd Font
-    style: Regular
+    family: SF Mono
+    style: Medium
   bold:
-    family: JetBrainsMono Nerd Font
+    family: SF Mono
     style: Bold
   italic:
-    family: JetBrainsMono Nerd Font
+    family: SF Mono
     style: Italic
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: SF Mono
     style: Bold Italic
   size: 13.0
   use_thin_strokes: true
@@ -86,5 +86,7 @@ key_bindings:
   - { key: PageDown, mods: Shift,   action: ScrollPageDown }
   - { key: N,        mods: Command, action: CreateNewWindow }
 
-colors: *gruvbox
+import:
+    - ~/.local/share/nvim/site/pack/packer/start/github-nvim-theme/terminal/alacritty/github_dark.yml
 
+# colors: *gruvbox

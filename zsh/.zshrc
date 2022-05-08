@@ -76,3 +76,8 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+SECRETS=$HOME/.env_secrets.sh
+if [[ -f "$SECRETS" ]]; then
+    source $SECRETS
+fi

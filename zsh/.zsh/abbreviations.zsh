@@ -13,7 +13,6 @@ abbrevs=(
 
 if hash exa 2>/dev/null; then
     abbrevs+=(
-    "ls" "exa"
     "l" 'exa -l --all --group-directories-first --git'
     "ll" 'exa -l --all --all --group-directories-first --git'
     "lt" 'exa -T --git-ignore --level=2 --group-directories-first'
@@ -56,6 +55,8 @@ abbrevs+=(
 
 # Git aliases
 abbrevs+=(
+"gar"   "git archive -o __CURSOR__ HEAD"
+
 "gs"   "git status"
 "gss"  "git status -sb"
 
