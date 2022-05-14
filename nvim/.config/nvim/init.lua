@@ -1,4 +1,7 @@
-vim.cmd [[packadd packer.nvim]]
+vim.api.nvim_cmd({
+    cmd = 'packadd',
+    args = { 'packer.nvim' }
+}, {})
 local home = os.getenv('HOME')
 
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -10,7 +13,6 @@ end
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', { command = 'PackerCompile', group = packer_group, pattern = 'init.lua' })
 
--- PACKER
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -22,26 +24,34 @@ require('packer').startup(function(use)
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
-    use 'ellisonleao/gruvbox.nvim'
-    use 'projekt0n/github-nvim-theme'
+    use { 'ellisonleao/gruvbox.nvim', disable = true }
+    use({
+        "themercorp/themer.lua",
+        config = function()
+            require("themer").setup({
+                colorscheme = "everforest",
+            })
+        end
+    })
+
+    use { 'projekt0n/github-nvim-theme', disable = true, config = function()
+        require('github-theme').setup({
+            overrides = function()
+                return {
+                    sidebars = { "telescope" },
+                    Visual = { style = 'inverse' },
+                    Search = { style = 'inverse' },
+                }
+            end,
+        })
+    end }
 
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+    use { 'norcalli/nvim-colorizer.lua', ft = { 'css' } }
 end)
 -- PACKER
-
--- COLORS
-require('github-theme').setup({
-    overrides = function()
-        return {
-            sidebars = { "telescope" },
-            Visual = { style = 'inverse' },
-            Search = { style = 'inverse' },
-        }
-    end,
-})
--- vim.cmd('colorscheme gruvbox')
--- COLORS ]]
 
 -- CONFIG
 vim.opt.shiftwidth = 4
@@ -64,7 +74,6 @@ vim.opt.fileencoding = 'utf-8'
 vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
 vim.opt.mouse = 'a'
 vim.opt.updatetime = 50
-vim.opt.ruler = false
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 30
 vim.opt.cursorline = true
@@ -82,9 +91,7 @@ vim.keymap.set('i', '<A-p>', [[<C-r>"]], { silent = true, noremap = true })
 vim.keymap.set('t', '<Esc>', [[<C-\><C-N>]])
 vim.keymap.set('n', '[c', ':cp<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', ']c', ':cn<CR>', { silent = true, noremap = true })
-vim.keymap.set('i', '<C-c>', '<C-x><C-o>', { noremap = true })
 -- KEYMAPS
-
 -- TREESITTER
 require('nvim-treesitter.configs').setup {
     ensure_installed = {
@@ -181,7 +188,7 @@ vim.keymap.set('n', '<Leader>b', require('telescope.builtin').buffers)
 -- TELESCOPE
 
 -- LSP CONFIG
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -261,6 +268,11 @@ local luasnip = require('luasnip')
 local cmp = require('cmp')
 
 cmp.setup({
+    completion = {
+        completeopt = "menu,menuone,noinsert",
+        keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+        keyword_length = 1,
+    },
     mapping = cmp.mapping.preset.insert({
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -298,7 +310,6 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
     }),
 })
 -- NVIM-CMP
@@ -307,12 +318,12 @@ cmp.setup({
 require('Comment').setup({})
 -- COMMENTS
 
-vim.api.nvim_create_augroup('TrimOnSave', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePre', {
-    group = 'TrimOnSave',
-    callback = function()
-        local current_view = vim.fn.winsaveview()
-        vim.cmd([[keeppatterns %s/\s\+$//e]])
-        vim.fn.winrestview(current_view)
-    end
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*" },
+    command = [[%s/\s\+$//e]],
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = { "*.css" },
+    command = 'ColorizerAttachToBuffer',
 })
