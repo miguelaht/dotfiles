@@ -1,15 +1,12 @@
 window:
-  opacity: 0.99
-  position:
-    x: 1760
-    y: 0
+  opacity: 0.999
   padding:
     x: 0
-    y: 0
+    y: 1
 
   dynamic_padding: true
-  decorations: full
   dynamic_title: true
+  decorations: full
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -24,19 +21,18 @@ mouse:
 
 font:
   normal:
-    family: SF Mono
+    family: JetBrainsMono Nerd Font
     style: Medium
   bold:
-    family: SF Mono
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: SF Mono
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: SF Mono
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
   size: 13.0
-  use_thin_strokes: true
 draw_bold_text_with_bright_colors: true
 
 bell:
@@ -45,6 +41,28 @@ bell:
   color: '#ffffff'
 
 schemes:
+  everforest: &everforest
+    primary:
+      background: '#2b3339'
+      foreground: '#d3c6aa'
+    normal:
+      black:   '#4b565c'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3c6aa'
+    bright:
+      black:   '#4b565c'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3c6aa'
   gruvbox: &gruvbox
     primary:
       background: '0x1e1e1e'
@@ -85,8 +103,9 @@ key_bindings:
   - { key: PageUp,   mods: Shift,   action: ScrollPageUp }
   - { key: PageDown, mods: Shift,   action: ScrollPageDown }
   - { key: N,        mods: Command, action: CreateNewWindow }
+  - { key: Return,   mods: Command, action: ToggleFullscreen }
 
 # import:
 #     - ~/.local/share/nvim/site/pack/packer/start/github-nvim-theme/terminal/alacritty/github_dark.yml
 
-colors: *gruvbox
+colors: *everforest

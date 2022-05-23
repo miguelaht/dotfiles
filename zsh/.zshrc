@@ -1,4 +1,5 @@
-source "$HOME/.zsh/abbreviations.zsh"
+export EDITOR=nvim
+source "$HOME/.zsh/alias.zsh"
 
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line
@@ -49,32 +50,10 @@ export PATH="/usr/local/opt:$PATH"
 # llvm
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
-export CC=clang
-export CXX=clang++
-export LD=ld.lld
-export AR=llvm-ar
-export RANLIB=llvm-ranlib
-
-export CC=clang
-export CXX=clang++
-export LD=ld.lld
-export AR=llvm-ar
-export RANLIB=llvm-ranlib
-
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-alias cc=$CC
-alias c++=$CXX
-alias ld=$LD
-alias ar=$AR
-alias ranlib=$RANLIB
-
 . /usr/local/opt/asdf/libexec/asdf.sh
+
 export PATH="/usr/local/sbin:$PATH"
-
 export PATH="$PATH:$HOME/.local/bin"
-
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 SECRETS=$HOME/.env_secrets.sh
