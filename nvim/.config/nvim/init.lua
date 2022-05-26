@@ -81,7 +81,6 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 30
 -- CONFIG
 
-
 -- KEYMAPS
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
@@ -95,6 +94,7 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-N>]])
 vim.keymap.set('n', '[c', ':cp<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', ']c', ':cn<CR>', { silent = true, noremap = true })
 -- KEYMAPS
+
 -- TREESITTER
 require('nvim-treesitter.configs').setup {
   ensure_installed = {
@@ -117,7 +117,8 @@ require('nvim-treesitter.configs').setup {
     enable = true
   },
   highlight = {
-    enable = true, -- false will disable the whole extension
+    enable = true,
+    disable = { 'html' },
   },
   incremental_selection = {
     enable = true,
@@ -132,7 +133,7 @@ require('nvim-treesitter.configs').setup {
 -- TELESCOPE
 require('telescope').setup({
   defaults = {
-    vimgrep_arguments = {
+    ripgrep_arguments = {
       'rg',
       '--hidden',
       '--no-heading',
@@ -141,34 +142,6 @@ require('telescope').setup({
       '--column',
       '--smart-case'
     },
-    initial_mode = "insert",
-    selection_strategy = "reset",
-    sorting_strategy = "ascending",
-    layout_strategy = "horizontal",
-    layout_config = {
-      horizontal = {
-        prompt_position = "top",
-        preview_width = 0.55,
-        results_width = 0.8,
-      },
-      vertical = {
-        mirror = false,
-      },
-      width = 0.80,
-      height = 0.85,
-      preview_cutoff = 120,
-    },
-    file_sorter = require("telescope.sorters").get_fuzzy_file,
-    file_ignore_patterns = { "node_modules", ".git/", "dist/" },
-    generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-    path_display = { "absolute" },
-    winblend = 0,
-    use_less = true,
-    set_env = { ["COLORTERM"] = "truecolor" },
-    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-    buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
   },
   pickers = {
     buffers = {
@@ -182,8 +155,8 @@ require('telescope').setup({
   extensions = {
     fzf = {
       fuzzy = true,
-      override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true, -- override the file sorter
+      override_generic_sorter = true,
+      override_file_sorter = true,
       case_mode = "smart_case",
     },
   },
@@ -238,7 +211,8 @@ local servers = { 'tsserver'
   , 'gopls'
   , 'rust_analyzer'
   , 'html'
-  , 'cssls' }
+  , 'cssls'
+  , 'csharp_ls' }
 
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
@@ -247,15 +221,6 @@ for _, lsp in pairs(servers) do
     handlers = handlers
   }
 end
-
-local pid = vim.fn.getpid()
-local omnisharp_bin = home .. "/omnisharp-osx/run"
-require 'lspconfig'.omnisharp.setup({
-  cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-  on_attach = on_attach,
-  capabilities = capabilities,
-  handlers = handlers
-})
 
 require('lspconfig').sumneko_lua.setup {
   on_attach = on_attach,
@@ -293,7 +258,7 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-c>'] = cmp.mapping.complete(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close(), }),

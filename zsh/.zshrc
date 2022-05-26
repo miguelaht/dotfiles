@@ -1,4 +1,3 @@
-export EDITOR=nvim
 source "$HOME/.zsh/alias.zsh"
 
 # Edit the current command line in $EDITOR
