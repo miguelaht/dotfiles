@@ -1,11 +1,11 @@
 source "$HOME/.zsh/alias.zsh"
 
-# Edit the current command line in $EDITOR
+bindkey -e
+export EDITOR=nvim
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey '\C-x\C-e' edit-command-line
+bindkey '\C-x\C-x' edit-command-line
 
-# poetry
 fpath+=~/.zfunc
 
 # ZSH auto-complete
@@ -17,6 +17,8 @@ fi
 
 # fuzzy search keybinds
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!node_modules/*,.git/*'"
+export FZF_CTRL_T_OPTS="--preview='bat --style numbers,changes --color=always --theme=gruvbox-dark {} | head -500' --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --no-height --no-reverse"
 
 # ZSH autosuggest
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

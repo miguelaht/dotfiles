@@ -1,6 +1,6 @@
 vim.api.nvim_cmd({
-  cmd = 'packadd',
-  args = { 'packer.nvim' }
+    cmd = 'packadd',
+    args = { 'packer.nvim' }
 }, {})
 local home = os.getenv('HOME')
 
@@ -16,11 +16,14 @@ vim.api.nvim_create_autocmd('BufWritePost', { command = 'PackerCompile', group =
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'neovim/nvim-lspconfig'
-  use 'L3MON4D3/LuaSnip'
-  use 'numToStr/Comment.nvim'
+  use { 'neovim/nvim-lspconfig', disable = true }
+  use { 'hrsh7th/nvim-cmp', disable = true }
+  use { 'hrsh7th/cmp-nvim-lsp', disable = true }
+  use { 'L3MON4D3/LuaSnip', disable = true }
+  use { 'numToStr/Comment.nvim', config = function()
+    require('Comment').setup({})
+  end
+  }
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
@@ -40,8 +43,6 @@ require('packer').startup(function(use)
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-
-  use { 'norcalli/nvim-colorizer.lua', ft = { 'css' } }
 end)
 -- PACKER
 
@@ -75,8 +76,8 @@ vim.opt.wrap = false
 vim.opt.fileencoding = 'utf-8'
 vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
 vim.opt.mouse = 'a'
+vim.opt.cursorline = true
 vim.opt.updatetime = 50
-vim.opt.ruler = false
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 30
 -- CONFIG
@@ -142,16 +143,26 @@ require('telescope').setup({
       '--column',
       '--smart-case'
     },
+    layout_config = {
+      prompt_position = "bottom"
+    },
   },
   pickers = {
+    live_grep = {
+      theme = "ivy"
+    },
+    git_files = {
+      theme = "ivy"
+    },
     buffers = {
+      theme = "ivy",
       mappings = {
         n = {
           ['dd'] = require('telescope.actions').delete_buffer,
         }
       }
     },
-  },
+},
   extensions = {
     fzf = {
       fuzzy = true,
@@ -170,144 +181,135 @@ vim.keymap.set('n', '<Leader>b', require('telescope.builtin').buffers)
 -- TELESCOPE
 
 -- LSP CONFIG
-local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local opts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, opts)
-  vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-  vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, opts)
-
-  vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, opts)
-  vim.keymap.set('v', '<Leader>f', vim.lsp.buf.range_formatting, opts)
-end
-
-local handlers = {
-  ['textDocument/hover'] = function(...)
-    local bufnr, _ = vim.lsp.handlers.hover(...)
-    if bufnr then
-      vim.keymap.set('n', 'K', '<Cmd>wincmd p<CR>', { silent = true, buffer = bufnr })
-    end
-  end,
-}
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = false
-
--- LANGUAGES
-local servers = { 'tsserver'
-  , 'svelte'
-  , 'eslint'
-  , 'pyright'
-  , 'gopls'
-  , 'rust_analyzer'
-  , 'html'
-  , 'cssls'
-  , 'csharp_ls' }
-
-for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    handlers = handlers
-  }
-end
-
-require('lspconfig').sumneko_lua.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
+-- local on_attach = function(_, bufnr)
+--     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+--
+--     local opts = { noremap = true, silent = true, buffer = bufnr }
+--     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+--     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+--     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+--     vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
+--     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+--     vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, opts)
+--     vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
+--     vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
+--     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+--     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+--     vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, opts)
+--
+--     vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, opts)
+--     vim.keymap.set('v', '<Leader>f', vim.lsp.buf.range_formatting, opts)
+-- end
+--
+-- local handlers = {
+--     ['textDocument/hover'] = function(...)
+--         local bufnr, _ = vim.lsp.handlers.hover(...)
+--         if bufnr then
+--             vim.keymap.set('n', 'K', '<Cmd>wincmd p<CR>', { silent = true, buffer = bufnr })
+--         end
+--     end,
+-- }
+--
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+-- capabilities.textDocument.completion.completionItem.snippetSupport = false
+--
+-- -- LANGUAGES
+-- local servers = { 'tsserver'
+--     , 'svelte'
+--     , 'eslint'
+--     , 'pyright'
+--     , 'gopls'
+--     , 'rust_analyzer'
+--     , 'html'
+--     , 'cssls'
+--     , 'csharp_ls' }
+--
+-- for _, lsp in pairs(servers) do
+--     require('lspconfig')[lsp].setup {
+--         on_attach = on_attach,
+--         capabilities = capabilities,
+--         handlers = handlers
+--     }
+-- end
+--
+-- require('lspconfig').sumneko_lua.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     settings = {
+--         Lua = {
+--             runtime = {
+--                 version = 'LuaJIT',
+--             },
+--             diagnostics = {
+--                 globals = { 'vim' },
+--             },
+--             workspace = {
+--                 library = vim.api.nvim_get_runtime_file('', true),
+--             },
+--             telemetry = {
+--                 enable = false,
+--             },
+--         },
+--     },
+-- }
 -- LSP CONFIG
 
 -- NVIM-CMP
-local luasnip = require('luasnip')
-local cmp = require('cmp')
-
-cmp.setup({
-  completion = {
-    autocomplete = false,
-    completeopt = "menu,menuone,noinsert",
-    keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-    keyword_length = 1,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-c>'] = cmp.mapping.complete(),
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close(), }),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  snippet = {
-    expand = function(args)
-      if not luasnip then
-        return
-      end
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-  }),
-})
+-- local luasnip = require('luasnip')
+-- local cmp = require('cmp')
+--
+-- cmp.setup({
+--     completion = {
+--         autocomplete = false,
+--         completeopt = "menu,menuone,noinsert",
+--         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+--         keyword_length = 1,
+--     },
+--     mapping = cmp.mapping.preset.insert({
+--         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+--         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+--         ['<C-c>'] = cmp.mapping.complete(),
+--         ['<C-p>'] = cmp.mapping.select_prev_item(),
+--         ['<C-n>'] = cmp.mapping.select_next_item(),
+--         ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close(), }),
+--         ['<CR>'] = cmp.mapping.confirm({
+--             behavior = cmp.ConfirmBehavior.Replace,
+--             select = true,
+--         }),
+--         ['<Tab>'] = cmp.mapping(function(fallback)
+--             if cmp.visible() then
+--                 cmp.select_next_item()
+--             else
+--                 fallback()
+--             end
+--         end, { 'i', 's' }),
+--
+--         ['<S-Tab>'] = cmp.mapping(function(fallback)
+--             if cmp.visible() then
+--                 cmp.select_prev_item()
+--             else
+--                 fallback()
+--             end
+--         end, { 'i', 's' }),
+--     }),
+--     snippet = {
+--         expand = function(args)
+--             if not luasnip then
+--                 return
+--             end
+--             luasnip.lsp_expand(args.body)
+--         end,
+--     },
+--     sources = cmp.config.sources({
+--         { name = 'nvim_lsp' },
+--     }),
+-- })
 -- NVIM-CMP
-
--- COMMENTS
-require('Comment').setup({})
--- COMMENTS
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
-})
-
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  pattern = { "*.css" },
-  command = 'ColorizerAttachToBuffer',
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {

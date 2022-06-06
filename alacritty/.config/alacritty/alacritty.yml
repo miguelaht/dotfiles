@@ -95,11 +95,13 @@ key_bindings:
   - { key: D,        mods: Alt,     chars: "\x1bd" }
   - { key: Q,        mods: Alt,     chars: "\x1bq" }
   - { key: P,        mods: Alt,     chars: "\x1bp" }
+  - { key: C,        mods: Alt,     chars: "\x1bc" }
   - { key: Key1,     mods: Alt,     chars: "\x1b1" }
   - { key: Key2,     mods: Alt,     chars: "\x1b2" }
   - { key: Key3,     mods: Alt,     chars: "\x1b3" }
   - { key: Key4,     mods: Alt,     chars: "\x1b4" }
   - { key: Key5,     mods: Alt,     chars: "\x1b5" }
+  - { key: Key6,     mods: Control, chars: "\x1e" }
   - { key: PageUp,   mods: Shift,   action: ScrollPageUp }
   - { key: PageDown, mods: Shift,   action: ScrollPageDown }
   - { key: N,        mods: Command, action: CreateNewWindow }

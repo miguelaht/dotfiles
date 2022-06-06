@@ -1,8 +1,8 @@
-tap "cockroachdb/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
+tap "homebrew/services"
 tap "planetscale/tap"
 brew "readline"
 brew "asdf"
@@ -28,6 +28,7 @@ brew "libpq", link: true
 brew "llvm"
 brew "lua-language-server"
 brew "luajit", args: ["HEAD"]
+brew "mas"
 brew "miniserve"
 brew "mycli"
 brew "mysql-client"
@@ -44,7 +45,6 @@ brew "unar"
 brew "wget"
 brew "zlib"
 brew "zsh-autosuggestions"
-brew "cockroachdb/tap/cockroach"
 brew "planetscale/tap/pscale"
 cask "alacritty"
 cask "brave-browser"
@@ -52,3 +52,10 @@ cask "cyberduck"
 cask "font-jetbrains-mono-nerd-font"
 cask "rectangle"
 cask "the-unarchiver"
+mas "AdGuard for Safari", id: 1440147259
+mas "ColorSlurp", id: 1287239339
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Telegram", id: 747648890
+mas "WhatsApp", id: 1147396723
