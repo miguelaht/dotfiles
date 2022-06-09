@@ -96,6 +96,8 @@ key_bindings:
   - { key: Q,        mods: Alt,     chars: "\x1bq" }
   - { key: P,        mods: Alt,     chars: "\x1bp" }
   - { key: C,        mods: Alt,     chars: "\x1bc" }
+  - { key: J,        mods: Alt,     chars: "\x1bj" }
+  - { key: A,        mods: Alt,     chars: "\x1ba" }
   - { key: Key1,     mods: Alt,     chars: "\x1b1" }
   - { key: Key2,     mods: Alt,     chars: "\x1b2" }
   - { key: Key3,     mods: Alt,     chars: "\x1b3" }

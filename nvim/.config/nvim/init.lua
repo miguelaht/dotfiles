@@ -47,13 +47,13 @@ end)
 -- PACKER
 
 -- COLOR
-vim.g.everforest_background = 'hard'
-vim.g.everforest_cursor = 'orange'
-vim.g.everforest_diagnostic_virtual_text = 'colored'
-vim.api.nvim_cmd({
-  cmd = 'colorscheme',
-  args = { 'everforest' }
-}, {})
+-- vim.g.everforest_background = 'hard'
+-- vim.g.everforest_cursor = 'orange'
+-- vim.g.everforest_diagnostic_virtual_text = 'colored'
+-- vim.api.nvim_cmd({
+--   cmd = 'colorscheme',
+--   args = { 'everforest' }
+-- }, {})
 -- COLOR
 
 -- CONFIG
@@ -75,25 +75,34 @@ vim.opt.undodir = { home .. '/.vim/undodir' }
 vim.opt.wrap = false
 vim.opt.fileencoding = 'utf-8'
 vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
-vim.opt.mouse = 'a'
 vim.opt.cursorline = true
 vim.opt.updatetime = 50
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 30
 -- CONFIG
 
+-- COMMANDS
+vim.api.nvim_create_user_command('Init', 'e! $MYVIMRC', {})
+-- COMMANDS
+
 -- KEYMAPS
+vim.keymap.set({ 'n', 'v' }, '<Up>', '<NOP>')
+vim.keymap.set({ 'n', 'v' }, '<Down>', '<NOP>')
+vim.keymap.set({ 'n', 'v' }, '<Left>', '<NOP>')
+vim.keymap.set({ 'n', 'v' }, '<Right>', '<NOP>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.keymap.set('v', 'J', [[:m '>+1<CR>gv=gv]], { noremap = true })
-vim.keymap.set('v', 'K', [[:m '<-2<CR>gv=gv]], { noremap = true })
+vim.keymap.set('v', 'J', [[:m '>+1<CR>gv=gv]], { noremap = true, silent = true })
+vim.keymap.set('v', 'K', [[:m '<-2<CR>gv=gv]], { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader><Leader>', '<c-^>', { silent = true, noremap = true })
 vim.keymap.set('n', 'Q', '<Cmd>:q<CR>', { silent = true, noremap = true })
 vim.keymap.set('i', '<A-p>', [[<C-r>"]], { silent = true, noremap = true })
 vim.keymap.set('t', '<Esc>', [[<C-\><C-N>]])
 vim.keymap.set('n', '[c', ':cp<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', ']c', ':cn<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<Leader>,', ':Init<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<Leader>so', ':so $MYVIMRC<CR>', { silent = true, noremap = true })
 -- KEYMAPS
 
 -- TREESITTER
@@ -134,7 +143,7 @@ require('nvim-treesitter.configs').setup {
 -- TELESCOPE
 require('telescope').setup({
   defaults = {
-    ripgrep_arguments = {
+    vimgrep_arguments = {
       'rg',
       '--hidden',
       '--no-heading',
@@ -144,25 +153,34 @@ require('telescope').setup({
       '--smart-case'
     },
     layout_config = {
-      prompt_position = "bottom"
+      prompt_position = "bottom",
     },
   },
   pickers = {
     live_grep = {
-      theme = "ivy"
+      theme = "ivy",
+      results_title = false,
+      preview_title = false,
+      prompt_title = false
     },
     git_files = {
-      theme = "ivy"
+      theme = "ivy",
+      results_title = false,
+      preview_title = false,
+      prompt_title = false
     },
     buffers = {
       theme = "ivy",
+      results_title = false,
+      preview_title = false,
+      prompt_title = false,
       mappings = {
         n = {
           ['dd'] = require('telescope.actions').delete_buffer,
         }
       }
     },
-},
+  },
   extensions = {
     fzf = {
       fuzzy = true,
@@ -173,7 +191,7 @@ require('telescope').setup({
   },
 })
 require('telescope').load_extension('fzf')
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files)
+vim.keymap.set('n', '<c-t>', require('telescope.builtin').git_files)
 vim.keymap.set('n', '<Leader>pw', function()
   require('telescope.builtin').live_grep({ search = vim.fn.expand("<cword>") })
 end)
