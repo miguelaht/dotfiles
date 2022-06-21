@@ -1,7 +1,7 @@
 window:
   opacity: 0.999
   padding:
-    x: 0
+    x: 1
     y: 1
 
   dynamic_padding: true
@@ -108,8 +108,5 @@ key_bindings:
   - { key: PageDown, mods: Shift,   action: ScrollPageDown }
   - { key: N,        mods: Command, action: CreateNewWindow }
   - { key: Return,   mods: Command, action: ToggleFullscreen }
-
-# import:
-#     - ~/.local/share/nvim/site/pack/packer/start/github-nvim-theme/terminal/alacritty/github_dark.yml
 
 colors: *everforest
