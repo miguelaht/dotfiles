@@ -4,6 +4,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "planetscale/tap"
+tap "veeso/termscp"
 brew "readline"
 brew "asdf"
 brew "bat"
@@ -37,23 +38,28 @@ brew "openssl@3"
 brew "pgcli"
 brew "pure"
 brew "ripgrep"
+brew "rmlint"
 brew "rust-analyzer"
 brew "stow"
 brew "tmux"
 brew "tree"
 brew "unar"
+brew "viddy"
 brew "wget"
 brew "zlib"
 brew "zsh-autosuggestions"
 brew "planetscale/tap/pscale"
+brew "veeso/termscp/termscp", link: false
 cask "alacritty"
 cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
+cask "keycastr"
+cask "pika"
 cask "rectangle"
 cask "the-unarchiver"
 mas "AdGuard for Safari", id: 1440147259
-mas "ColorSlurp", id: 1287239339
 mas "Keynote", id: 409183694
+mas "Microsoft Word", id: 462054704
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Telegram", id: 747648890
