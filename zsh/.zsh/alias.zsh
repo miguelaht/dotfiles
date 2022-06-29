@@ -16,7 +16,7 @@ alias ranlib=$RANLIB
 alias cat="bat --theme=gruvbox-dark"
 alias bat="bat --theme=gruvbox-dark"
 alias grep=rg
-alias vim=nvim
+# alias vim=nvim
 
 alias l="exa -l --all --group-directories-first --git"
 alias ll="exa -l --all --all --group-directories-first --git"
@@ -50,3 +50,4 @@ trash() {
 mdc() {
     mkdir -p $1 && cd $1
 }
+alias prime="streamlink twitch.tv/theprimeagen best"

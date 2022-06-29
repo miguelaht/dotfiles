@@ -85,13 +85,15 @@ schemes:
       magenta: '0xd3869b'
       aqua:    '0x89b482'
       white:   '0xd4be98'
-    indexed_colors:
-      - { index: 16, color: '0xe78a4e' }
-      - { index: 17, color: '0xc14a4a' }
+  indexed_colors:
+    - { index: 16, color: '0xe78a4e' }
+    - { index: 17, color: '0xc14a4a' }
 
 key_bindings:
   - { key: F,        mods: Alt,     chars: "\x1bf" }
+  - { key: Right,    mods: Alt,     chars: "\x1bf" }
   - { key: B,        mods: Alt,     chars: "\x1bb" }
+  - { key: Left,     mods: Alt,     chars: "\x1bb" }
   - { key: D,        mods: Alt,     chars: "\x1bd" }
   - { key: Q,        mods: Alt,     chars: "\x1bq" }
   - { key: P,        mods: Alt,     chars: "\x1bp" }
@@ -109,4 +111,8 @@ key_bindings:
   - { key: N,        mods: Command, action: CreateNewWindow }
   - { key: Return,   mods: Command, action: ToggleFullscreen }
 
-colors: *everforest
+import:
+  # - ~/.local/share/nvim/site/pack/packer/start/onenord.nvim/extras/onenord.yaml
+  - ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
+
+# colors: *everforest

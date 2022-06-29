@@ -24,8 +24,8 @@
  set cmdheight=1
  set updatetime=50
  set colorcolumn=80
- set spell
- set encoding=utf8
+"set spell
+"set encoding=utf8
 
  highlight ColorColumn ctermbg=0 guibg=lightgrey
 

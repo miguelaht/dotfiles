@@ -1,13 +1,15 @@
+local colorscheme = 'onedark'
+
 vim.api.nvim_cmd({
   cmd = 'packadd',
   args = { 'packer.nvim' }
 }, {})
 local home = os.getenv('HOME')
 
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = string.format('%s/site/pack/packer/start/packer.nvim', vim.fn.stdpath('data'))
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  vim.fn.execute(string.format('!git clone https://github.com/wbthomason/packer.nvim %s', install_path))
 end
 
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
@@ -28,18 +30,10 @@ require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use { 'ellisonleao/gruvbox.nvim', disable = false }
-  use { 'sainnhe/everforest' }
-  use { 'projekt0n/github-nvim-theme', disable = true, config = function()
-    require('github-theme').setup({
-      overrides = function()
-        return {
-          sidebars = { "telescope" },
-          Visual = { style = 'inverse' },
-          Search = { style = 'inverse' },
-        }
-      end,
-    })
-  end }
+  use { 'sainnhe/everforest', disable = false }
+  use { 'rmehri01/onenord.nvim', disable = false }
+  use { 'ful1e5/onedark.nvim', disable = false }
+  use { 'projekt0n/github-nvim-theme', disable = false }
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
@@ -47,14 +41,51 @@ end)
 -- PACKER
 
 -- COLOR
-vim.g.everforest_background = 'hard'
-vim.g.everforest_diagnostic_virtual_text = 'colored'
-vim.g.everforest_diagnostic_text_highlight = 1
-vim.g.everforest_better_performance = 1
-vim.api.nvim_cmd({
+if colorscheme == 'everforest' then
+  vim.g.everforest_background = 'hard'
+  vim.g.everforest_diagnostic_virtual_text = 'colored'
+  vim.g.everforest_diagnostic_text_highlight = 1
+  vim.g.everforest_better_performance = 1
+  vim.api.nvim_cmd({
     cmd = 'colorscheme',
-    args = { 'everforest' }
-}, {})
+    args = { colorscheme }
+  }, {})
+end
+
+if colorscheme == 'gruvbox' then
+  vim.g.gruvbox_invert_selection = true
+end
+
+if colorscheme == 'github' then
+  require('github-theme').setup({
+    overrides = function()
+      return {
+        sidebars = { "telescope" },
+        Visual = { style = 'inverse' },
+        Search = { style = 'inverse' },
+      }
+    end,
+  })
+end
+
+if colorscheme == 'onenord' then
+  require('onenord').setup({
+    theme = 'dark'
+  })
+end
+
+if colorscheme == 'onedark' then
+  require('onedark').setup({
+    dark_float = false,
+    hide_inactive_statusline = false,
+    dark_sidebar = false,
+    overrides = function()
+      return {
+        Visual = { style = 'inverse' },
+      }
+    end,
+  })
+end
 -- COLOR
 
 -- CONFIG
@@ -62,28 +93,26 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
-vim.opt.syntax = 'on'
 vim.opt.colorcolumn = '80'
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 3
 vim.opt.undofile = true
-vim.opt.undodir = { home .. '/.vim/undodir' }
+vim.opt.undodir = string.format('%s/.vim/undodir', home)
 vim.opt.wrap = false
 vim.opt.fileencoding = 'utf-8'
 vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
 vim.opt.cursorline = true
 vim.opt.updatetime = 50
 vim.opt.splitbelow = true
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 30
 vim.opt.isfname:append('@-@')
+vim.g.mapleader = ' '
 -- CONFIG
 
 -- COMMANDS
-vim.api.nvim_create_user_command('EditConfig', 'e! $MYVIMRC', {})
+vim.api.nvim_create_user_command('ConfigOpen', 'e! $MYVIMRC', {})
 -- COMMANDS
 
 -- KEYMAPS
@@ -92,16 +121,12 @@ vim.keymap.set({ 'n', 'v' }, '<Down>', '<NOP>')
 vim.keymap.set({ 'n', 'v' }, '<Left>', '<NOP>')
 vim.keymap.set({ 'n', 'v' }, '<Right>', '<NOP>')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-vim.keymap.set('v', 'J', [[:m '>+1<CR>gv=gv]], { silent = true })
-vim.keymap.set('v', 'K', [[:m '<-2<CR>gv=gv]], { silent = true })
 vim.keymap.set('n', '<Leader><Leader>', '<c-^>', { silent = true })
 vim.keymap.set('i', '<A-p>', [[<C-r>"]], { silent = true })
 vim.keymap.set('t', '<Esc>', [[<C-\><C-N>]])
 vim.keymap.set('n', '[c', ':cp<CR>', { silent = true })
 vim.keymap.set('n', ']c', ':cn<CR>', { silent = true })
-vim.keymap.set('n', '<Leader>,', ':EditConfig<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>,', ':ConfigOpen<CR>', { silent = true })
 vim.keymap.set('n', '<Leader>so', ':so $MYVIMRC<CR>', { silent = true })
 -- KEYMAPS
 
@@ -142,6 +167,7 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = true,
     disable = { 'python' },
+    additional_vim_regex_highlighting = false,
   },
 }
 -- TREESITTER
@@ -158,31 +184,15 @@ require('telescope').setup({
       '--column',
       '--smart-case'
     },
-    layout_config = {
-      prompt_position = "bottom",
-    },
   },
   pickers = {
-    live_grep = {
-      theme = "ivy",
-      results_title = false,
-      preview_title = false,
-      prompt_title = false
-    },
-    git_files = {
-      theme = "ivy",
-      results_title = false,
-      preview_title = false,
-      prompt_title = false
-    },
     buffers = {
-      theme = "ivy",
-      results_title = false,
-      preview_title = false,
-      prompt_title = false,
       mappings = {
         n = {
-          ['dd'] = require('telescope.actions').delete_buffer,
+          ['<C-z>'] = require('telescope.actions').delete_buffer,
+        },
+        i = {
+          ['<C-z>'] = require('telescope.actions').delete_buffer,
         }
       }
     },
@@ -249,10 +259,6 @@ local servers = { 'tsserver'
   , 'cssls'
   , 'csharp_ls' }
 
-vim.diagnostic.config({
-  virtual_text = false
-})
-
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -296,7 +302,7 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-c>'] = cmp.mapping.complete(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
