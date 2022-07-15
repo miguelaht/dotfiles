@@ -45,9 +45,6 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 
 export PATH="/usr/local/opt:$PATH"
 
-# Rust
-. "$HOME/.cargo/env"
-
 # llvm
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 

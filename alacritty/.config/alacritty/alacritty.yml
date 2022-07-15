@@ -21,18 +21,21 @@ mouse:
 
 font:
   normal:
-    family: JetBrainsMono Nerd Font
-    style: Medium
+    family: JetBrainsMono Nerd Font Mono
+    style: Regular
   bold:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font Mono
     style: Bold
   italic:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
-  size: 13.0
+  size: 14
+  offset:
+      x: 1
+      y: 1
 draw_bold_text_with_bright_colors: true
 
 bell:
@@ -90,29 +93,32 @@ schemes:
     - { index: 17, color: '0xc14a4a' }
 
 key_bindings:
-  - { key: F,        mods: Alt,     chars: "\x1bf" }
-  - { key: Right,    mods: Alt,     chars: "\x1bf" }
-  - { key: B,        mods: Alt,     chars: "\x1bb" }
-  - { key: Left,     mods: Alt,     chars: "\x1bb" }
-  - { key: D,        mods: Alt,     chars: "\x1bd" }
-  - { key: Q,        mods: Alt,     chars: "\x1bq" }
-  - { key: P,        mods: Alt,     chars: "\x1bp" }
-  - { key: C,        mods: Alt,     chars: "\x1bc" }
-  - { key: J,        mods: Alt,     chars: "\x1bj" }
-  - { key: A,        mods: Alt,     chars: "\x1ba" }
-  - { key: Key1,     mods: Alt,     chars: "\x1b1" }
-  - { key: Key2,     mods: Alt,     chars: "\x1b2" }
-  - { key: Key3,     mods: Alt,     chars: "\x1b3" }
-  - { key: Key4,     mods: Alt,     chars: "\x1b4" }
-  - { key: Key5,     mods: Alt,     chars: "\x1b5" }
-  - { key: Key6,     mods: Control, chars: "\x1e" }
-  - { key: PageUp,   mods: Shift,   action: ScrollPageUp }
-  - { key: PageDown, mods: Shift,   action: ScrollPageDown }
-  - { key: N,        mods: Command, action: CreateNewWindow }
-  - { key: Return,   mods: Command, action: ToggleFullscreen }
+  - { key: F,      mods: Alt,     chars: "\x1bf" }
+  - { key: Right,  mods: Alt,     chars: "\x1bf" }
+  - { key: B,      mods: Alt,     chars: "\x1bb" }
+  - { key: Left,   mods: Alt,     chars: "\x1bb" }
+  - { key: D,      mods: Alt,     chars: "\x1bd" }
+  - { key: Q,      mods: Alt,     chars: "\x1bq" }
+  - { key: P,      mods: Alt,     chars: "\x1bp" }
+  - { key: C,      mods: Alt,     chars: "\x1bc" }
+  - { key: J,      mods: Alt,     chars: "\x1bj" }
+  - { key: A,      mods: Alt,     chars: "\x1ba" }
+  - { key: Key1,   mods: Alt,     chars: "\x1b1" }
+  - { key: Key2,   mods: Alt,     chars: "\x1b2" }
+  - { key: Key3,   mods: Alt,     chars: "\x1b3" }
+  - { key: Key4,   mods: Alt,     chars: "\x1b4" }
+  - { key: Key5,   mods: Alt,     chars: "\x1b5" }
+  - { key: Key6,   mods: Control, chars: "\x1e" }
+  - { key: J,      mods: Command, action: ScrollPageUp }
+  - { key: K,      mods: Command, action: ScrollPageDown }
+  - { key: N,      mods: Command, action: CreateNewWindow }
+  - { key: Return, mods: Command, action: ToggleFullscreen }
 
 import:
-  # - ~/.local/share/nvim/site/pack/packer/start/onenord.nvim/extras/onenord.yaml
-  - ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
+  # - &onenord ~/.local/share/nvim/site/pack/packer/start/onenord.nvim/extras/onenord.yaml
+  # - &onedark ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
+  # - &rasmus ~/.local/share/nvim/site/pack/packer/start/rasmus.nvim/extras/alacritty/rasmus.yaml
+  # - &github ~/.local/share/nvim/site/pack/packer/start/github-nvim-theme/terminal/alacritty/github_dark.yml
+  - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
 
 # colors: *everforest
