@@ -66,31 +66,6 @@ schemes:
       magenta: '#d699b6'
       cyan:    '#83c092'
       white:   '#d3c6aa'
-  gruvbox: &gruvbox
-    primary:
-      background: '0x1e1e1e'
-      foreground: '0xd4be98'
-    normal:
-      black:   '0x1D2021'
-      red:     '0xea6962'
-      green:   '0xa9b665'
-      yellow:  '0xd8a657'
-      blue:    '0x7daea3'
-      magenta: '0xd3869b'
-      aqua:    '0x89b482'
-      white:   '0xd4be98'
-    bright:
-      black:   '0x17191a'
-      red:     '0xea6962'
-      green:   '0xa9b665'
-      yellow:  '0xd8a657'
-      blue:    '0x7daea3'
-      magenta: '0xd3869b'
-      aqua:    '0x89b482'
-      white:   '0xd4be98'
-  indexed_colors:
-    - { index: 16, color: '0xe78a4e' }
-    - { index: 17, color: '0xc14a4a' }
 
 key_bindings:
   - { key: F,      mods: Alt,     chars: "\x1bf" }
@@ -115,10 +90,7 @@ key_bindings:
   - { key: Return, mods: Command, action: ToggleFullscreen }
 
 import:
-  # - &onenord ~/.local/share/nvim/site/pack/packer/start/onenord.nvim/extras/onenord.yaml
   # - &onedark ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
   # - &rasmus ~/.local/share/nvim/site/pack/packer/start/rasmus.nvim/extras/alacritty/rasmus.yaml
-  # - &github ~/.local/share/nvim/site/pack/packer/start/github-nvim-theme/terminal/alacritty/github_dark.yml
   - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
-
-# colors: *everforest
+  - &minimal ~/.local/share/nvim/site/pack/packer/start/minimal.nvim/terminal/alacritty_minimal.yml

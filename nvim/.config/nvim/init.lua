@@ -1,4 +1,4 @@
-local colorscheme = "moonfly"
+local colorscheme = "minimal"
 
 vim.api.nvim_cmd({
     cmd = "packadd",
@@ -18,32 +18,24 @@ vim.api.nvim_create_autocmd("BufWritePost", { command = "PackerCompile", group =
 require("packer").startup(function(use)
     use({ "wbthomason/packer.nvim" })
 
-    use({ "ThePrimeagen/harpoon" })
-    use({ "nvim-lua/plenary.nvim" })
+    use({ disable = false, "nvim-lua/plenary.nvim" })
+    use({ disable = false, "ThePrimeagen/harpoon" })
 
-    use({ "neovim/nvim-lspconfig", disable = false })
-    use({ "hrsh7th/nvim-cmp", disable = false })
-    use({ "hrsh7th/cmp-nvim-lsp", disable = false })
-    use({ "L3MON4D3/LuaSnip", disable = false })
+    use({ disable = false, "neovim/nvim-lspconfig" })
+    use({ disable = false, "hrsh7th/nvim-cmp" })
+    use({ disable = false, "hrsh7th/cmp-nvim-lsp" })
+    use({ disable = false, "L3MON4D3/LuaSnip" })
 
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
-    use({ "bluz71/vim-moonfly-colors", disable = false })
-    use({ "kvrohit/rasmus.nvim", disable = false })
-    use({ "sainnhe/everforest", disable = false })
-    use({ "rmehri01/onenord.nvim", disable = false })
-    use({ "ful1e5/onedark.nvim", disable = false })
-
-    use({ disable = true, "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    use({ disable = true, "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
+    use({ disable = false, "bluz71/vim-moonfly-colors" })
+    use({ disable = false, "Yazeed1s/minimal.nvim" })
+    use({ disable = false, "sainnhe/everforest" })
+    use({ disable = false, "ful1e5/onedark.nvim" })
 end)
 -- PACKER
 
 -- COLOR
-if colorscheme == "moonfly" then
-    vim.g.moonflyCursorColor = 1
-end
-
 if colorscheme == "everforest" then
     vim.g.everforest_ui_contrast = "low"
     vim.g.everforest_diagnostic_text_highlight = 1
@@ -51,12 +43,6 @@ if colorscheme == "everforest" then
     vim.g.everforest_diagnostic_virtual_text = "colored"
     vim.g.everforest_diagnostic_text_highlight = 1
     vim.g.everforest_better_performance = 1
-end
-
-if colorscheme == "onenord" then
-    require("onenord").setup({
-        theme = "dark"
-    })
 end
 
 if colorscheme == "onedark" then
@@ -84,7 +70,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.colorcolumn = "80"
-vim.opt.termguicolors = false
+vim.opt.termguicolors = true
 vim.opt.laststatus = 3
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -99,13 +85,14 @@ vim.opt.updatetime = 50
 vim.opt.splitbelow = true
 vim.opt.isfname:append("@-@")
 vim.opt.mouse = "a"
+vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.g.mapleader = " "
 -- CONFIG
 
--- COMMANDS
+-- USER COMMANDS
 vim.api.nvim_create_user_command("ConfigOpen", "e! $MYVIMRC", {})
 vim.api.nvim_create_user_command("TmuxSend", [[silent exec "!tmux send-keys -t 1 '<args>' enter"]], { nargs = "+" })
--- COMMANDS
+-- USER COMMANDS
 
 -- KEYMAPS
 vim.keymap.set({ "n", "v" }, "<Up>", "<NOP>")
@@ -153,12 +140,6 @@ require("nvim-treesitter.configs").setup({
     },
     incremental_selection = {
         enable = true,
-        keymaps = {
-            init_selection = "<CR>",
-            scope_incremental = "<CR>",
-            node_incremental = "<TAB>",
-            node_decremental = "<S-TAB>",
-        },
     },
     indent = {
         enable = true,
@@ -168,55 +149,16 @@ require("nvim-treesitter.configs").setup({
 })
 -- TREESITTER
 
--- TELESCOPE
---[[
-require("telescope").setup({
-    defaults = {
-        vimgrep_arguments = {
-            "rg",
-            "--hidden",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case"
-        },
-    },
-    pickers = {
-        buffers = {
-            mappings = {
-                n = {
-                    ["<C-z>"] = require("telescope.actions").delete_buffer,
-                },
-                i = {
-                    ["<C-z>"] = require("telescope.actions").delete_buffer,
-                }
-            }
-        },
-    },
-    extensions = {
-        fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-        },
-    },
+-- HARPOON
+require("harpoon").setup({
+    global_settings = {
+        enter_on_sendcmd = true,
+    }
 })
 
-require("telescope").load_extension("fzf")
-vim.keymap.set("n", "<c-t>", require("telescope.builtin").git_files)
-vim.keymap.set("n", "<Leader>pw", function()
-    require("telescope.builtin").live_grep({ search = vim.fn.expand("<cword>") })
-end)
-vim.keymap.set("n", "<Leader>b", require("telescope.builtin").buffers)
-]] --
--- TELESCOPE
-
--- HARPOON
 vim.keymap.set("n", "<Leader>m", require("harpoon.mark").add_file)
 vim.keymap.set("n", "<Leader>h", require("harpoon.ui").toggle_quick_menu)
-for var = 1, 3 do
+for var = 1, 4 do
     vim.keymap.set("n", string.format("<Leader>%d", var), function()
         require("harpoon.ui").nav_file(var)
     end)
@@ -233,6 +175,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "<Leader>D", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
@@ -350,6 +293,7 @@ cmp.setup({
 })
 -- NVIM-CMP
 
+-- AUTOCMD
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
     command = [[%s/\s\+$//e]],
@@ -361,3 +305,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
     pattern = "*",
 })
+-- AUTOCMD
+
+-- CUSTOM TEXT OBJECTS
+local chars = { '_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '%', '`', '?' }
+for _, char in ipairs(chars) do
+    for _, mode in ipairs({ 'x', 'o' }) do
+        vim.api.nvim_set_keymap(mode, "i" .. char, string.format(':<C-u>normal! T%svt%s<CR>', char, char),
+            { noremap = true, silent = true })
+        vim.api.nvim_set_keymap(mode, "a" .. char, string.format(':<C-u>normal! F%svf%s<CR>', char, char),
+            { noremap = true, silent = true })
+    end
+end
+-- CUSTOM TEXT OBJECTS
+
+-- HIGHLIGHT
+-- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#6E7380", fg = "#16181D", bold = true }) -- add clearer statusline to minimal.nvim
+-- HIGHLIGHT
