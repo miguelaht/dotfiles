@@ -15,18 +15,19 @@ if (( ! ${fpath[(I)/usr/local/share/zsh-completions]} )); then
   FPATH=/usr/local/share/zsh-completions:$FPATH
 fi
 
-# fuzzy search keybinds
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!node_modules/*,.git/*'"
+export FZF_DEFAULT_COMMAND="rg --files --max-depth 2 --follow --hidden --glob '!node_modules/*,.git/*'"
 export FZF_CTRL_T_OPTS="--preview='bat --style numbers,changes --color=always {} | head -500' --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up --no-height --no-reverse"
+export export FZF_ALT_C_COMMAND="fd . -d 3"
 
 # ZSH autosuggest
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # theme
 autoload -U promptinit; promptinit
-prompt pure
 prompt_newline='%666v'
+prompt pure
 PROMPT=" $PROMPT"
 
 # colors

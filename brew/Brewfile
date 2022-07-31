@@ -46,14 +46,12 @@ brew "zlib"
 brew "zsh-autosuggestions"
 brew "veeso/termscp/termscp", link: false
 cask "alacritty"
-cask "brave-browser"
 cask "font-jetbrains-mono-nerd-font"
 cask "pika"
 cask "rectangle"
 cask "the-unarchiver"
 mas "AdGuard for Safari", id: 1440147259
 mas "Keynote", id: 409183694
-mas "Microsoft Word", id: 462054704
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Telegram", id: 747648890

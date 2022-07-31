@@ -29,6 +29,7 @@ require("packer").startup(function(use)
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
     use({ disable = false, "bluz71/vim-moonfly-colors" })
+    use({ disable = false, "Mofiqul/adwaita.nvim" })
     use({ disable = false, "Yazeed1s/minimal.nvim" })
     use({ disable = false, "sainnhe/everforest" })
     use({ disable = false, "ful1e5/onedark.nvim" })
@@ -36,6 +37,10 @@ end)
 -- PACKER
 
 -- COLOR
+if colorscheme == "adwaita" then
+    vim.g.adwaita_darker = true
+end
+
 if colorscheme == "everforest" then
     vim.g.everforest_ui_contrast = "low"
     vim.g.everforest_diagnostic_text_highlight = 1
@@ -72,6 +77,7 @@ vim.opt.expandtab = true
 vim.opt.colorcolumn = "80"
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
+-- vim.opt.winbar = "%f %h%w%m%r"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 3
@@ -84,7 +90,6 @@ vim.opt.cursorline = true
 vim.opt.updatetime = 50
 vim.opt.splitbelow = true
 vim.opt.isfname:append("@-@")
-vim.opt.mouse = "a"
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.g.mapleader = " "
 -- CONFIG
@@ -175,7 +180,6 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "<Leader>D", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
@@ -318,7 +322,3 @@ for _, char in ipairs(chars) do
     end
 end
 -- CUSTOM TEXT OBJECTS
-
--- HIGHLIGHT
--- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#6E7380", fg = "#16181D", bold = true }) -- add clearer statusline to minimal.nvim
--- HIGHLIGHT

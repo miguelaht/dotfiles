@@ -32,7 +32,7 @@ font:
   bold_italic:
     family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
-  size: 14
+  size: 15
   offset:
       x: 1
       y: 1
@@ -42,30 +42,6 @@ bell:
   animation: EaseOutExpo
   duration: 2
   color: '#ffffff'
-
-schemes:
-  everforest: &everforest
-    primary:
-      background: '#2b3339'
-      foreground: '#d3c6aa'
-    normal:
-      black:   '#4b565c'
-      red:     '#e67e80'
-      green:   '#a7c080'
-      yellow:  '#dbbc7f'
-      blue:    '#7fbbb3'
-      magenta: '#d699b6'
-      cyan:    '#83c092'
-      white:   '#d3c6aa'
-    bright:
-      black:   '#4b565c'
-      red:     '#e67e80'
-      green:   '#a7c080'
-      yellow:  '#dbbc7f'
-      blue:    '#7fbbb3'
-      magenta: '#d699b6'
-      cyan:    '#83c092'
-      white:   '#d3c6aa'
 
 key_bindings:
   - { key: F,      mods: Alt,     chars: "\x1bf" }
@@ -91,6 +67,5 @@ key_bindings:
 
 import:
   # - &onedark ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
-  # - &rasmus ~/.local/share/nvim/site/pack/packer/start/rasmus.nvim/extras/alacritty/rasmus.yaml
-  - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
+  # - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
   - &minimal ~/.local/share/nvim/site/pack/packer/start/minimal.nvim/terminal/alacritty_minimal.yml
