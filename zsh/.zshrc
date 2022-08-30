@@ -1,3 +1,4 @@
+setopt autocd
 source "$HOME/.zsh/alias.zsh"
 
 bindkey -e

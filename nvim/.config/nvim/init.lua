@@ -1,4 +1,4 @@
-local colorscheme = "minimal"
+local colorscheme = "jellybeans"
 
 vim.api.nvim_cmd({
     cmd = "packadd",
@@ -28,11 +28,13 @@ require("packer").startup(function(use)
 
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
-    use({ disable = false, "bluz71/vim-moonfly-colors" })
-    use({ disable = false, "Mofiqul/adwaita.nvim" })
-    use({ disable = false, "Yazeed1s/minimal.nvim" })
-    use({ disable = false, "sainnhe/everforest" })
-    use({ disable = false, "ful1e5/onedark.nvim" })
+    use({ disable = false, "nanotech/jellybeans.vim" })
+    use({ disable = true, "bluz71/vim-moonfly-colors" })
+    use({ disable = true, "Mofiqul/adwaita.nvim" })
+    use({ disable = true, "Yazeed1s/minimal.nvim" })
+    use({ disable = true, "sainnhe/everforest" })
+    use({ disable = true, "ful1e5/onedark.nvim" })
+    use({ disable = true, "themercorp/themer.lua" })
 end)
 -- PACKER
 
@@ -89,6 +91,7 @@ vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.cursorline = true
 vim.opt.updatetime = 50
 vim.opt.splitbelow = true
+vim.opt.mouse = 'n'
 vim.opt.isfname:append("@-@")
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.g.mapleader = " "
@@ -121,6 +124,7 @@ end
 -- TREESITTER
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
+        "php",
         "c_sharp",
         "css",
         "go",
@@ -205,15 +209,18 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = false
 
 -- LANGUAGES
-local servers = { "tsserver"
-    , "svelte"
-    , "eslint"
-    , "pyright"
-    , "gopls"
-    , "rust_analyzer"
-    , "html"
-    , "cssls"
-    , "csharp_ls" }
+local servers = {
+    "tsserver",
+    "svelte",
+    "eslint",
+    "pyright",
+    "gopls",
+    "rust_analyzer",
+    "html",
+    "cssls",
+    "sourcekit",
+    -- "csharp_ls",
+}
 
 for _, lsp in pairs(servers) do
     require("lspconfig")[lsp].setup {
@@ -222,6 +229,12 @@ for _, lsp in pairs(servers) do
         handlers = handlers
     }
 end
+
+require("lspconfig").omnisharp.setup({
+    cmd = { "dotnet", home .. "/omnisharp/Omnisharp.dll" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
 
 require("lspconfig").sumneko_lua.setup({
     on_attach = on_attach,
