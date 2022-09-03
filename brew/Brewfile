@@ -47,7 +47,6 @@ brew "zsh-autosuggestions"
 brew "veeso/termscp/termscp", link: false
 cask "alacritty"
 cask "font-jetbrains-mono-nerd-font"
-cask "pika"
 cask "rectangle"
 cask "the-unarchiver"
 mas "AdGuard for Safari", id: 1440147259

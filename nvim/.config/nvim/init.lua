@@ -1,4 +1,4 @@
-local colorscheme = "jellybeans"
+local colorscheme = "adwaita"
 
 vim.api.nvim_cmd({
     cmd = "packadd",
@@ -27,14 +27,17 @@ require("packer").startup(function(use)
     use({ disable = false, "L3MON4D3/LuaSnip" })
 
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({ disable = false, "nvim-treesitter/nvim-treesitter-context" })
 
     use({ disable = false, "nanotech/jellybeans.vim" })
-    use({ disable = true, "bluz71/vim-moonfly-colors" })
-    use({ disable = true, "Mofiqul/adwaita.nvim" })
+    use({ disable = false, "bluz71/vim-moonfly-colors" })
+    use({ disable = false, "Mofiqul/adwaita.nvim" })
     use({ disable = true, "Yazeed1s/minimal.nvim" })
     use({ disable = true, "sainnhe/everforest" })
     use({ disable = true, "ful1e5/onedark.nvim" })
-    use({ disable = true, "themercorp/themer.lua" })
+
+    use({ disable = false, "mfussenegger/nvim-dap" })
+    use({ disable = false, "rcarriga/nvim-dap-ui" })
 end)
 -- PACKER
 
@@ -114,7 +117,6 @@ vim.keymap.set("n", "<Leader><Leader>", "<c-^>")
 vim.keymap.set("n", "[c", ":cp<CR>")
 vim.keymap.set("n", "]c", ":cn<CR>")
 vim.keymap.set("n", "<Leader>,", ":ConfigOpen<CR>")
-vim.keymap.set("n", "<Leader>so", ":so $MYVIMRC<CR>")
 vim.keymap.set("n", "<Leader>q", ":copen<CR>")
 for var = 1, 9 do
     vim.keymap.set("n", string.format("<A-%d>", var), string.format("%dgt", var))
@@ -180,6 +182,7 @@ local on_attach = function(_, bufnr)
 
     local opts = { noremap = true, buffer = bufnr }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
@@ -310,6 +313,84 @@ cmp.setup({
 })
 -- NVIM-CMP
 
+-- NVIM-DAP
+local dap = require("dap")
+local dapui = require("dapui")
+dap.adapters.coreclr = {
+    type = "executable",
+    command = home .. "/netcoredbg/netcoredbg",
+    args = { "--interpreter=vscode" }
+}
+
+vim.g.dotnet_build_project = function()
+    local default_path = vim.fn.getcwd() .. '/'
+    if vim.g['dotnet_last_proj_path'] ~= nil then
+        default_path = vim.g['dotnet_last_proj_path']
+    end
+    local path = vim.fn.input('Path to your *proj file', default_path, 'file')
+    vim.g['dotnet_last_proj_path'] = path
+    local cmd = 'dotnet build -c Debug ' .. path .. ' > /dev/null'
+    print('')
+    print('Cmd to execute: ' .. cmd)
+    local f = os.execute(cmd)
+    if f == 0 then
+        print('\nBuild: ✔️ ')
+    else
+        print('\nBuild: ❌ (code: ' .. f .. ')')
+    end
+end
+
+vim.g.dotnet_get_dll_path = function()
+    local request = function()
+        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end
+
+    if vim.g['dotnet_last_dll_path'] == nil then
+        vim.g['dotnet_last_dll_path'] = request()
+    else
+        if vim.fn.confirm('Do you want to change the path to dll?\n' .. vim.g['dotnet_last_dll_path'], '&yes\n&no', 2) ==
+            1 then
+            vim.g['dotnet_last_dll_path'] = request()
+        end
+    end
+
+    return vim.g['dotnet_last_dll_path']
+end
+
+local config = {
+    {
+        type = "coreclr",
+        name = "launch - netcoredbg",
+        request = "launch",
+        program = function()
+            if vim.fn.confirm('Should I recompile first?', '&yes\n&no', 2) == 1 then
+                vim.g.dotnet_build_project()
+            end
+            return vim.g.dotnet_get_dll_path()
+        end,
+    },
+}
+
+dap.configurations.cs = config
+
+dapui.setup({})
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open({})
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close({})
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close({})
+end
+
+vim.keymap.set("n", "<Leader>sb", dap.toggle_breakpoint)
+vim.keymap.set("n", "<Leader>so", dap.step_out)
+vim.keymap.set("n", "<Leader>si", dap.step_into)
+vim.keymap.set("n", "<Leader>n", dap.continue)
+-- NVIM-DAP
+
 -- AUTOCMD
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
@@ -325,12 +406,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- AUTOCMD
 
 -- CUSTOM TEXT OBJECTS
-local chars = { '_', '.', ':', ',', ';', '|', '/', '\\', '*', '+', '%', '`', '?' }
+local chars = { "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }
 for _, char in ipairs(chars) do
-    for _, mode in ipairs({ 'x', 'o' }) do
-        vim.api.nvim_set_keymap(mode, "i" .. char, string.format(':<C-u>normal! T%svt%s<CR>', char, char),
+    for _, mode in ipairs({ "x", "o" }) do
+        vim.api.nvim_set_keymap(mode, "i" .. char, string.format(":<C-u>normal! T%svt%s<CR>", char, char),
             { noremap = true, silent = true })
-        vim.api.nvim_set_keymap(mode, "a" .. char, string.format(':<C-u>normal! F%svf%s<CR>', char, char),
+        vim.api.nvim_set_keymap(mode, "a" .. char, string.format(":<C-u>normal! F%svf%s<CR>", char, char),
             { noremap = true, silent = true })
     end
 end
