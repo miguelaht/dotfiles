@@ -41,41 +41,40 @@ draw_bold_text_with_bright_colors: true
 bell:
   animation: EaseOutExpo
   duration: 2
-  color: '#ffffff'
+  color: '#FFFFFF'
 
 colors:
-  custom:
-    # Default colors
-    primary:
-      background: '0x121212'
-      foreground: '0xdedede'
+  # Default colors
+  primary:
+    background: '#000000'
+    foreground: '#DEDEDE'
 
-    # Cursor colors
-    cursor:
-      text:   '0xffffff'
-      cursor: '0xffa460'
+  # Cursor colors
+  cursor:
+    text:   '#FFFFFF'
+    cursor: '#FFA460'
 
-    # Normal colors
-    normal:
-      # black:   '0x929292'
-      red:     '0xe27373'
-      green:   '0x94b979'
-      yellow:  '0xffba7b'
-      blue:    '0x97bedc'
-      magenta: '0xe1c0fa'
-      cyan:    '0x00988e'
-      white:   '0xdedede'
+  # Normal colors
+  normal:
+    black:   '#929292'
+    red:     '#E27373'
+    green:   '#94B979'
+    yellow:  '#FFBA7B'
+    blue:    '#97BEDC'
+    magenta: '#E1C0FA'
+    cyan:    '#00988E'
+    white:   '#DEDEDE'
 
-    # Bright colors
-    bright:
-      black:   '0xbdbdbd'
-      red:     '0xffa1a1'
-      green:   '0xbddeab'
-      yellow:  '0xffdca0'
-      blue:    '0xb1d8f6'
-      magenta: '0xfbdaff'
-      cyan:    '0x1ab2a8'
-      white:   '0xffffff'
+  # Bright colors
+  bright:
+    black:   '#BDBDBD'
+    red:     '#FFA1A1'
+    green:   '#BDDEAB'
+    yellow:  '#FFDCA0'
+    blue:    '#B1D8F6'
+    magenta: '#FBDAFF'
+    cyan:    '#1AB2A8'
+    white:   '#FFFFFF'
 
 key_bindings:
   - { key: F,      mods: Alt,     chars: "\x1bf" }
@@ -98,7 +97,7 @@ key_bindings:
   - { key: K,      mods: Command, action: ScrollPageDown }
   - { key: N,      mods: Command, action: CreateNewWindow }
 
-import:
+# import:
   # - &onedark ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
-  - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
+  # - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
   # - &minimal ~/.local/share/nvim/site/pack/packer/start/minimal.nvim/terminal/alacritty_minimal.yml

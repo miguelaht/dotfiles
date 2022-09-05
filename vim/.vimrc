@@ -23,7 +23,6 @@ set completeopt=menuone,noinsert,noselect
 set cmdheight=1
 set updatetime=50
 set colorcolumn=80
-set spell
 set spelllang=en
 set encoding=utf8
 
