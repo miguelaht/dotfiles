@@ -126,7 +126,6 @@ end
 -- TREESITTER
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
-        "php",
         "c_sharp",
         "css",
         "go",
@@ -137,7 +136,6 @@ require("nvim-treesitter.configs").setup({
         "lua",
         "python",
         "rust",
-        "prisma",
         "tsx",
         "typescript",
         "comment",
@@ -214,15 +212,12 @@ capabilities.textDocument.completion.completionItem.snippetSupport = false
 -- LANGUAGES
 local servers = {
     "tsserver",
-    "svelte",
     "eslint",
     "pyright",
     "gopls",
     "rust_analyzer",
     "html",
     "cssls",
-    "sourcekit",
-    -- "csharp_ls",
 }
 
 for _, lsp in pairs(servers) do
@@ -234,7 +229,7 @@ for _, lsp in pairs(servers) do
 end
 
 require("lspconfig").omnisharp.setup({
-    cmd = { "dotnet", home .. "/omnisharp/Omnisharp.dll" },
+    cmd = { "dotnet", home .. "/.omnisharp/Omnisharp.dll" },
     on_attach = on_attach,
     capabilities = capabilities,
 })
@@ -318,7 +313,7 @@ local dap = require("dap")
 local dapui = require("dapui")
 dap.adapters.coreclr = {
     type = "executable",
-    command = home .. "/netcoredbg/netcoredbg",
+    command = home .. "/.netcoredbg/netcoredbg",
     args = { "--interpreter=vscode" }
 }
 
