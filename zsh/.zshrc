@@ -7,18 +7,22 @@ bindkey -e
 export EDITOR=nvim
 autoload -U edit-command-line
 zle -N edit-command-line
-bindkey '\C-x\C-x' edit-command-line
+bindkey '\C-x\C-e' edit-command-line
 
 # theme
 autoload -U promptinit; promptinit
+export CLICOLOR=1
 prompt pure
+prompt_newline='%666v'
+PROMPT=" $PROMPT"
+RPROMPT='%F{white}%*'
 
 # ZSH
 ZSH_DISABLE_COMPFIX="true"
 HYPHEN_INSENSITIVE="true"
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 
 # Homebrew
 export HOMEBREW_AUTO_UPDATE_SECS=604800
@@ -33,7 +37,7 @@ export export FZF_ALT_C_COMMAND="fd . -d 3"
 autoload -Uz compinit; compinit
 
 # ZSH autosuggest
-source $HOME/.local/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 export PATH="$PATH:$HOME/.dotnet/tools"
 export PATH="$HOME/.local/bin:$PATH"

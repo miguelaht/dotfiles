@@ -1,4 +1,4 @@
-local colorscheme = "adwaita"
+local colorscheme = "tokyonight"
 
 vim.api.nvim_cmd({
     cmd = "packadd",
@@ -32,9 +32,7 @@ require("packer").startup(function(use)
     use({ disable = false, "nanotech/jellybeans.vim" })
     use({ disable = false, "bluz71/vim-moonfly-colors" })
     use({ disable = false, "Mofiqul/adwaita.nvim" })
-    use({ disable = true, "Yazeed1s/minimal.nvim" })
-    use({ disable = true, "sainnhe/everforest" })
-    use({ disable = true, "ful1e5/onedark.nvim" })
+    use({ disable = false, "folke/tokyonight.nvim" })
 
     use({ disable = false, "mfussenegger/nvim-dap" })
     use({ disable = false, "rcarriga/nvim-dap-ui" })
@@ -46,25 +44,13 @@ if colorscheme == "adwaita" then
     vim.g.adwaita_darker = true
 end
 
-if colorscheme == "everforest" then
-    vim.g.everforest_ui_contrast = "low"
-    vim.g.everforest_diagnostic_text_highlight = 1
-    vim.g.everforest_background = "hard"
-    vim.g.everforest_diagnostic_virtual_text = "colored"
-    vim.g.everforest_diagnostic_text_highlight = 1
-    vim.g.everforest_better_performance = 1
-end
-
-if colorscheme == "onedark" then
-    require("onedark").setup({
-        dark_float = false,
-        hide_inactive_statusline = false,
-        dark_sidebar = false,
-        overrides = function()
-            return {
-                Visual = { style = "inverse" },
-            }
-        end,
+if colorscheme == "tokyonight" then
+    require("tokyonight").setup({
+        style = "night",
+        transparent = true,
+        styles = {
+            sidebars = "transparent",
+        },
     })
 end
 
@@ -82,7 +68,6 @@ vim.opt.expandtab = true
 vim.opt.colorcolumn = "80"
 vim.opt.termguicolors = true
 vim.opt.laststatus = 3
--- vim.opt.winbar = "%f %h%w%m%r"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 3
@@ -162,6 +147,9 @@ require("nvim-treesitter.configs").setup({
 require("harpoon").setup({
     global_settings = {
         enter_on_sendcmd = true,
+    },
+    menu = {
+        borderchars = { "", "", "", "", "", "", "", "" }
     }
 })
 
@@ -217,7 +205,7 @@ local servers = {
     "gopls",
     "rust_analyzer",
     "html",
-    "cssls",
+    "jdtls",
 }
 
 for _, lsp in pairs(servers) do

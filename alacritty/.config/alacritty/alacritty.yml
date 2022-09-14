@@ -1,8 +1,8 @@
 window:
-  opacity: 0.999
+  opacity: 0.8
   padding:
-    x: 1
-    y: 1
+    x: 2
+    y: 2
 
   dynamic_padding: true
   dynamic_title: false
@@ -41,40 +41,71 @@ draw_bold_text_with_bright_colors: true
 bell:
   animation: EaseOutExpo
   duration: 2
-  color: '#FFFFFF'
+  color: "#FFFFFF"
 
-colors:
-  # Default colors
-  primary:
-    background: '#000000'
-    foreground: '#DEDEDE'
+env:
+  TERM: xterm-256color
 
-  # Cursor colors
-  cursor:
-    text:   '#FFFFFF'
-    cursor: '#FFA460'
+schemes:
 
-  # Normal colors
-  normal:
-    black:   '#929292'
-    red:     '#E27373'
-    green:   '#94B979'
-    yellow:  '#FFBA7B'
-    blue:    '#97BEDC'
-    magenta: '#E1C0FA'
-    cyan:    '#00988E'
-    white:   '#DEDEDE'
+  d1: &d1
+    primary:
+      background: "#000000"
+      foreground: "#f1f1f1"
 
-  # Bright colors
-  bright:
-    black:   '#BDBDBD'
-    red:     '#FFA1A1'
-    green:   '#BDDEAB'
-    yellow:  '#FFDCA0'
-    blue:    '#B1D8F6'
-    magenta: '#FBDAFF'
-    cyan:    '#1AB2A8'
-    white:   '#FFFFFF'
+    # Normal colors
+    bright:
+      black: "#666666"
+      blue: "#5c78ff"
+      cyan: "#5ac8ff"
+      green: "#905aff"
+      magenta: "#5ea2ff"
+      red: "#ba5aff"
+      white: "#ffffff"
+      yellow: "#657b83"
+
+    normal:
+      black: "#121212"
+      blue: "#2b4fff"
+      cyan: "#28b9ff"
+      green: "#7129ff"
+      magenta: "#2883ff"
+      red: "#a52aff"
+      white: "#f1f1f1"
+      yellow: "#7e74e8"
+
+  d2: &d2
+    # Default colors
+    primary:
+      background: "#000000"
+      foreground: "#DEDEDE"
+
+    # Cursor colors
+    cursor:
+      text:   "#FFFFFF"
+      cursor: "#FFA460"
+
+    # Normal colors
+    normal:
+      black:   "#929292"
+      red:     "#E27373"
+      green:   "#94B979"
+      yellow:  "#FFBA7B"
+      blue:    "#97BEDC"
+      magenta: "#E1C0FA"
+      cyan:    "#00988E"
+      white:   "#DEDEDE"
+
+    # Bright colors
+    bright:
+      black:   "#BDBDBD"
+      red:     "#FFA1A1"
+      green:   "#BDDEAB"
+      yellow:  "#FFDCA0"
+      blue:    "#B1D8F6"
+      magenta: "#FBDAFF"
+      cyan:    "#1AB2A8"
+      white:   "#FFFFFF"
 
 key_bindings:
   - { key: F,      mods: Alt,     chars: "\x1bf" }
@@ -85,6 +116,10 @@ key_bindings:
   - { key: C,      mods: Alt,     chars: "\x1bc" }
   - { key: J,      mods: Alt,     chars: "\x1bj" }
   - { key: A,      mods: Alt,     chars: "\x1ba" }
+  - { key: T,      mods: Alt,     chars: "\x1bt" }
+  - { key: U,      mods: Alt,     chars: "\x1bu" }
+  - { key: R,      mods: Alt,     chars: "\x1br" }
+  - { key: L,      mods: Alt,     chars: "\x1bl" }
   - { key: Right,  mods: Alt,     chars: "\x1bf" }
   - { key: Left,   mods: Alt,     chars: "\x1bb" }
   - { key: Key1,   mods: Alt,     chars: "\x1b1" }
@@ -97,7 +132,13 @@ key_bindings:
   - { key: K,      mods: Command, action: ScrollPageDown }
   - { key: N,      mods: Command, action: CreateNewWindow }
 
-# import:
+import:
   # - &onedark ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
   # - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
   # - &minimal ~/.local/share/nvim/site/pack/packer/start/minimal.nvim/terminal/alacritty_minimal.yml
+  - &tokyo ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim/extras/alacritty_tokyonight_night.yml
+
+colors:
+  primary:
+    background: '0x0d1117'
+    foreground: '0xdedede'
