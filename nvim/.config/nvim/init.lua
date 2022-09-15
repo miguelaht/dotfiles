@@ -25,6 +25,7 @@ require("packer").startup(function(use)
     use({ disable = false, "hrsh7th/nvim-cmp" })
     use({ disable = false, "hrsh7th/cmp-nvim-lsp" })
     use({ disable = false, "L3MON4D3/LuaSnip" })
+    use({ disable = false, "Issafalcon/lsp-overloads.nvim" })
 
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({ disable = false, "nvim-treesitter/nvim-treesitter-context" })
@@ -163,7 +164,7 @@ end
 -- HARPOON
 
 -- LSP CONFIG
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
     local opts = { noremap = true, buffer = bufnr }
@@ -182,6 +183,21 @@ local on_attach = function(_, bufnr)
 
     vim.keymap.set("n", "<Leader>f", vim.lsp.buf.format, opts)
     vim.keymap.set("v", "<Leader>f", vim.lsp.buf.range_formatting, opts)
+
+    if client.server_capabilities.signatureHelpProvider then
+        require('lsp-overloads').setup(client, {
+            ui = {
+                -- The border to use for the signature popup window. Accepts same border values as |nvim_open_win()|.
+                border = "single"
+            },
+            keymaps = {
+                next_signature = "<C-j>",
+                previous_signature = "<C-k>",
+                next_parameter = "<C-l>",
+                previous_parameter = "<C-h>",
+            },
+        })
+    end
 end
 
 local handlers = {
