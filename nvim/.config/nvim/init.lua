@@ -42,20 +42,7 @@ require("packer").startup(function(use)
     use({ disable = false, "mfussenegger/nvim-dap" })
     use({ disable = false, "rcarriga/nvim-dap-ui" })
 
-    use({ disable = true, "vigoux/azy.nvim", run = "make lib", config = function()
-        local M = {}
-
-        local ab = require 'azy.builtins'
-
-        vim.keymap.set("n", "<Leader>e", ab.files(), {})
-        vim.keymap.set("n", "<Leader>r", ab.files_contents(), {})
-        vim.keymap.set('n', '<Leader>oc', ab.files { vim.fn.stdpath 'config' }, {})
-        vim.keymap.set('n', '<Leader>h', ab.help(), {})
-        vim.keymap.set('n', '<Leader>b', ab.buffers(), {})
-        vim.keymap.set('n', '<Leader>q', ab.quickfix(), {})
-
-        return M
-    end })
+    use({ disable = false, "vigoux/azy.nvim", run = "make lib" })
 end)
 -- PACKER
 
@@ -280,7 +267,7 @@ local cmp = require("cmp")
 
 cmp.setup({
     completion = {
-        -- autocomplete = true,
+        autocomplete = true,
         completeopt = "menu,menuone,noinsert",
         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
         keyword_length = 1,
@@ -403,6 +390,15 @@ vim.keymap.set("n", "<Leader>so", dap.step_out)
 vim.keymap.set("n", "<Leader>si", dap.step_into)
 vim.keymap.set("n", "<Leader>n", dap.continue)
 -- NVIM-DAP
+
+-- AZY
+local ab = require 'azy.builtins'
+
+vim.keymap.set("n", "<Leader>t", ab.files(vim.lsp.buf.list_workspace_folders()), {})
+vim.keymap.set("n", "<Leader>p", ab.files_contents(), {})
+vim.keymap.set('n', '<Leader>oc', ab.files { vim.fn.stdpath 'config' }, {})
+vim.keymap.set('n', '<Leader>h', ab.help(), {})
+-- AZY
 
 -- AUTOCMD
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
