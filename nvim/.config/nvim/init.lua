@@ -397,7 +397,6 @@ local ab = require 'azy.builtins'
 vim.keymap.set("n", "<Leader>t", ab.files(vim.lsp.buf.list_workspace_folders()), {})
 vim.keymap.set("n", "<Leader>p", ab.files_contents(), {})
 vim.keymap.set('n', '<Leader>oc', ab.files { vim.fn.stdpath 'config' }, {})
-vim.keymap.set('n', '<Leader>h', ab.help(), {})
 -- AZY
 
 -- AUTOCMD
