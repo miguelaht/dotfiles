@@ -1,0 +1,5 @@
+namespace ;
+
+public class
+{
+}

@@ -27,16 +27,35 @@ require("packer").startup(function(use)
     use({ disable = false, "L3MON4D3/LuaSnip" })
     use({ disable = false, "Issafalcon/lsp-overloads.nvim" })
 
+    use({ disable = false, "williamboman/mason.nvim", config = function()
+        require("mason").setup()
+    end })
+
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({ disable = false, "nvim-treesitter/nvim-treesitter-context" })
 
-    use({ disable = false, "nanotech/jellybeans.vim" })
-    use({ disable = false, "bluz71/vim-moonfly-colors" })
-    use({ disable = false, "Mofiqul/adwaita.nvim" })
+    use({ disable = true, "nanotech/jellybeans.vim" })
+    use({ disable = true, "bluz71/vim-moonfly-colors" })
+    use({ disable = true, "Mofiqul/adwaita.nvim" })
     use({ disable = false, "folke/tokyonight.nvim" })
 
     use({ disable = false, "mfussenegger/nvim-dap" })
     use({ disable = false, "rcarriga/nvim-dap-ui" })
+
+    use({ disable = true, "vigoux/azy.nvim", run = "make lib", config = function()
+        local M = {}
+
+        local ab = require 'azy.builtins'
+
+        vim.keymap.set("n", "<Leader>e", ab.files(), {})
+        vim.keymap.set("n", "<Leader>r", ab.files_contents(), {})
+        vim.keymap.set('n', '<Leader>oc', ab.files { vim.fn.stdpath 'config' }, {})
+        vim.keymap.set('n', '<Leader>h', ab.help(), {})
+        vim.keymap.set('n', '<Leader>b', ab.buffers(), {})
+        vim.keymap.set('n', '<Leader>q', ab.quickfix(), {})
+
+        return M
+    end })
 end)
 -- PACKER
 
@@ -216,12 +235,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = false
 -- LANGUAGES
 local servers = {
     "tsserver",
-    "eslint",
-    "pyright",
-    "gopls",
     "rust_analyzer",
-    "html",
-    "jdtls",
 }
 
 for _, lsp in pairs(servers) do
@@ -233,7 +247,7 @@ for _, lsp in pairs(servers) do
 end
 
 require("lspconfig").omnisharp.setup({
-    cmd = { "dotnet", home .. "/.omnisharp/Omnisharp.dll" },
+    cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/Omnisharp.dll" },
     on_attach = on_attach,
     capabilities = capabilities,
 })
@@ -266,7 +280,7 @@ local cmp = require("cmp")
 
 cmp.setup({
     completion = {
-        autocomplete = true,
+        -- autocomplete = true,
         completeopt = "menu,menuone,noinsert",
         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
         keyword_length = 1,
@@ -317,7 +331,7 @@ local dap = require("dap")
 local dapui = require("dapui")
 dap.adapters.coreclr = {
     type = "executable",
-    command = home .. "/.netcoredbg/netcoredbg",
+    command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
     args = { "--interpreter=vscode" }
 }
 
@@ -401,6 +415,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
     pattern = "*",
+})
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "*.cs",
+    command = "0r $HOME/.vim/skeletons/skeleton.cs"
 })
 -- AUTOCMD
 

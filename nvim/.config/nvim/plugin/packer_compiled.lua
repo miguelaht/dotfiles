@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["adwaita.nvim"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/adwaita.nvim",
-    url = "https://github.com/Mofiqul/adwaita.nvim"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -94,15 +89,16 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
-  ["jellybeans.vim"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/jellybeans.vim",
-    url = "https://github.com/nanotech/jellybeans.vim"
-  },
   ["lsp-overloads.nvim"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/lsp-overloads.nvim",
     url = "https://github.com/Issafalcon/lsp-overloads.nvim"
+  },
+  ["mason.nvim"] = {
+    config = { "\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0" },
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -148,15 +144,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
-  },
-  ["vim-moonfly-colors"] = {
-    loaded = true,
-    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors",
-    url = "https://github.com/bluz71/vim-moonfly-colors"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
+time([[Config for mason.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
