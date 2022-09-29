@@ -44,8 +44,6 @@ require("packer").startup(function(use)
 
     use({ disable = false, "mfussenegger/nvim-dap" })
     use({ disable = false, "rcarriga/nvim-dap-ui" })
-
-    use({ disable = false, "vigoux/azy.nvim", run = "make lib" })
 end)
 -- PACKER
 
@@ -93,6 +91,10 @@ vim.opt.mouse = 'n'
 vim.opt.isfname:append("@-@")
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.g.mapleader = " "
+vim.g.netrw_keepdir = 0
+vim.g.netrw_localcopydircmd = "cp -r"
+vim.g.netrw_localrmdir = "rm -rf"
+vim.g.netrw_list_hide = [['\(^\|\s\s\)\zs\.\S\+']]
 -- CONFIG
 
 -- USER COMMANDS
@@ -122,17 +124,8 @@ end
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "c_sharp",
-        "css",
-        "go",
-        "gomod",
-        "html",
-        "javascript",
         "json",
         "lua",
-        "python",
-        "rust",
-        "tsx",
-        "typescript",
         "comment",
     },
     context_commentstring = {
@@ -140,7 +133,6 @@ require("nvim-treesitter.configs").setup({
     },
     highlight = {
         enable = true,
-        disable = { "html" },
     },
     incremental_selection = {
         enable = true,
@@ -220,7 +212,7 @@ local handlers = {
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = false
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
 local servers = {
@@ -393,14 +385,6 @@ vim.keymap.set("n", "<Leader>so", dap.step_out)
 vim.keymap.set("n", "<Leader>si", dap.step_into)
 vim.keymap.set("n", "<Leader>n", dap.continue)
 -- NVIM-DAP
-
--- AZY
-local ab = require 'azy.builtins'
-
-vim.keymap.set("n", "<Leader>t", ab.files(vim.lsp.buf.list_workspace_folders()), {})
-vim.keymap.set("n", "<Leader>p", ab.files_contents(), {})
-vim.keymap.set('n', '<Leader>oc', ab.files { vim.fn.stdpath 'config' }, {})
--- AZY
 
 -- AUTOCMD
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
