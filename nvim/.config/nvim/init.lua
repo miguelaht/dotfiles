@@ -384,6 +384,10 @@ vim.keymap.set("n", "<Leader>sb", dap.toggle_breakpoint)
 vim.keymap.set("n", "<Leader>so", dap.step_out)
 vim.keymap.set("n", "<Leader>si", dap.step_into)
 vim.keymap.set("n", "<Leader>n", dap.continue)
+vim.keymap.set("n", "<F2>", dap.toggle_breakpoint)
+vim.keymap.set("n", "<F3>", dap.step_out)
+vim.keymap.set("n", "<F4>", dap.step_into)
+vim.keymap.set("n", "<F1>", dap.continue)
 -- NVIM-DAP
 
 -- AUTOCMD
@@ -397,11 +401,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
     pattern = "*",
-})
-
-vim.api.nvim_create_autocmd("BufNewFile", {
-    pattern = "*.cs",
-    command = "0r $HOME/.vim/skeletons/skeleton.cs"
 })
 -- AUTOCMD
 
