@@ -37,6 +37,7 @@ require("packer").startup(function(use)
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({ disable = false, "nvim-treesitter/nvim-treesitter-context" })
 
+    use({ disable = false, "ellisonleao/gruvbox.nvim" })
     use({ disable = true, "nanotech/jellybeans.vim" })
     use({ disable = true, "bluz71/vim-moonfly-colors" })
     use({ disable = true, "Mofiqul/adwaita.nvim" })
@@ -48,6 +49,13 @@ end)
 -- PACKER
 
 -- COLOR
+if colorscheme == "gruvbox" then
+    require("gruvbox").setup({
+        inverse = false, -- invert background for search, diffs, statuslines and errors
+        contrast = "hard", -- can be "hard", "soft" or empty string
+    })
+end
+
 if colorscheme == "adwaita" then
     vim.g.adwaita_darker = true
 end
@@ -111,8 +119,10 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set("i", "<A-p>", [[<C-r>"]])
 vim.keymap.set("t", "<Esc>", [[<C-\><C-N>]])
 vim.keymap.set("n", "<Leader><Leader>", "<c-^>")
-vim.keymap.set("n", "[c", ":cp<CR>")
-vim.keymap.set("n", "]c", ":cn<CR>")
+vim.keymap.set("n", "[c", ":cprevious<CR>")
+vim.keymap.set("n", "]c", ":cnext<CR>")
+vim.keymap.set("n", "[l", ":lprevious<CR>")
+vim.keymap.set("n", "]l", ":lnext<CR>")
 vim.keymap.set("n", "<Leader>,", ":ConfigOpen<CR>")
 vim.keymap.set("n", "<Leader>q", ":copen<CR>")
 for var = 1, 9 do
@@ -183,7 +193,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<Leader>l", vim.diagnostic.setloclist, opts)
 
     vim.keymap.set("n", "<Leader>f", vim.lsp.buf.format, opts)
-    vim.keymap.set("v", "<Leader>f", vim.lsp.buf.range_formatting, opts)
 
     if client.server_capabilities.signatureHelpProvider then
         require('lsp-overloads').setup(client, {
