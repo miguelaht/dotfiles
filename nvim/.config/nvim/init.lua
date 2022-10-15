@@ -39,8 +39,8 @@ require("packer").startup(function(use)
 
     use({ disable = false, "ellisonleao/gruvbox.nvim" })
     use({ disable = true, "nanotech/jellybeans.vim" })
-    use({ disable = true, "bluz71/vim-moonfly-colors" })
-    use({ disable = true, "Mofiqul/adwaita.nvim" })
+    use({ disable = false, "bluz71/vim-moonfly-colors" })
+    use({ disable = false, "Mofiqul/adwaita.nvim" })
     use({ disable = false, "folke/tokyonight.nvim" })
 
     use({ disable = false, "mfussenegger/nvim-dap" })
@@ -67,6 +67,7 @@ if colorscheme == "tokyonight" then
         styles = {
             sidebars = "transparent",
         },
+        dim_inactive = true,
     })
 end
 
