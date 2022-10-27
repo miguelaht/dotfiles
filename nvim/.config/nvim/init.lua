@@ -45,6 +45,9 @@ require("packer").startup(function(use)
 
     use({ disable = false, "mfussenegger/nvim-dap" })
     use({ disable = false, "rcarriga/nvim-dap-ui" })
+
+    use({ disable = false, "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+    use({ disable = false, "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
 end)
 -- PACKER
 
@@ -155,6 +158,48 @@ require("nvim-treesitter.configs").setup({
     },
 })
 -- TREESITTER
+
+-- TELESCOPE
+require("telescope").setup({
+    defaults = {
+        vimgrep_arguments = {
+            "rg",
+            "--hidden",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+        },
+    },
+    pickers = {
+        buffers = {
+            mappings = {
+                n = {
+                    ["<C-z>"] = require("telescope.actions").delete_buffer,
+                },
+                i = {
+                    ["<C-z>"] = require("telescope.actions").delete_buffer,
+                }
+            }
+        },
+    },
+    extensions = {
+        fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+        },
+    },
+})
+require("telescope").load_extension("fzf")
+vim.keymap.set("n", "<c-t>", require("telescope.builtin").git_files)
+vim.keymap.set("n", "<Leader>pw", function()
+    require("telescope.builtin").live_grep({ search = vim.fn.expand("<cword>") })
+end)
+vim.keymap.set("n", "<Leader>b", require("telescope.builtin").buffers)
+-- TELESCOPE
 
 -- HARPOON
 require("harpoon").setup({
