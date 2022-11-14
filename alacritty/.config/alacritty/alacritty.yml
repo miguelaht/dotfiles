@@ -233,9 +233,10 @@ import:
   # - &onedark ~/.local/share/nvim/site/pack/packer/start/onedark.nvim/terminal/alacritty_onedark.yml
   # - &moonfly ~/.local/share/nvim/site/pack/packer/start/vim-moonfly-colors/terminal_themes/alacritty.yml
   # - &minimal ~/.local/share/nvim/site/pack/packer/start/minimal.nvim/terminal/alacritty_minimal.yml
-  - &tokyo ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim/extras/alacritty_tokyonight_night.yml
+  # - &tokyo ~/.local/share/nvim/site/pack/packer/start/tokyonight.nvim/extras/alacritty_tokyonight_night.yml
+  - &nigthfox ~/.local/share/nvim/site/pack/packer/start/nightfox.nvim/extra/nightfox/nightfox_alacritty.yml
 
-colors:
-   primary:
-     background: '0x0d1117'
-     foreground: '0xdedede'
+# colors:
+#    primary:
+#      background: '0x0d1117'
+#      foreground: '0xdedede'

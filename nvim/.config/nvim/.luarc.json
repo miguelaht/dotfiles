@@ -1,0 +1,28 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "$HOME/.config/nvim",
+        "$HOME/.local/share/nvim/site",
+        "$HOME/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+        "$HOME/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+        "$HOME/.local/share/nvim/site/pack/packer/start/harpoon",
+        "$HOME/.local/share/nvim/site/pack/packer/start/lsp-overloads.nvim",
+        "$HOME/.local/share/nvim/site/pack/packer/start/LuaSnip",
+        "$HOME/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "$HOME/.local/share/nvim/site/pack/packer/start/neogit",
+        "$HOME/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+        "$HOME/.local/share/nvim/site/pack/packer/start/nvim-dap",
+        "$HOME/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+        "$HOME/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "$HOME/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "$HOME/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+        "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "$HOME/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "$HOME/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+        "$HOME/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        "$HOME/.local/homebrew/Cellar/neovim/HEAD-7abe8ef/share/nvim/runtime",
+        "$HOME/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/after",
+        "$HOME/.config/nvim/after",
+        "${3rd}/luassert/library"
+    ]
+}

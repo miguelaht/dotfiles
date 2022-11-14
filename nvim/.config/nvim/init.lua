@@ -1,4 +1,4 @@
-local colorscheme = "tokyonight"
+local colorscheme = "nightfox"
 
 vim.api.nvim_cmd({
     cmd = "packadd",
@@ -26,6 +26,7 @@ require("packer").startup(function(use)
     use({ disable = false, "hrsh7th/cmp-nvim-lsp" })
     use({ disable = false, "L3MON4D3/LuaSnip" })
     use({ disable = false, "Issafalcon/lsp-overloads.nvim" })
+    use({ disable = false, "hoffs/omnisharp-extended-lsp.nvim" })
 
     use({ disable = false, "williamboman/mason.nvim", config = function()
         require("mason").setup()
@@ -39,8 +40,7 @@ require("packer").startup(function(use)
 
     use({ disable = false, "ellisonleao/gruvbox.nvim" })
     use({ disable = true, "nanotech/jellybeans.vim" })
-    use({ disable = false, "bluz71/vim-moonfly-colors" })
-    use({ disable = false, "Mofiqul/adwaita.nvim" })
+    use({ disable = false, "EdenEast/nightfox.nvim" })
     use({ disable = false, "folke/tokyonight.nvim" })
 
     use({ disable = false, "mfussenegger/nvim-dap" })
@@ -57,10 +57,6 @@ if colorscheme == "gruvbox" then
         inverse = false, -- invert background for search, diffs, statuslines and errors
         contrast = "hard", -- can be "hard", "soft" or empty string
     })
-end
-
-if colorscheme == "adwaita" then
-    vim.g.adwaita_darker = true
 end
 
 if colorscheme == "tokyonight" then
@@ -227,7 +223,7 @@ local on_attach = function(client, bufnr)
     local opts = { noremap = true, buffer = bufnr }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "<C-]>", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -287,6 +283,15 @@ require("lspconfig").omnisharp.setup({
     cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/Omnisharp.dll" },
     on_attach = on_attach,
     capabilities = capabilities,
+    handlers = {
+        ["textDocument/hover"] = function(...)
+            local bufnr, _ = vim.lsp.handlers.hover(...)
+            if bufnr then
+                vim.keymap.set("n", "K", "<Cmd>wincmd p<CR>", { buffer = bufnr })
+            end
+        end,
+        ["textDocument/definition"] = require("omnisharp_extended").handler,
+    }
 })
 
 require("lspconfig").sumneko_lua.setup({
@@ -379,7 +384,7 @@ vim.g.dotnet_build_project = function()
     end
     local path = vim.fn.input('Path to your *proj file', default_path, 'file')
     vim.g['dotnet_last_proj_path'] = path
-    local cmd = 'dotnet build -c Debug ' .. path .. ' > /dev/null'
+    local cmd = 'dotnet build  ' .. path .. ' > /dev/null'
     print('')
     print('Cmd to execute: ' .. cmd)
     local f = os.execute(cmd)
@@ -410,6 +415,12 @@ end
 local config = {
     {
         type = "coreclr",
+        name = "attach - netcoredbg",
+        request = "attach",
+        processId = require("dap.utils").pick_process,
+    },
+    {
+        type = "coreclr",
         name = "launch - netcoredbg",
         request = "launch",
         program = function()
@@ -423,7 +434,54 @@ local config = {
 
 dap.configurations.cs = config
 
-dapui.setup({})
+dapui.setup({
+    mappings = {
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+        toggle = "t",
+    },
+    expand_lines = true,
+    layouts = {
+        {
+            elements = {
+                -- Elements can be strings or table with id and size keys.
+                { id = "scopes", size = 0.25 },
+                "breakpoints",
+                "stacks",
+                "watches",
+            },
+            size = 60, -- 40 columns
+            position = "left",
+        },
+        {
+            elements = {
+                "repl",
+                "console",
+            },
+            size = 0.25, -- 25% of total lines
+            position = "bottom",
+        },
+    },
+    controls = {
+        -- Requires Neovim nightly (or 0.8 when released)
+        enabled = false,
+    },
+    floating = {
+        max_height = 1, -- These can be integers or a float between 0 and 1.
+        max_width = 1, -- Floats will be treated as percentage of your screen.
+        border = "single", -- Border style. Can be "single", "double" or "rounded"
+        mappings = {
+            close = { "q", "<Esc>" },
+        },
+    },
+    windows = { indent = 1 },
+    render = {
+        max_type_length = nil, -- Can be integer or nil.
+        max_value_lines = 100, -- Can be integer or nil.
+    }
+})
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open({})
@@ -435,14 +493,13 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close({})
 end
 
-vim.keymap.set("n", "<Leader>sb", dap.toggle_breakpoint)
-vim.keymap.set("n", "<Leader>so", dap.step_out)
-vim.keymap.set("n", "<Leader>si", dap.step_into)
-vim.keymap.set("n", "<Leader>n", dap.continue)
-vim.keymap.set("n", "<F2>", dap.toggle_breakpoint)
-vim.keymap.set("n", "<F3>", dap.step_out)
-vim.keymap.set("n", "<F4>", dap.step_into)
 vim.keymap.set("n", "<F1>", dap.continue)
+vim.keymap.set("n", "<F2>", dap.step_over)
+vim.keymap.set("n", "<F3>", dap.step_into)
+vim.keymap.set("n", "<F3>", dap.step_out)
+vim.keymap.set("n", "<F10>", require("dap.ui.widgets").preview)
+vim.keymap.set("n", "<F11>", dap.toggle_breakpoint)
+vim.keymap.set("n", "<F12>", dapui.toggle)
 -- NVIM-DAP
 
 -- AUTOCMD
