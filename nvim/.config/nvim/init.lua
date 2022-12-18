@@ -27,6 +27,7 @@ require("packer").startup(function(use)
     use({ disable = false, "L3MON4D3/LuaSnip" })
     use({ disable = false, "Issafalcon/lsp-overloads.nvim" })
     use({ disable = false, "hoffs/omnisharp-extended-lsp.nvim" })
+    use({ disable = false, "Decodetalkers/csharpls-extended-lsp.nvim" })
 
     use({ disable = false, "williamboman/mason.nvim", config = function()
         require("mason").setup()
@@ -99,9 +100,9 @@ vim.opt.mouse = 'n'
 vim.opt.isfname:append("@-@")
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.g.mapleader = " "
-vim.g.netrw_keepdir = 0
 vim.g.netrw_localcopydircmd = "cp -r"
-vim.g.netrw_localrmdir = "rm -rf"
+vim.g.netrw_localmvdircmd = "-r"
+vim.g.netrw_localrmdir = "rm -r"
 vim.g.netrw_list_hide = [['\(^\|\s\s\)\zs\.\S\+']]
 -- CONFIG
 
@@ -267,8 +268,8 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
 local servers = {
-    "tsserver",
-    "rust_analyzer",
+    "pyright",
+    "rust_analyzer"
 }
 
 for _, lsp in pairs(servers) do
@@ -279,6 +280,21 @@ for _, lsp in pairs(servers) do
     }
 end
 
+require("lspconfig").csharp_ls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = {
+        ["textDocument/hover"] = function(...)
+            local bufnr, _ = vim.lsp.handlers.hover(...)
+            if bufnr then
+                vim.keymap.set("n", "K", "<Cmd>wincmd p<CR>", { buffer = bufnr })
+            end
+        end,
+        ["textDocument/definition"] = require('csharpls_extended').handler,
+    }
+}
+
+--[[
 require("lspconfig").omnisharp.setup({
     cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/Omnisharp.dll" },
     on_attach = on_attach,
@@ -293,6 +309,7 @@ require("lspconfig").omnisharp.setup({
         ["textDocument/definition"] = require("omnisharp_extended").handler,
     }
 })
+--]]
 
 require("lspconfig").sumneko_lua.setup({
     on_attach = on_attach,
@@ -377,41 +394,6 @@ dap.adapters.coreclr = {
     args = { "--interpreter=vscode" }
 }
 
-vim.g.dotnet_build_project = function()
-    local default_path = vim.fn.getcwd() .. '/'
-    if vim.g['dotnet_last_proj_path'] ~= nil then
-        default_path = vim.g['dotnet_last_proj_path']
-    end
-    local path = vim.fn.input('Path to your *proj file', default_path, 'file')
-    vim.g['dotnet_last_proj_path'] = path
-    local cmd = 'dotnet build  ' .. path .. ' > /dev/null'
-    print('')
-    print('Cmd to execute: ' .. cmd)
-    local f = os.execute(cmd)
-    if f == 0 then
-        print('\nBuild: ✔️ ')
-    else
-        print('\nBuild: ❌ (code: ' .. f .. ')')
-    end
-end
-
-vim.g.dotnet_get_dll_path = function()
-    local request = function()
-        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-    end
-
-    if vim.g['dotnet_last_dll_path'] == nil then
-        vim.g['dotnet_last_dll_path'] = request()
-    else
-        if vim.fn.confirm('Do you want to change the path to dll?\n' .. vim.g['dotnet_last_dll_path'], '&yes\n&no', 2) ==
-            1 then
-            vim.g['dotnet_last_dll_path'] = request()
-        end
-    end
-
-    return vim.g['dotnet_last_dll_path']
-end
-
 local config = {
     {
         type = "coreclr",
@@ -424,10 +406,7 @@ local config = {
         name = "launch - netcoredbg",
         request = "launch",
         program = function()
-            if vim.fn.confirm('Should I recompile first?', '&yes\n&no', 2) == 1 then
-                vim.g.dotnet_build_project()
-            end
-            return vim.g.dotnet_get_dll_path()
+            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
         end,
     },
 }
@@ -496,10 +475,10 @@ end
 vim.keymap.set("n", "<F1>", dap.continue)
 vim.keymap.set("n", "<F2>", dap.step_over)
 vim.keymap.set("n", "<F3>", dap.step_into)
-vim.keymap.set("n", "<F3>", dap.step_out)
-vim.keymap.set("n", "<F10>", require("dap.ui.widgets").preview)
-vim.keymap.set("n", "<F11>", dap.toggle_breakpoint)
-vim.keymap.set("n", "<F12>", dapui.toggle)
+vim.keymap.set("n", "<F4>", dap.step_out)
+vim.keymap.set("n", "<F5>", require("dap.ui.widgets").preview)
+vim.keymap.set("n", "<F6>", dap.toggle_breakpoint)
+vim.keymap.set("n", "<F7>", dapui.toggle)
 -- NVIM-DAP
 
 -- AUTOCMD
