@@ -1,4 +1,4 @@
-local colorscheme = "nightfox"
+local colorscheme = "gruvbox"
 
 vim.api.nvim_cmd({
     cmd = "packadd",
@@ -339,7 +339,6 @@ local cmp = require("cmp")
 
 cmp.setup({
     completion = {
-        autocomplete = true,
         completeopt = "menu,menuone,noinsert",
         keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
         keyword_length = 1,
