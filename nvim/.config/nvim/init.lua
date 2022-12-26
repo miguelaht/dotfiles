@@ -283,6 +283,7 @@ end
 require("lspconfig").csharp_ls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
+    root_dir = require("lspconfig.util").root_pattern('*.sln', '.git'),
     handlers = {
         ["textDocument/hover"] = function(...)
             local bufnr, _ = vim.lsp.handlers.hover(...)
