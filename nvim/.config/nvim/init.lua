@@ -49,6 +49,8 @@ require("packer").startup(function(use)
 
     use({ disable = false, "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
     use({ disable = false, "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
+
+    use({ disable = false, "mbbill/undotree" })
 end)
 -- PACKER
 
@@ -109,6 +111,7 @@ vim.g.netrw_list_hide = [['\(^\|\s\s\)\zs\.\S\+']]
 -- USER COMMANDS
 vim.api.nvim_create_user_command("ConfigOpen", "e! $MYVIMRC", {})
 vim.api.nvim_create_user_command("TmuxSend", [[silent exec "!tmux send-keys -t 1 '<args>' enter"]], { nargs = "+" })
+vim.api.nvim_create_user_command("ClearBreakpoints", require("dap").clear_breakpoints, {})
 -- USER COMMANDS
 
 -- KEYMAPS
