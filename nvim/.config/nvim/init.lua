@@ -33,9 +33,7 @@ require("packer").startup(function(use)
     use({ disable = false, "williamboman/mason.nvim", config = function()
         require("mason").setup()
     end })
-    use({ disable = false, "TimUntersberger/neogit", config = function()
-        require("neogit").setup()
-    end })
+    use({ disable = false, "tpope/vim-fugitive" })
 
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({ disable = false, "nvim-treesitter/nvim-treesitter-context" })
@@ -129,10 +127,10 @@ vim.keymap.set({ "n", "v" }, "<Left>", "<NOP>")
 vim.keymap.set({ "n", "v" }, "<Right>", "<NOP>")
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set("i", "<A-p>", [[<C-r>"]])
-vim.keymap.set("t", "<Esc>", [[<C-\><C-N>]])
+vim.keymap.set("t", "<Esc>", [[<C-\><C-N>]]) -- terminal window
 vim.keymap.set("n", "<Leader><Leader>", "<c-^>")
-vim.keymap.set("n", "[c", ":cprevious<CR>")
-vim.keymap.set("n", "]c", ":cnext<CR>")
+vim.keymap.set("n", "[q", ":cprevious<CR>")
+vim.keymap.set("n", "]q", ":cnext<CR>")
 vim.keymap.set("n", "[l", ":lprevious<CR>")
 vim.keymap.set("n", "]l", ":lnext<CR>")
 vim.keymap.set("n", "<Leader>,", ":ConfigOpen<CR>")
@@ -230,81 +228,17 @@ end
 
 -- LSP CONFIG
 local on_attach = function(client, bufnr)
-    if client.name == "omnisharp" then
-        client.server_capabilities.semanticTokensProvider = {
-            full = vim.empty_dict(),
-            legend = {
-                tokenModifiers = { "static_symbol" },
-                tokenTypes = {
-                    "comment",
-                    "excluded_code",
-                    "identifier",
-                    "keyword",
-                    "keyword_control",
-                    "number",
-                    "operator",
-                    "operator_overloaded",
-                    "preprocessor_keyword",
-                    "string",
-                    "whitespace",
-                    "text",
-                    "static_symbol",
-                    "preprocessor_text",
-                    "punctuation",
-                    "string_verbatim",
-                    "string_escape_character",
-                    "class_name",
-                    "delegate_name",
-                    "enum_name",
-                    "interface_name",
-                    "module_name",
-                    "struct_name",
-                    "type_parameter_name",
-                    "field_name",
-                    "enum_member_name",
-                    "constant_name",
-                    "local_name",
-                    "parameter_name",
-                    "method_name",
-                    "extension_method_name",
-                    "property_name",
-                    "event_name",
-                    "namespace_name",
-                    "label_name",
-                    "xml_doc_comment_attribute_name",
-                    "xml_doc_comment_attribute_quotes",
-                    "xml_doc_comment_attribute_value",
-                    "xml_doc_comment_cdata_section",
-                    "xml_doc_comment_comment",
-                    "xml_doc_comment_delimiter",
-                    "xml_doc_comment_entity_reference",
-                    "xml_doc_comment_name",
-                    "xml_doc_comment_processing_instruction",
-                    "xml_doc_comment_text",
-                    "xml_literal_attribute_name",
-                    "xml_literal_attribute_quotes",
-                    "xml_literal_attribute_value",
-                    "xml_literal_cdata_section",
-                    "xml_literal_comment",
-                    "xml_literal_delimiter",
-                    "xml_literal_embedded_expression",
-                    "xml_literal_entity_reference",
-                    "xml_literal_name",
-                    "xml_literal_processing_instruction",
-                    "xml_literal_text",
-                    "regex_comment",
-                    "regex_character_class",
-                    "regex_anchor",
-                    "regex_quantifier",
-                    "regex_grouping",
-                    "regex_alternation",
-                    "regex_text",
-                    "regex_self_escaped_character",
-                    "regex_other_escape",
-                },
-            },
-            range = true,
-        }
+    print(string.format("LSP: Starting %s", client.name))
+    if client.name == 'omnisharp' then
+        local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+        for i, v in ipairs(tokenModifiers) do
+            tokenModifiers[i] = v:gsub(' ', '_')
+        end
+        local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+        for i, v in ipairs(tokenTypes) do
+            tokenTypes[i] = v:gsub(' ', '_')
+            tokenTypes[i] = tokenTypes[i]:gsub('-', '')
+        end
     end
 
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -341,6 +275,7 @@ local on_attach = function(client, bufnr)
             },
         })
     end
+    print(string.format("LSP: %s ready", client.name))
 end
 
 local handlers = {
@@ -401,12 +336,9 @@ require("lspconfig").omnisharp.setup({
         ["textDocument/definition"] = require("omnisharp_extended").handler,
     },
     enable_editorconfig_support = true,
-    enable_ms_build_load_projects_on_demand = false,
     enable_roslyn_analyzers = false,
     organize_imports_on_format = false,
     enable_import_completion = false,
-    sdk_include_prereleases = true,
-    analyze_open_documents_only = false,
 })
 
 require("lspconfig").lua_ls.setup({
@@ -588,6 +520,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
 })
 -- AUTOCMD
+
+-- fugitive
+vim.keymap.set("n", "<Leader>th", ":diffget //2")
+vim.keymap.set("n", "<Leader>tl", ":diffget //3")
+-- fugitive
 
 -- CUSTOM TEXT OBJECTS
 local chars = { "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }
