@@ -30,9 +30,13 @@ require("packer").startup(function(use)
     use({ disable = false, "hoffs/omnisharp-extended-lsp.nvim" })
     use({ disable = false, "Decodetalkers/csharpls-extended-lsp.nvim" })
 
-    use({ disable = false, "williamboman/mason.nvim", config = function()
-        require("mason").setup()
-    end })
+    use({
+        disable = false,
+        "williamboman/mason.nvim",
+        config = function()
+            require("mason").setup()
+        end
+    })
     use({ disable = false, "tpope/vim-fugitive" })
 
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -56,7 +60,7 @@ end)
 -- COLOR
 if colorscheme == "gruvbox" then
     require("gruvbox").setup({
-        inverse = false, -- invert background for search, diffs, statuslines and errors
+        inverse = false,   -- invert background for search, diffs, statuslines and errors
         contrast = "hard", -- can be "hard", "soft" or empty string
     })
 end
@@ -320,7 +324,8 @@ require("lspconfig").csharp_ls.setup {
         ["textDocument/definition"] = require('csharpls_extended').handler,
     }
 }
-]] --
+]]
+   --
 
 require("lspconfig").omnisharp.setup({
     cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/Omnisharp.dll" },
@@ -391,7 +396,6 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -464,14 +468,22 @@ dapui.setup({
             size = 60, -- 40 columns
             position = "left",
         },
+        {
+            elements = {
+                "repl",
+                "console",
+            },
+            size = 10,
+            position = "bottom", -- Can be "bottom" or "top"
+        },
     },
     controls = {
         -- Requires Neovim nightly (or 0.8 when released)
         enabled = false,
     },
     floating = {
-        max_height = 1, -- These can be integers or a float between 0 and 1.
-        max_width = 1, -- Floats will be treated as percentage of your screen.
+        max_height = 1,    -- These can be integers or a float between 0 and 1.
+        max_width = 1,     -- Floats will be treated as percentage of your screen.
         border = "single", -- Border style. Can be "single", "double" or "rounded"
         mappings = {
             close = { "q", "<Esc>" },
@@ -501,6 +513,8 @@ vim.keymap.set("n", "<F4>", dap.step_out)
 vim.keymap.set("n", "<F5>", require("dap.ui.widgets").preview)
 vim.keymap.set("n", "<F6>", dap.toggle_breakpoint)
 vim.keymap.set("n", "<F7>", dapui.toggle)
+vim.keymap.set("n", "<F8>", dap.reverse_continue)
+vim.keymap.set("n", "<F9>", dap.restart)
 -- NVIM-DAP
 
 -- UNDOTREE
