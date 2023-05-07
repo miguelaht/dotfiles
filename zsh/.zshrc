@@ -58,5 +58,6 @@ source "$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 export PATH="$PATH:$HOME/.dotnet/tools"
 export PATH="$HOME/.local/bin:$PATH"
+export OPENSSL_DIR="$HOME/.local/opt/openssl"
 
 eval "$(direnv hook zsh)"

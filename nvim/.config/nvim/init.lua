@@ -232,7 +232,6 @@ end
 
 -- LSP CONFIG
 local on_attach = function(client, bufnr)
-    print(string.format("LSP: Starting %s", client.name))
     if client.name == 'omnisharp' then
         local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
         for i, v in ipairs(tokenModifiers) do
@@ -241,7 +240,7 @@ local on_attach = function(client, bufnr)
         local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
         for i, v in ipairs(tokenTypes) do
             tokenTypes[i] = v:gsub(' ', '_')
-            tokenTypes[i] = tokenTypes[i]:gsub('-', '')
+            tokenTypes[i] = tokenTypes[i]:gsub('-_', '')
         end
     end
 
@@ -277,9 +276,9 @@ local on_attach = function(client, bufnr)
                 next_parameter = "<C-l>",
                 previous_parameter = "<C-h>",
             },
+            display_automatically = true
         })
     end
-    print(string.format("LSP: %s ready", client.name))
 end
 
 local handlers = {
@@ -296,18 +295,20 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
-local servers = {
-    "pyright",
-    "rust_analyzer"
-}
-
-for _, lsp in pairs(servers) do
-    require("lspconfig")[lsp].setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        handlers = handlers
+require("lspconfig").rust_analyzer.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+    settings = {
+        ["rust-analyzer"] = {
+            diagnostics = {
+                enable = true,
+                disabled = { "unresolved-proc-macro" },
+                enableExperimental = true,
+            }
+        }
     }
-end
+}
 
 --[[
 require("lspconfig").csharp_ls.setup {
@@ -325,7 +326,9 @@ require("lspconfig").csharp_ls.setup {
     }
 }
 ]]
-   --
+--
+
+local util = require 'lspconfig.util'
 
 require("lspconfig").omnisharp.setup({
     cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/Omnisharp.dll" },
@@ -340,10 +343,13 @@ require("lspconfig").omnisharp.setup({
         end,
         ["textDocument/definition"] = require("omnisharp_extended").handler,
     },
+    root_dir = function(fname)
+        return util.root_pattern '*.sln' (fname) or util.root_pattern '*.csproj' (fname)
+    end,
     enable_editorconfig_support = true,
-    enable_roslyn_analyzers = false,
-    organize_imports_on_format = false,
-    enable_import_completion = false,
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = true,
 })
 
 require("lspconfig").lua_ls.setup({
@@ -541,7 +547,7 @@ vim.keymap.set("n", "<Leader>tl", ":diffget //3")
 -- fugitive
 
 -- CUSTOM TEXT OBJECTS
-local chars = { "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }
+local chars = { "<", ">", "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }
 for _, char in ipairs(chars) do
     for _, mode in ipairs({ "x", "o" }) do
         vim.api.nvim_set_keymap(mode, "i" .. char, string.format(":<C-u>normal! T%svt%s<CR>", char, char),
