@@ -42,6 +42,7 @@ require("packer").startup(function(use)
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({ disable = false, "nvim-treesitter/nvim-treesitter-context" })
 
+    use({ disable = false, "adelarsq/neofsharp.vim" })
     use({ disable = true, "ellisonleao/gruvbox.nvim" })
     use({ disable = true, "nanotech/jellybeans.vim" })
     use({ disable = true, "EdenEast/nightfox.nvim" })
@@ -295,6 +296,19 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
+require("lspconfig").ocamllsp.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+})
+
+require("lspconfig").fsharp_language_server.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+    cmd = { "fsautocomplete", "--adaptive-lsp-server-enabled" }
+})
+
 require("lspconfig").rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -314,6 +328,7 @@ require("lspconfig").rust_analyzer.setup {
 require("lspconfig").csharp_ls.setup {
     capabilities = capabilities,
     on_attach = on_attach,
+    handlers = handlers,
     root_dir = require("lspconfig.util").root_pattern('*.sln', '.git'),
     handlers = {
         ["textDocument/hover"] = function(...)
@@ -330,8 +345,21 @@ require("lspconfig").csharp_ls.setup {
 
 local util = require 'lspconfig.util'
 
+require("lspconfig").java_language_server.setup({
+    cmd = { vim.fn.stdpath("data") .. "/mason/packages/java-language-server/dist/lang_server_mac.sh" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+})
+
+require("lspconfig").gopls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+})
+
 require("lspconfig").omnisharp.setup({
-    cmd = { "dotnet", vim.fn.stdpath("data") .. "/mason/packages/omnisharp/Omnisharp.dll" },
+    cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp" },
     on_attach = on_attach,
     capabilities = capabilities,
     handlers = {
@@ -355,6 +383,7 @@ require("lspconfig").omnisharp.setup({
 require("lspconfig").lua_ls.setup({
     capabilities = capabilities,
     on_attach = on_attach,
+    handlers = handlers,
     settings = {
         Lua = {
             runtime = {
@@ -428,6 +457,8 @@ cmp.setup({
 -- NVIM-DAP
 local dap = require("dap")
 local dapui = require("dapui")
+dap.adapters.java = {
+}
 dap.adapters.coreclr = {
     type = "executable",
     command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
@@ -452,6 +483,28 @@ local config = {
 }
 
 dap.configurations.cs = config
+
+dap.configurations.java = {
+    {
+    type = 'java';
+    request = 'attach';
+    name = "Debug (Attach) - Remote";
+    hostName = "127.0.0.1";
+    port = function()
+        return vim.fn.input('Port')
+    end,
+  },
+{
+    classPaths = {},
+    projectName = "yourProjectName",
+    javaExec = "/path/to/your/bin/java",
+    mainClass = "your.package.name.MainClassName",
+    modulePaths = {},
+    name = "Launch YourClassName",
+    request = "launch",
+    type = "java"
+  },
+}
 
 dapui.setup({
     mappings = {

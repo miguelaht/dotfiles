@@ -15,14 +15,10 @@ alias brew=~/.local/homebrew/bin/brew
 # alias ar=$AR
 # alias ranlib=$RANLIB
 
-alias bat="bat"
-alias cat="bat"
 alias grep=rg
 alias vim=nvim
 
-alias ll="exa -l --group-directories-first --git"
-alias lt="exa -lT --git-ignore --group-directories-first --level=2"
-alias tree="exa -T --git-ignore --level=2"
+alias ll="ls -l"
 
 alias dof="cd ~/dotfiles; nvim; cd -"
 
