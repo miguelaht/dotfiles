@@ -233,6 +233,8 @@ end
 
 -- LSP CONFIG
 local on_attach = function(client, bufnr)
+    vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
+
     if client.name == 'omnisharp' then
         local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
         for i, v in ipairs(tokenModifiers) do
@@ -296,6 +298,16 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
+require("lspconfig").tsserver.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+})
+require("lspconfig").svelte.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+})
 require("lspconfig").ocamllsp.setup({
     capabilities = capabilities,
     on_attach = on_attach,
@@ -386,6 +398,7 @@ require("lspconfig").lua_ls.setup({
     handlers = handlers,
     settings = {
         Lua = {
+            hint = { enabled = true },
             runtime = {
                 version = "LuaJIT",
             },
@@ -486,24 +499,24 @@ dap.configurations.cs = config
 
 dap.configurations.java = {
     {
-    type = 'java';
-    request = 'attach';
-    name = "Debug (Attach) - Remote";
-    hostName = "127.0.0.1";
-    port = function()
-        return vim.fn.input('Port')
-    end,
-  },
-{
-    classPaths = {},
-    projectName = "yourProjectName",
-    javaExec = "/path/to/your/bin/java",
-    mainClass = "your.package.name.MainClassName",
-    modulePaths = {},
-    name = "Launch YourClassName",
-    request = "launch",
-    type = "java"
-  },
+        type = 'java',
+        request = 'attach',
+        name = "Debug (Attach) - Remote",
+        hostName = "127.0.0.1",
+        port = function()
+            return vim.fn.input('Port')
+        end,
+    },
+    {
+        classPaths = {},
+        projectName = "yourProjectName",
+        javaExec = "/path/to/your/bin/java",
+        mainClass = "your.package.name.MainClassName",
+        modulePaths = {},
+        name = "Launch YourClassName",
+        request = "launch",
+        type = "java"
+    },
 }
 
 dapui.setup({
