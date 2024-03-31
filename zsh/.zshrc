@@ -2,8 +2,6 @@ fpath+=~/.zfunc
 source "$HOME/.zsh/alias.zsh"
 setopt autocd
 
-# tmux-sessionizer
-bindkey -s ^f "tmux-sessionizer\n"
 # editing
 bindkey -e
 export EDITOR=nvim
@@ -57,6 +55,7 @@ source "$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 export PATH="$HOME/.local/bin:$PATH"
 export OPENSSL_DIR="$HOME/.local/opt/openssl"
 export PATH="$PATH:/Users/miguelaht/.dotnet/tools"
+export DOTNET_HOST_PATH="/usr/local/share/dotnet/dotnet"
 
 eval "$(direnv hook zsh)"
 

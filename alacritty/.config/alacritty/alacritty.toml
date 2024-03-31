@@ -33,6 +33,16 @@ style = "Regular"
 
 [[keyboard.bindings]]
 chars = "\u001Bf"
+key = "Right"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bb"
+key = "Left"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bf"
 key = "F"
 mods = "Alt"
 
@@ -89,16 +99,6 @@ mods = "Alt"
 [[keyboard.bindings]]
 chars = "\u001Bl"
 key = "L"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001Bf"
-key = "Right"
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u001Bb"
-key = "Left"
 mods = "Alt"
 
 [[keyboard.bindings]]

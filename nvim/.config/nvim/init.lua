@@ -49,7 +49,7 @@ require("packer").startup(function(use)
     use({ disable = false, "folke/tokyonight.nvim" })
 
     use({ disable = false, "mfussenegger/nvim-dap" })
-    use({ disable = false, "rcarriga/nvim-dap-ui" })
+    use({ disable = false, "rcarriga/nvim-dap-ui", requires = { "nvim-neotest/nvim-nio" }  })
 
     use({ disable = false, "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
     use({ disable = false, "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
