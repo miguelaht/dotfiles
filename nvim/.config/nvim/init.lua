@@ -21,7 +21,12 @@ require("packer").startup(function(use)
     use({ "https://gitlab.com/schrieveslaach/sonarlint.nvim" })
 
     use({ disable = false, "nvim-lua/plenary.nvim" })
-    use({ disable = false, "ThePrimeagen/harpoon" })
+    use({
+        disable = false,
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { "nvim-lua/plenary.nvim" }
+    })
 
     use({ disable = false, "mfussenegger/nvim-jdtls" })
     use({ disable = false, "neovim/nvim-lspconfig" })
@@ -231,20 +236,19 @@ vim.keymap.set("n", "<Leader>b", require("telescope.builtin").buffers)
 -- TELESCOPE
 
 -- HARPOON
-require("harpoon").setup({
-    global_settings = {
-        enter_on_sendcmd = true,
-    },
-    menu = {
-        borderchars = { "", "", "", "", "", "", "", "" }
-    }
-})
+local harpoon = require("harpoon");
+harpoon:setup()
 
-vim.keymap.set("n", "<Leader>m", require("harpoon.mark").add_file)
-vim.keymap.set("n", "<Leader>h", require("harpoon.ui").toggle_quick_menu)
+vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end)
+vim.keymap.set("n", "<Leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
 for var = 1, 4 do
     vim.keymap.set("n", string.format("<Leader>%d", var), function()
-        require("harpoon.ui").nav_file(var)
+        harpoon:list():select(var)
     end)
 end
 -- HARPOON
@@ -387,7 +391,8 @@ lspconfig.java_language_server.setup({
     capabilities = capabilities,
     handlers = handlers,
 })
-]]--
+]]
+--
 
 lspconfig.gopls.setup({
     on_attach = on_attach,
