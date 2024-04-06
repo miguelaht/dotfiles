@@ -12,7 +12,8 @@
         "enableDecompilationSupport": true,
         "enableImportCompletion": true,
         "enableAnalyzersSupport": true,
-        "diagnosticWorkersThreadCount": 8
+        "diagnosticWorkersThreadCount": 8,
+        "locationPaths": []
     },
     "FormattingOptions": {
         "EnableEditorConfigSupport": true,

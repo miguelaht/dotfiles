@@ -18,9 +18,12 @@ vim.api.nvim_create_autocmd("BufWritePost", { command = "PackerCompile", group =
 require("packer").startup(function(use)
     use({ "wbthomason/packer.nvim" })
 
+    use({ "https://gitlab.com/schrieveslaach/sonarlint.nvim" })
+
     use({ disable = false, "nvim-lua/plenary.nvim" })
     use({ disable = false, "ThePrimeagen/harpoon" })
 
+    use({ disable = false, "mfussenegger/nvim-jdtls" })
     use({ disable = false, "neovim/nvim-lspconfig" })
     use({ disable = false, "hrsh7th/nvim-cmp" })
     use({ disable = false, "hrsh7th/cmp-buffer" })
@@ -33,10 +36,24 @@ require("packer").startup(function(use)
     use({
         disable = false,
         "williamboman/mason.nvim",
+        require = { "williamboman/mason-lspconfig.nvim", "mfussenegger/nvim-lint" },
         config = function()
             require("mason").setup()
         end
     })
+
+    use({
+        disable = false,
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("mason-lspconfig").setup()
+        end
+    })
+    use({
+        disable = false,
+        "mfussenegger/nvim-lint",
+    })
+
     use({ disable = false, "tpope/vim-fugitive" })
 
     use({ disable = false, "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -49,7 +66,7 @@ require("packer").startup(function(use)
     use({ disable = false, "folke/tokyonight.nvim" })
 
     use({ disable = false, "mfussenegger/nvim-dap" })
-    use({ disable = false, "rcarriga/nvim-dap-ui", requires = { "nvim-neotest/nvim-nio" }  })
+    use({ disable = false, "rcarriga/nvim-dap-ui", requires = { "nvim-neotest/nvim-nio" } })
 
     use({ disable = false, "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
     use({ disable = false, "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
@@ -113,6 +130,7 @@ vim.opt.mouse = 'n'
 vim.opt.isfname:append("@-@")
 vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.g.mapleader = " "
+vim.g.editorconfig = true
 vim.g.netrw_localcopydircmd = "cp -r"
 vim.g.netrw_localmvdircmd = "-r"
 vim.g.netrw_localrmdir = "rm -r"
@@ -293,35 +311,36 @@ local handlers = {
     end,
 }
 
+local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- LANGUAGES
-require("lspconfig").tsserver.setup({
+lspconfig.tsserver.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     handlers = handlers,
 })
-require("lspconfig").svelte.setup({
+lspconfig.svelte.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     handlers = handlers,
 })
-require("lspconfig").ocamllsp.setup({
+lspconfig.ocamllsp.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     handlers = handlers,
 })
 
-require("lspconfig").fsharp_language_server.setup({
+lspconfig.fsharp_language_server.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     handlers = handlers,
     cmd = { "fsautocomplete", "--adaptive-lsp-server-enabled" }
 })
 
-require("lspconfig").rust_analyzer.setup {
+lspconfig.rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
     handlers = handlers,
@@ -355,22 +374,38 @@ require("lspconfig").csharp_ls.setup {
 ]]
 --
 
-local util = require 'lspconfig.util'
+lspconfig.jdtls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+})
 
-require("lspconfig").java_language_server.setup({
+--[[
+lspconfig.java_language_server.setup({
     cmd = { vim.fn.stdpath("data") .. "/mason/packages/java-language-server/dist/lang_server_mac.sh" },
     on_attach = on_attach,
     capabilities = capabilities,
     handlers = handlers,
 })
+]]--
 
-require("lspconfig").gopls.setup({
+lspconfig.gopls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     handlers = handlers,
 })
 
-require("lspconfig").omnisharp.setup({
+lspconfig.harper_ls.setup({
+    filetypes = { "cs" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    handlers = handlers,
+    root_dir = function(fname)
+        return lspconfig.util.root_pattern '*.sln' (fname) or lspconfig.util.root_pattern '*.csproj' (fname)
+    end,
+})
+
+lspconfig.omnisharp.setup({
     cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp" },
     on_attach = on_attach,
     capabilities = capabilities,
@@ -381,18 +416,17 @@ require("lspconfig").omnisharp.setup({
                 vim.keymap.set("n", "K", "<Cmd>wincmd p<CR>", { buffer = bufnr })
             end
         end,
-        ["textDocument/definition"] = require("omnisharp_extended").handler,
+        ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+        ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+        ["textDocument/references"] = require('omnisharp_extended').references_handler,
+        ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
     },
     root_dir = function(fname)
-        return util.root_pattern '*.sln' (fname) or util.root_pattern '*.csproj' (fname)
+        return lspconfig.util.root_pattern '*.sln' (fname) or lspconfig.util.root_pattern '*.csproj' (fname)
     end,
-    enable_editorconfig_support = true,
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
-    enable_import_completion = true,
 })
 
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     handlers = handlers,
@@ -623,3 +657,37 @@ for _, char in ipairs(chars) do
     end
 end
 -- CUSTOM TEXT OBJECTS
+require('lint').linters_by_ft = {
+    cs = {}
+}
+
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+    callback = function()
+        require("lint").try_lint()
+    end,
+})
+
+local mason_base_path = vim.fn.stdpath("data") .. "/mason";
+
+require('sonarlint').setup({
+    server = {
+        cmd = {
+            mason_base_path .. '/packages/sonarlint-language-server/sonarlint-language-server',
+            '-stdio',
+            '-analyzers',
+            mason_base_path .. "/share/sonarlint-analyzers/sonarcfamily.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonargo.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarhtml.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonariac.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarjava.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarjs.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarlintomnisharp.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarphp.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarpython.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonartext.jar",
+            mason_base_path .. "/share/sonarlint-analyzers/sonarxml.jar",
+        },
+        autostart = true,
+    },
+    filetypes = { "csharp", "go", "java" },
+})

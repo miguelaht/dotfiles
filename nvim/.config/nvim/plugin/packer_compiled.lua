@@ -104,6 +104,12 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/lsp-overloads.nvim",
     url = "https://github.com/Issafalcon/lsp-overloads.nvim"
   },
+  ["mason-lspconfig.nvim"] = {
+    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20mason-lspconfig\frequire\0" },
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
   ["mason.nvim"] = {
     config = { "\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0" },
     loaded = true,
@@ -129,6 +135,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-jdtls"] = {
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
+  },
+  ["nvim-lint"] = {
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/nvim-lint",
+    url = "https://github.com/mfussenegger/nvim-lint"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -165,6 +181,11 @@ _G.packer_plugins = {
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["sonarlint.nvim"] = {
+    loaded = true,
+    path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/sonarlint.nvim",
+    url = "https://gitlab.com/schrieveslaach/sonarlint.nvim"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/miguelaht/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
@@ -193,6 +214,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: mason-lspconfig.nvim
+time([[Config for mason-lspconfig.nvim]], true)
+try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\20mason-lspconfig\frequire\0", "config", "mason-lspconfig.nvim")
+time([[Config for mason-lspconfig.nvim]], false)
 -- Config for: mason.nvim
 time([[Config for mason.nvim]], true)
 try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
