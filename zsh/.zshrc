@@ -8,6 +8,8 @@ export EDITOR=nvim
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
+bindkey '\e[109;5u' accept-line
+bindkey '\e[09;5u' accept-line
 
 # theme
 autoload -U promptinit; promptinit
@@ -28,7 +30,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
 # FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # ZSH auto-complete
 autoload -Uz compinit; compinit

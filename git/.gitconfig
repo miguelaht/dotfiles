@@ -1,0 +1,35 @@
+[user]
+  name = Miguel Hernandez
+  email = 61668895+miguelaht@users.noreply.github.com
+
+[github]
+  user = miguelaht
+
+[init]
+  defaultBranch = main
+
+[core]
+  excludesFile = ~/.gitignore_global
+  pager = less -FX
+
+[difftool]
+  prompt = true
+
+[diff]
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[alias]
+  st = status
+  l = log
+  c = commit
+  ch = checkout
+  aa = add -A
+  cm = commit -m
+  ca = commit --amend
+  cane = commit --amend --no-edit
+  lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green) (%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)-%an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  lg = !"git lg1"
+
