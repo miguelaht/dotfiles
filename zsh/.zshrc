@@ -50,14 +50,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # ZSH autosuggest
-source "$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-export PATH="$HOME/.local/bin:$PATH"
-export OPENSSL_DIR="$HOME/.local/opt/openssl"
-export PATH="$PATH:/Users/miguelaht/.dotnet/tools"
-export DOTNET_HOST_PATH="/usr/local/share/dotnet/dotnet"
-
-eval "$(direnv hook zsh)"
-
-# opam configuration
-[[ ! -r /Users/miguelaht/.opam/opam-init/init.zsh ]] || source /Users/miguelaht/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+# eval "$(direnv hook zsh)"

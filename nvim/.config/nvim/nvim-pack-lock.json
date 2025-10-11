@@ -1,0 +1,69 @@
+{
+  "plugins": {
+    "cmp-nvim-lsp": {
+      "rev": "bd5a7d6",
+      "src": "git@github.com:hrsh7th/cmp-nvim-lsp"
+    },
+    "harpoon": {
+      "rev": "ed1f853",
+      "src": "git@github.com:ThePrimeagen/harpoon",
+      "version": "'harpoon2'"
+    },
+    "lsp-overloads.nvim": {
+      "rev": "aecb7f4",
+      "src": "git@github.com:Issafalcon/lsp-overloads.nvim"
+    },
+    "mason.nvim": {
+      "rev": "ad7146a",
+      "src": "git@github.com:williamboman/mason.nvim"
+    },
+    "nvim-cmp": {
+      "rev": "b5311ab",
+      "src": "git@github.com:hrsh7th/nvim-cmp"
+    },
+    "nvim-dap": {
+      "rev": "881f7dc",
+      "src": "git@github.com:mfussenegger/nvim-dap"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e",
+      "src": "git@github.com:rcarriga/nvim-dap-ui"
+    },
+    "nvim-lspconfig": {
+      "rev": "623bcf0",
+      "src": "git@github.com:neovim/nvim-lspconfig"
+    },
+    "nvim-nio": {
+      "rev": "21f5324",
+      "src": "git@github.com:nvim-neotest/nvim-nio"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba",
+      "src": "git@github.com:nvim-treesitter/nvim-treesitter"
+    },
+    "nvim-treesitter-context": {
+      "rev": "41847d3",
+      "src": "git@github.com:nvim-treesitter/nvim-treesitter-context"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "git@github.com:nvim-lua/plenary.nvim"
+    },
+    "telescope-fzf-native.nvim": {
+      "rev": "1f08ed6",
+      "src": "git@github.com:nvim-telescope/telescope-fzf-native.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "b4da76b",
+      "src": "git@github.com:nvim-telescope/telescope.nvim"
+    },
+    "undotree": {
+      "rev": "0f1c981",
+      "src": "git@github.com:mbbill/undotree"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "git@github.com:tpope/vim-fugitive"
+    }
+  }
+}

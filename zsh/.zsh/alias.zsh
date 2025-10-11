@@ -7,8 +7,6 @@
 # export LC_CTYPE=en_US.UTF-8
 # export LC_ALL=en_US.UTF-8
 
-alias brew=~/.local/homebrew/bin/brew
-
 # alias cc=$CC
 # alias c++=$CXX
 # alias ld=$LD
