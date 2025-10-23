@@ -1,1 +1,8 @@
-keybind = ctrl+m=text:\n
+keybind = ctrl+m=text:\r
+keybind = super+,=reload_config
+
+mouse-hide-while-typing = true
+macos-option-as-alt = true
+font-size = 14
+scrollback-limit = 50000000
+clipboard-paste-protection = true

@@ -16,10 +16,10 @@
   prompt = true
 
 [diff]
-  tool = nvimdiff
+    tool = nvim_difftool
 
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[difftool "nvim_difftool"]
+    cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
 
 [alias]
   st = status

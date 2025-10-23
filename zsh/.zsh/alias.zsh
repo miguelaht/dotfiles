@@ -13,6 +13,7 @@
 # alias ar=$AR
 # alias ranlib=$RANLIB
 
+alias k=kubectl
 alias grep=rg
 alias vim=nvim
 

@@ -54,4 +54,12 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # ZSH autosuggest
 source "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# eval "$(direnv hook zsh)"
+# GO
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# Dotnet
+export PATH="$PATH:/Users/maht/.dotnet/tools"
+
+
+eval "$(direnv hook zsh)"

@@ -45,7 +45,6 @@ vim.keymap.set("n", "<Leader>q", ":copen<CR>")
 
 -- PLUGINS
 vim.pack.add({
-    { src = "git@github.com:mbbill/undotree" },
     { src = "git@github.com:nvim-lua/plenary.nvim" },
     {
         src = "git@github.com:ThePrimeagen/harpoon",
@@ -78,6 +77,9 @@ vim.pack.add({
 -- TREESITTER
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
+        "zig",
+        "proto",
+        "go",
         "c_sharp",
         "json",
         "lua",
@@ -160,7 +162,7 @@ end
 ---
 
 -- UNDOTREE
-vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<Leader>u", ":Undotree<CR>")
 ---
 
 -- AUTOCMD
@@ -207,6 +209,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- Unset 'omnifunc'
         vim.bo[args.buf].omnifunc = nil
 
+        if client:supports_method('textDocument/completion') then
+            -- Optional: trigger autocompletion on EVERY keypress. May be slow!
+            -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+            -- client.server_capabilities.completionProvider.triggerCharacters = chars
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        end
+
         local opts = { noremap = true, buffer = args.buf }
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
@@ -218,8 +227,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "<Leader>l", vim.diagnostic.setloclist, opts)
-        -- Disable document colors
-        vim.lsp.document_color.enable(false, args.buf)
 
         vim.keymap.set("n", "<Leader>f", function()
             vim.lsp.buf.format({ async = true })
@@ -243,7 +250,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.lsp.enable("omnisharp")
+vim.lsp.enable({ "omnisharp", "zls", "gopls", "buf_ls", "ansiblels" })
 vim.lsp.enable("lua_ls", {
     settings = {
         Lua = {
@@ -291,7 +298,9 @@ cmp.setup({
         end, { "i", "s" }),
     }),
     snippet = {
-        expand = {},
+        expand = function(args)
+            vim.snippet.expand(args.body)
+        end,
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
@@ -300,8 +309,8 @@ cmp.setup({
 ---
 
 --- DAP
-local dap = require("dap")
-local dapui = require("dapui")
+local dap                                             = require("dap")
+local dapui                                           = require("dapui")
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open({})
@@ -323,13 +332,13 @@ vim.keymap.set("n", "<F7>", dapui.toggle)
 vim.keymap.set("n", "<F8>", dap.reverse_continue)
 vim.keymap.set("n", "<F9>", dap.restart)
 
-dap.adapters.coreclr = {
+dap.adapters.coreclr  = {
     type = "executable",
     command = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg",
     args = { "--interpreter=vscode" }
 }
 
-dap.configurations.cs                                 = {
+dap.configurations.cs = {
     {
         type = "coreclr",
         name = "attach - netcoredbg",
