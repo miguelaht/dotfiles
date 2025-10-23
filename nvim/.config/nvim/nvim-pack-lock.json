@@ -4,13 +4,17 @@
       "rev": "bd5a7d6",
       "src": "git@github.com:hrsh7th/cmp-nvim-lsp"
     },
+    "gruvbox.nvim": {
+      "rev": "5e0a460",
+      "src": "git@github.com:ellisonleao/gruvbox.nvim"
+    },
     "harpoon": {
       "rev": "ed1f853",
       "src": "git@github.com:ThePrimeagen/harpoon",
       "version": "'harpoon2'"
     },
     "lsp-overloads.nvim": {
-      "rev": "aecb7f4",
+      "rev": "187912c",
       "src": "git@github.com:Issafalcon/lsp-overloads.nvim"
     },
     "mason.nvim": {
@@ -18,11 +22,11 @@
       "src": "git@github.com:williamboman/mason.nvim"
     },
     "nvim-cmp": {
-      "rev": "b5311ab",
+      "rev": "a7bcf1d",
       "src": "git@github.com:hrsh7th/nvim-cmp"
     },
     "nvim-dap": {
-      "rev": "881f7dc",
+      "rev": "6782b09",
       "src": "git@github.com:mfussenegger/nvim-dap"
     },
     "nvim-dap-ui": {
@@ -30,7 +34,7 @@
       "src": "git@github.com:rcarriga/nvim-dap-ui"
     },
     "nvim-lspconfig": {
-      "rev": "623bcf0",
+      "rev": "52a8932",
       "src": "git@github.com:neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -42,7 +46,7 @@
       "src": "git@github.com:nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
-      "rev": "41847d3",
+      "rev": "ec308c7",
       "src": "git@github.com:nvim-treesitter/nvim-treesitter-context"
     },
     "plenary.nvim": {

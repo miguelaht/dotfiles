@@ -71,8 +71,11 @@ vim.pack.add({
     { src = "git@github.com:rcarriga/nvim-dap-ui" },
     { src = "git@github.com:mfussenegger/nvim-dap" },
     { src = "git@github.com:nvim-neotest/nvim-nio" },
+    { src = "git@github.com:ellisonleao/gruvbox.nvim" },
 })
 ---
+-- COLORS
+vim.cmd("colorscheme gruvbox")
 
 -- TREESITTER
 require("nvim-treesitter.configs").setup({
@@ -250,16 +253,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.lsp.enable({ "omnisharp", "zls", "gopls", "buf_ls", "ansiblels" })
-vim.lsp.enable("lua_ls", {
-    settings = {
-        Lua = {
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-            }
-        }
-    }
+vim.diagnostic.enable = true
+vim.diagnostic.config({
+    virtual_text = true,
+    virtual_lines = false,
+    underline = false,
+
 })
+
+vim.lsp.enable({ "lua_ls", "omnisharp", "zls", "gopls", "buf_ls", "ansiblels" })
 ---
 
 -- NVIM-CMP

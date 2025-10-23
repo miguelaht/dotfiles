@@ -1,3 +1,4 @@
+theme = Gruvbox Material Dark
 keybind = ctrl+m=text:\r
 keybind = super+,=reload_config
 
